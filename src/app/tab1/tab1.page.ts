@@ -9,4 +9,7 @@ export class Tab1Page {
 
   constructor() {}
 
+  prueba(){
+    alert("esto es una prueba de m...");
+  }
 }
