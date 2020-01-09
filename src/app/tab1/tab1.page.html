@@ -12,9 +12,9 @@
   </div>
   <ion-list>
     <ion-item-sliding *ngFor="let todo of todos"> 
-      <ion-item lines="insert" button[routerLink]="['/details',todo.id]">
+      <ion-item lines="insert" button [routerLink]="['/details',todo.id]">
         <ion-label>
-          {{todo.task}}
+          {{todo.nombre}}
         </ion-label>
       </ion-item>
       
