@@ -10,4 +10,19 @@
   <div class="ion-padding">
     <ion-button (click)="prueba()" expand="block" type="ion-button" class="ion-no-margin">Jolastu</ion-button>
   </div>
+  <ion-list>
+    <ion-item-sliding *ngFor="let todo of todos"> 
+      <ion-item lines="insert" button[routerLink]="['/details',todo.id]">
+        <ion-label>
+          {{todo.task}}
+        </ion-label>
+      </ion-item>
+      
+    </ion-item-sliding>
+  </ion-list>
+ <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button routerLink="/details" routerDirection="forward">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab> 
 </ion-content>
