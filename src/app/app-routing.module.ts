@@ -9,7 +9,11 @@ const routes: Routes = [
   {
     path: 'details',
     loadChildren: () => import('./todo-details/todo-details.module').then( m => m.TodoDetailsPageModule)
+  },  {
+    path: 'partida',
+    loadChildren: () => import('./partida/partida.module').then( m => m.PartidaPageModule)
   },
+
 
 ];
 @NgModule({
