@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-flash-card',
-  templateUrl: './flash-card.component.html',
-  styleUrls: ['./flash-card.component.scss'],
+  selector: 'flash-card',
+  templateUrl: 'flash-card.component.html'
 })
-export class FlashCardComponent implements OnInit {
+export class FlashCardComponent {
 
-  constructor() { }
+  @Input('isFlipped') flipCard: boolean;
 
-  ngOnInit() {}
+  constructor() {
+
+  }
 
 }

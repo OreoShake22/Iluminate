@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { PartidaPageRoutingModule } from './partida-routing.module';
 
 import { PartidaPage } from './partida.page';
-
+import { FlashCardComponent } from '../flash-card/flash-card.component';
+import { DataService } from '../data/data.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +16,9 @@ import { PartidaPage } from './partida.page';
     IonicModule,
     PartidaPageRoutingModule
   ],
-  declarations: [PartidaPage]
+  declarations: [PartidaPage,FlashCardComponent],
+  providers: [
+    DataService
+  ]
 })
 export class PartidaPageModule {}
