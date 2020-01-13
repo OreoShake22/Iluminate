@@ -8,6 +8,8 @@ import { PartidaPageRoutingModule } from './partida-routing.module';
 
 import { PartidaPage } from './partida.page';
 
+
+
 @NgModule({
   imports: [
     CommonModule,

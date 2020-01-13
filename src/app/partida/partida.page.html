@@ -7,33 +7,30 @@
 
   <ion-slides #slides>
 
+      <label>{{t}}</label>
+
       <ion-slide>
-
-          
-
-          <h3>What is this?</h3>
-
-          <ion-list no-lines radio-group>
-
-              <ion-item>
-
-                  <ion-label>1. Helicopter</ion-label>
-
-              </ion-item>
-
-              <ion-item>
-
-                  <ion-label>2. Truck</ion-label>
-
-              </ion-item>
-
-              <ion-item>
-
-                  <ion-label>3. Plane</ion-label>
-
-              </ion-item>
-
-          </ion-list>
+        <ion-item>
+          <h3>{{preguntas[getIndex()].pregunta}}</h3>
+        </ion-item>
+        <ion-list>
+          <ion-item-sliding> 
+            <ion-item>
+              <ion-button (click)="updateIndex()" >
+                {{preguntas[getIndex()].respuesta}}
+              </ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-button (click)="updateIndex()" >
+                {{preguntas[getIndex()].respuesta2}}
+              </ion-button>
+            </ion-item><ion-item>
+              <ion-button (click)="updateIndex()" >
+                {{preguntas[getIndex()].respuesta3}}
+              </ion-button>
+            </ion-item>
+          </ion-item-sliding>
+        </ion-list>
 
       </ion-slide>
 
