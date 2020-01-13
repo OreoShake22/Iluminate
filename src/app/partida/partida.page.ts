@@ -1,6 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {NavController} from '@ionic/angular';
-import { DataService } from '../data/data.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-partida',
@@ -9,21 +7,9 @@ import { DataService } from '../data/data.service';
 })
 export class PartidaPage implements OnInit {
 
-    @ViewChild('slides', { static: true }) slides: any;
-    slideOptions: any;
-    flashCardFlipped: boolean = false;
-
-  constructor(public navCtrl: NavController, public dataService: DataService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  ionViewDidLoad() {
-
-  }
-
-  selectAnswer(){
-      this.flashCardFlipped = true;
   }
 
 }
