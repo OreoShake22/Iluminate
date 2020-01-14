@@ -9,8 +9,8 @@ import { NavController } from '@ionic/angular';
 export class PartidaPage implements OnInit {
 
   index:number = 0;
-  respuestas:[string];
-  final:string[];
+  respuestas:string[]=[];
+  final:string[]=[];
   t:number = 10;
 
   public preguntas = [
@@ -38,14 +38,15 @@ updateIndex(){
 getIndex(){
   return this.index;
 }
-  constructor(private navCtrl: NavController,) { this.startTimer()}
+  constructor(private navCtrl: NavController) { this.startTimer()}
 
   ngOnInit() {
+    
   }
 
   startTimer(){
     if(this.t>0){
-      this.mix()
+      this.mix();
       setTimeout(function(){
         this.t--;this.startTimer()}.bind(this),1000)
     }
@@ -67,6 +68,7 @@ getIndex(){
           break;
         }else{
           this.final.push(respuestas[i]);
+          console.log(respuestas[i])
         }
       }
     }
