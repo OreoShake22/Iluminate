@@ -15,18 +15,9 @@
         </ion-item>
         <ion-list>
           <ion-item-sliding> 
-            <ion-item>
+            <ion-item *ngFor="let res of final">
               <ion-button (click)="updateIndex()" >
-                {{preguntas[getIndex()].respuesta}}
-              </ion-button>
-            </ion-item>
-            <ion-item>
-              <ion-button (click)="updateIndex()" >
-                {{preguntas[getIndex()].respuesta2}}
-              </ion-button>
-            </ion-item><ion-item>
-              <ion-button (click)="updateIndex()" >
-                {{preguntas[getIndex()].respuesta3}}
+                {{res}}
               </ion-button>
             </ion-item>
           </ion-item-sliding>
