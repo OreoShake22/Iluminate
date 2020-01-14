@@ -4,14 +4,21 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AuthenticateService } from '../services/autentication.service';
 import { NavController } from '@ionic/angular';
- 
+import { rankingTask } from "../models/rankingTask.interface";
+import * as firebase from 'firebase'
+import {rankingservice} from '../services/ranking.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
- 
+  ranking:rankingTask={
+    id:'',
+    username:'',
+    puntuacionS:0,
+    puntuacionG:0,
+  };
  
   validations_form: FormGroup;
   errorMessage: string = '';
@@ -31,7 +38,8 @@ export class RegisterPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private authService: AuthenticateService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private rankingservice:rankingservice
   ) {}
  
   ngOnInit(){
@@ -52,11 +60,15 @@ export class RegisterPage implements OnInit {
      .then(res => {
        console.log(res);
        this.navCtrl.navigateForward('');
+       this.ranking.id=firebase.auth().currentUser.uid;
+        this.ranking.username=((document.getElementById("username") as HTMLInputElement).value);
+        this.rankingservice.addTodo(this.ranking)
+        
      }, err => {
        console.log(err);
        this.errorMessage = err.message;
        this.successMessage = "";
-     })
+     })     
   }
  
   goLoginPage(){

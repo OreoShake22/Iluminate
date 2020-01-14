@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticateService } from '../services/autentication.service';
 
 @Component({
   selector: 'app-tab4',
@@ -7,6 +8,13 @@ import { Component } from '@angular/core';
 })
 export class Tab4Page {
 
-  constructor() {}
+  constructor(
+    private authService: AuthenticateService,
+  ) {}
 
+
+  logOut(value){
+    this.authService.logoutUser()
+    
+  }
 }

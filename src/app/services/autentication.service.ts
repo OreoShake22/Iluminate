@@ -1,10 +1,16 @@
 
 import { Injectable } from "@angular/core";
 import * as firebase from 'firebase/app';
+import { rankingTask } from "../models/rankingTask.interface";
  
 @Injectable()
 export class AuthenticateService {
- 
+  ranking:rankingTask={
+    id:'',
+    username:'',
+    puntuacionS:0,
+    puntuacionG:0,
+  };
   constructor(){}
  
   registerUser(value){
@@ -13,7 +19,9 @@ export class AuthenticateService {
      .then(
        res => resolve(res),
        err => reject(err))
+       
    })
+   
   }
  
   loginUser(value){
@@ -42,4 +50,5 @@ export class AuthenticateService {
   userDetails(){
     return firebase.auth().currentUser;
   }
+
 }

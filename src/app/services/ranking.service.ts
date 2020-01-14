@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreModule} from 'angularfire2/firestore'
 import {Observable} from 'rxjs'
 import {map} from 'rxjs/operators'
-import {TaskI} from '../models/task.interface'
+import {rankingTask } from "../models/rankingTask.interface";
 
 @Injectable({
   providedIn: 'root'
 })
-export class TodoService {
+export class rankingservice {
 
-  private todosCOllection : AngularFirestoreCollection<TaskI>;
-  private todos:Observable<TaskI[]>;
+  private rankingCOllection : AngularFirestoreCollection<rankingTask>;
+  private ranking:Observable<rankingTask[]>;
   constructor(db:AngularFirestore) {
-    this.todosCOllection= db.collection<TaskI>('todos');
-    this.todos=this.todosCOllection.snapshotChanges().pipe(map(
+    this.rankingCOllection= db.collection<rankingTask>('ranking');
+    this.ranking=this.rankingCOllection.snapshotChanges().pipe(map(
       actions=>{
         return actions.map(a=>{
           const data = a.payload.doc.data();
@@ -26,19 +26,19 @@ export class TodoService {
 
    }
    
-   getTodos()
+   getranking()
    {
-     return this.todos;
+     return this.ranking;
    }
    getTodo(id:string)
    {
-     return this.todosCOllection.doc<TaskI>(id).valueChanges();
+     return this.rankingCOllection.doc<rankingTask>(id).valueChanges();
      
    }
 
-   addTodo(todo:TaskI)
+   addTodo(todo:rankingTask)
    {
-     return this.todosCOllection.add(todo)
+     return this.rankingCOllection.add(todo)
    }
 
 }

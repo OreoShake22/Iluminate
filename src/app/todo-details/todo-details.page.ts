@@ -1,27 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import {TaskI} from '../models/task.interface';
-import {TodoService} from '../services/todo.service';
+import { rankingTask } from "../models/rankingTask.interface";
+import {rankingservice} from '../services/ranking.service';
 import {ActivatedRoute} from '@angular/router';
 import {NavController} from '@ionic/angular';
+import * as firebase from 'firebase';
 @Component({
   selector: 'app-todo-details',
   templateUrl: './todo-details.page.html',
   styleUrls: ['./todo-details.page.scss'],
 })
-export class TodoDetailsPage implements OnInit {
-  todo:TaskI={
-    nombre:''
+export class todoDetailsPage implements OnInit {
+  ranking:rankingTask={
+    id:'',
+    username:'',
+    puntuacionS:0,
+    puntuacionG:0,
   };
   inputvalue:string='';
 
 
-  constructor(private todoService:TodoService,private nav:NavController) { }
+  constructor(private rankingservice:rankingservice,private nav:NavController) { }
 
   ngOnInit() {
   }
   guardar(){
-    this.todo.nombre=((document.getElementById("text") as HTMLInputElement).value);
-    this.todoService.addTodo(this.todo).then(() =>{
+    this.ranking.username=((document.getElementById("text") as HTMLInputElement).value);
+    this.ranking.id=firebase.auth().currentUser.uid;
+    this.rankingservice.addTodo(this.ranking).then(() =>{
       this.nav.navigateForward('/')
     })
 }

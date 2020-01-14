@@ -17,6 +17,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ReactiveFormsModule } from '@angular/forms';
  
 import * as firebase from 'firebase';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+
 
 firebase.initializeApp(environment.firebase);
 @NgModule({
@@ -36,6 +38,7 @@ firebase.initializeApp(environment.firebase);
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthenticateService,
+    AngularFireAuthGuard,
   ],
   bootstrap: [AppComponent]
 })
