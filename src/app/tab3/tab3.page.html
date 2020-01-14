@@ -6,4 +6,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let galdera of preguntas"> 
+      <ion-item lines="insert" >
+        <ion-label>
+          {{galdera.pregunta}}
+        </ion-label>
+      </ion-item>
+      
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

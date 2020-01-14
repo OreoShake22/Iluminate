@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreModule} from 'angularfire2/firestore'
 import {Observable} from 'rxjs'
 import {map} from 'rxjs/operators'
-import {rankingTask } from "../models/rankingTask.interface";
+import {rankingTask } from "../models/model.interface";
 
 @Injectable({
   providedIn: 'root'

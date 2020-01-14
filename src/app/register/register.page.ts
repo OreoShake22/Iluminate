@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AuthenticateService } from '../services/autentication.service';
 import { NavController } from '@ionic/angular';
-import { rankingTask } from "../models/rankingTask.interface";
+import { rankingTask } from "../models/model.interface";
 import * as firebase from 'firebase'
 import {rankingservice} from '../services/ranking.service';
 @Component({

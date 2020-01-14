@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { rankingTask } from "../models/rankingTask.interface";
+import { rankingTask } from "../models/model.interface";
 import {rankingservice} from '../services/ranking.service';
 import {ActivatedRoute} from '@angular/router';
 import {NavController} from '@ionic/angular';

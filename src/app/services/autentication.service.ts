@@ -1,7 +1,7 @@
 
 import { Injectable } from "@angular/core";
 import * as firebase from 'firebase/app';
-import { rankingTask } from "../models/rankingTask.interface";
+import { rankingTask } from "../models/model.interface";
  
 @Injectable()
 export class AuthenticateService {
