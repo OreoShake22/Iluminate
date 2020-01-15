@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import { rankingTask } from "../models/model.interface";
 import {rankingservice} from '../services/ranking.service';
-
+import {preguntasservice} from '../services/galderak.service';
+import { galderakTask } from "../models/model.interface";
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -10,10 +12,10 @@ import {rankingservice} from '../services/ranking.service';
   
 })
 export class Tab1Page implements OnInit{
-
+  preguntas:galderakTask[];
   ranking:rankingTask[];
 
-  constructor(private rankingservice:rankingservice) {
+  constructor(private navCtrl: NavController,private rankingservice:rankingservice,private preguntasservice:preguntasservice) {
     
     
   }
@@ -21,9 +23,13 @@ export class Tab1Page implements OnInit{
     {
       this.rankingservice.getranking().subscribe(res=>{
         this.ranking=res;
-      })
+      });
+
+      
       
     }
+
+    
 
   
 }

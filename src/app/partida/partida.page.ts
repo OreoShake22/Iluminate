@@ -1,5 +1,7 @@
 import { Component, OnInit, wtfStartTimeRange } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController,LoadingController } from '@ionic/angular';
+import {preguntasservice} from '../services/galderak.service';
+import { galderakTask } from "../models/model.interface";
 
 @Component({
   selector: 'app-partida',
@@ -15,12 +17,10 @@ export class PartidaPage implements OnInit {
   myRand: number;
   astolfo: boolean;
 
+  
 
   public preguntas = [
-    { pregunta: "pregunta1", respuesta: "1", respuesta2: "2", respuesta3: "3" },
-    { pregunta: "pregunta2", respuesta: "1", respuesta2: "2", respuesta3: "3" },
-    { pregunta: "pregunta3", respuesta: "1", respuesta2: "2", respuesta3: "3" },
-    { pregunta: "pregunta4", respuesta: "1", respuesta2: "2", respuesta3: "3" },
+    { pregunta: "", respuesta: "", respuesta2: "", respuesta3: "" },
   ];
 
   mix() {
@@ -35,7 +35,7 @@ export class PartidaPage implements OnInit {
       this.mix();
       this.t = 10;
     } else {
-      this.navCtrl.navigateForward('/inicio');
+      this.navCtrl.navigateForward('/');
     }
 
   }
@@ -43,10 +43,14 @@ export class PartidaPage implements OnInit {
   getIndex() {
     return this.index;
   }
-  constructor(private navCtrl: NavController) { this.mix(), this.startTimer() }
+  constructor(private loadingController: LoadingController, private navCtrl: NavController,private preguntasservice:preguntasservice) {  }
 
   ngOnInit() {
-
+    this.preguntasservice.getpreguntas().subscribe(res=>{
+      this.preguntas=res;
+      this.loadAll();
+    });
+    
   }
 
   startTimer() {
@@ -61,7 +65,7 @@ export class PartidaPage implements OnInit {
         this.updateIndex();
         this.startTimer();
       } else {
-        this.navCtrl.navigateForward('/inicio');
+        this.navCtrl.navigateForward('/');
       }
 
     }
@@ -90,4 +94,12 @@ export class PartidaPage implements OnInit {
     return rand;
   }
 
+  async loadAll(){
+    const loading = await this.loadingController.create({
+      message: 'Loading'
+    });
+    await loading.present();
+      this.mix(), this.startTimer();
+      loading.dismiss();
+}
 }
