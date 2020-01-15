@@ -1,8 +1,8 @@
 
 import { Injectable } from "@angular/core";
 import * as firebase from 'firebase/app';
+import * as admin from 'firebase-admin';
 import { rankingTask } from "../models/model.interface";
- 
 @Injectable()
 export class AuthenticateService {
   ranking:rankingTask={
@@ -51,4 +51,6 @@ export class AuthenticateService {
     return firebase.auth().currentUser;
   }
 
+  
 }
+

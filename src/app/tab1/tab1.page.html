@@ -1,14 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab One
-    </ion-title>
+  <ion-row>
+        <div class="ion-text-left">
+          Hasiera <ion-icon name="home"></ion-icon>
+        </div>
+        <div class="ion-text-right">
+          <ion-icon name="build"></ion-icon>
+        </div>
+      </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="ion-padding">
-    <ion-button href="partida" expand="block" type="ion-button" class="ion-no-margin">Jolastu</ion-button>
+    <h1>Ongi Etorri Iluminate app-era, JOKATU aukeratu eta hasi.</h1>
+  </div>
+  <div class="ion-padding">
+    <ion-button href="partida" expand="block" type="ion-button" class="ion-no-margin">Jokatu</ion-button>
   </div>
   <ion-list>
     <ion-item-sliding *ngFor="let todo of todos"> 
