@@ -1,27 +1,18 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Taldeak <ion-icon name="people"></ion-icon>
+      Profila <ion-icon name="build"></ion-icon>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="ion-padding">
-    <h1>Main Content hau informzio taldeak da admakdajdajdajdisjdisfjiasdjfiadfjadif</h1>
+    <h1>Main Content hau informzio Profila  da admakdajdajdajdisjdisfjiasdjfiadfjadif</h1>
   </div>
-  <ion-list>
-    <ion-item-sliding *ngFor="let todo of todos"> 
-      <ion-item lines="insert" button [routerLink]="['/details',todo.id]">
-        <ion-label>
-          {{todo.nombre}}
-        </ion-label>
-      </ion-item>
-      <ion-list>
-        <ion-item-sliding *ngFor="let galdera of preguntas"> 
-          <ion-item lines="insert" >
-            <ion-label>
-              {{galdera.pregunta}}
-    </ion-item-sliding>
-  </ion-list>
+ <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+</ion-fab> 
+<div class="ion-padding">
+  <ion-button (click)="logOut()" expand="block" type="ion-button" class="ion-no-margin">Deskonektatu</ion-button>
+</div>
 </ion-content>
