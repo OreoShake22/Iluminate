@@ -1,6 +1,7 @@
 
 import { Injectable } from "@angular/core";
 import * as firebase from 'firebase/app';
+import * as admin from 'firebase-admin';
  
 @Injectable()
 export class AuthenticateService {
@@ -42,4 +43,7 @@ export class AuthenticateService {
   userDetails(){
     return firebase.auth().currentUser;
   }
+
+  
 }
+
