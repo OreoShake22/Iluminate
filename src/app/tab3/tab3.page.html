@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Profila <ion-icon name="build"></ion-icon>
+      <ion-icon name="bulb"></ion-icon> Iluminate
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +12,9 @@
   </div>
  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
 </ion-fab> 
-<div class="ion-padding">
-  <ion-button (click)="logOut()" expand="block" type="ion-button" class="ion-no-margin">Deskonektatu</ion-button>
-</div>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button routerLink="/details" routerDirection="forward">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab> 
 </ion-content>

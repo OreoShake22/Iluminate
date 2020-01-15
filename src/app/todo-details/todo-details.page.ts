@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { rankingTask } from "../models/model.interface";
-import {rankingservice} from '../services/ranking.service';
+import { galderakTask } from "../models/model.interface";
+import {preguntasservice} from '../services/galderak.service';
 import {ActivatedRoute} from '@angular/router';
 import {NavController} from '@ionic/angular';
 import * as firebase from 'firebase';
@@ -10,24 +10,28 @@ import * as firebase from 'firebase';
   styleUrls: ['./todo-details.page.scss'],
 })
 export class todoDetailsPage implements OnInit {
-  ranking:rankingTask={
-    id:'',
-    username:'',
-    puntuacionS:0,
-    puntuacionG:0,
+  galderak:galderakTask={
+    pregunta:'',
+    respuesta:'',
+    respuesta2:'',
+    respuesta3:'',
   };
   inputvalue:string='';
 
 
-  constructor(private rankingservice:rankingservice,private nav:NavController) { }
+  constructor(private preguntasservice:preguntasservice,private nav:NavController) { }
 
   ngOnInit() {
   }
   guardar(){
-    this.ranking.username=((document.getElementById("text") as HTMLInputElement).value);
-    this.ranking.id=firebase.auth().currentUser.uid;
-    this.rankingservice.addTodo(this.ranking).then(() =>{
-      this.nav.navigateForward('/')
-    })
+    this.galderak.pregunta=((document.getElementById("pregunta") as HTMLInputElement).value);
+    this.galderak.respuesta=((document.getElementById("respuesta") as HTMLInputElement).value);
+    this.galderak.respuesta2=((document.getElementById("respuesta2") as HTMLInputElement).value);
+    this.galderak.respuesta3=((document.getElementById("respuesta3") as HTMLInputElement).value);
+    this.preguntasservice.addpreguntas(this.galderak)
+    this.galderak.respuesta3=((document.getElementById("pregunta") as HTMLInputElement).value="");
+    this.galderak.respuesta3=((document.getElementById("respuesta") as HTMLInputElement).value="");
+    this.galderak.respuesta3=((document.getElementById("respuesta2") as HTMLInputElement).value="");
+    this.galderak.respuesta3=((document.getElementById("respuesta3") as HTMLInputElement).value="");
 }
 }

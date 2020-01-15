@@ -5,7 +5,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-input type="text"  id="text">  
-  </ion-input>
-  <ion-button (click)="guardar()" routerLink="/">Gehitu</ion-button>
+  
+  <ion-label  position="floating" color="primary">Pregunta</ion-label>
+  <ion-input type="text"  id="pregunta"></ion-input>
+  <ion-label  position="floating" color="primary">Respuesta</ion-label>
+  <ion-input type="text"  id="respuesta"></ion-input>
+  <ion-label  position="floating" color="primary">Respuesta 2</ion-label>
+  <ion-input type="text"  id="respuesta2"></ion-input>
+  <ion-label  position="floating" color="primary">Respuesta 3</ion-label>
+  <ion-input type="text"  id="respuesta3"></ion-input>
+  <ion-button (click)="guardar()" routerLink="/">Añadir</ion-button>
 </ion-content>
