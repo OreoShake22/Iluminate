@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { TodoDetailsPageRoutingModule } from './todo-details-routing.module';
 
-import { TodoDetailsPage } from './todo-details.page';
+import { todoDetailsPage } from './todo-details.page';
 
 @NgModule({
   imports: [
@@ -15,6 +15,6 @@ import { TodoDetailsPage } from './todo-details.page';
     IonicModule,
     TodoDetailsPageRoutingModule
   ],
-  declarations: [TodoDetailsPage]
+  declarations: [todoDetailsPage]
 })
 export class TodoDetailsPageModule {}

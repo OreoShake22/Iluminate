@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {TaskI} from '../models/task.interface';
-import {TodoService} from '../services/todo.service';
+import { rankingTask } from "../models/model.interface";
+import {rankingservice} from '../services/ranking.service';
 
 
 @Component({
@@ -11,16 +11,16 @@ import {TodoService} from '../services/todo.service';
 })
 export class Tab1Page implements OnInit{
 
-  todos:TaskI[];
+  ranking:rankingTask[];
 
-  constructor(private todoService:TodoService) {
+  constructor(private rankingservice:rankingservice) {
     
     
   }
   ngOnInit()
     {
-      this.todoService.getTodos().subscribe(res=>{
-        this.todos=res;
+      this.rankingservice.getranking().subscribe(res=>{
+        this.ranking=res;
       })
       
     }

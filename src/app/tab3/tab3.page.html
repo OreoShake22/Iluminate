@@ -17,7 +17,11 @@
           {{todo.nombre}}
         </ion-label>
       </ion-item>
-      
+      <ion-list>
+        <ion-item-sliding *ngFor="let galdera of preguntas"> 
+          <ion-item lines="insert" >
+            <ion-label>
+              {{galdera.pregunta}}
     </ion-item-sliding>
   </ion-list>
 </ion-content>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { NavController } from '@ionic/angular';
 
@@ -7,17 +7,22 @@ import { NavController } from '@ionic/angular';
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss']
 })
-export class TabsPage {
+export class TabsPage implements OnInit{
 
-  constructor(private navCtrl: NavController) {
+  constructor(public navCtrl: NavController) {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         console.log("haha xd")
       } else {
-        this.navCtrl.navigateForward('/log');
+        this.navCtrl.navigateForward('/login');
 
       }
-    });
+    }.bind(this));
+  }
+  
+
+  ngOnInit() {
+    
   }
 
 }

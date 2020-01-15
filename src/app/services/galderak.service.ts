@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreModule} from 'angularfire2/firestore'
 import {Observable} from 'rxjs'
 import {map} from 'rxjs/operators'
-import {TaskI} from '../models/task.interface'
+import {galderakTask } from "../models/model.interface";
 
 @Injectable({
   providedIn: 'root'
 })
-export class TodoService {
+export class preguntasservice {
 
-  private todosCOllection : AngularFirestoreCollection<TaskI>;
-  private todos:Observable<TaskI[]>;
+  private preguntasCOllection : AngularFirestoreCollection<galderakTask>;
+  private preguntas:Observable<galderakTask[]>;
   constructor(db:AngularFirestore) {
-    this.todosCOllection= db.collection<TaskI>('todos');
-    this.todos=this.todosCOllection.snapshotChanges().pipe(map(
+    this.preguntasCOllection= db.collection<galderakTask>('preguntas');
+    this.preguntas=this.preguntasCOllection.snapshotChanges().pipe(map(
       actions=>{
         return actions.map(a=>{
           const data = a.payload.doc.data();
@@ -26,19 +26,14 @@ export class TodoService {
 
    }
    
-   getTodos()
+   getpreguntas()
    {
-     return this.todos;
+     return this.preguntas;
    }
-   getTodo(id:string)
+   
+   addpreguntas(pregunta:galderakTask)
    {
-     return this.todosCOllection.doc<TaskI>(id).valueChanges();
-     
-   }
-
-   addTodo(todo:TaskI)
-   {
-     return this.todosCOllection.add(todo)
+     return this.preguntasCOllection.add(pregunta)
    }
 
 }
