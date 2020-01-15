@@ -7,19 +7,18 @@
 
   <ion-slides #slides>
 
-      <label>{{t}}</label>
+      <label id="timer">{{t}}</label>
 
       <ion-slide>
-        <ion-item>
-          <h3>{{preguntas[getIndex()].pregunta}}</h3>
-        </ion-item>
         <ion-list>
+        <ion-item-sliding>
+          <h3>{{preguntas[getIndex()].pregunta}}</h3>
+        </ion-item-sliding>
+        
           <ion-item-sliding *ngFor="let res of final"> 
-            <ion-item >
               <ion-button (click)="updateIndex()" >
                 {{res}}
               </ion-button>
-            </ion-item>
           </ion-item-sliding>
         </ion-list>
 

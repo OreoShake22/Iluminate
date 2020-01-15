@@ -16,6 +16,7 @@ export class PartidaPage implements OnInit {
   t: number = 10;
   myRand: number;
   astolfo: boolean;
+  loading;
 
   
 
@@ -99,7 +100,8 @@ export class PartidaPage implements OnInit {
       message: 'Loading'
     });
     await loading.present();
-      this.mix(), this.startTimer();
+      this.mix()
       loading.dismiss();
+      this.startTimer();
 }
 }
