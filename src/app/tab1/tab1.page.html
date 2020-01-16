@@ -11,7 +11,8 @@
     <h1>Ongi Etorri Iluminate app-era, JOKATU aukeratu eta hasi.</h1>
   </div>
   <div class="ion-padding">
-    <ion-button href="partida" expand="block" type="ion-button" class="ion-no-margin">Jokatu</ion-button>
+    <label></label>
+    <ion-button shape="round" href="partida" expand="block" type="ion-button" class="ion-no-margin">Jokatu</ion-button>
   </div>
   <ion-list>
     <ion-item-sliding *ngFor="let todo of todos"> 
@@ -23,9 +24,4 @@
       
     </ion-item-sliding>
   </ion-list>
- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button routerLink="/details" routerDirection="forward">
-    <ion-icon name="add"></ion-icon>
-  </ion-fab-button>
-</ion-fab> 
 </ion-content >
