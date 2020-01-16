@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {preguntasservice} from '../services/galderak.service';
-import { galderakTask } from "../models/model.interface";
+import {rankingservice} from '../services/ranking.service';
+import { rankingTask } from "../models/model.interface";
 
 @Component({
   selector: 'app-tab3',
@@ -8,17 +8,16 @@ import { galderakTask } from "../models/model.interface";
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit{
-  preguntas:galderakTask[];
+  ranking:rankingTask[];
 
-  constructor(private preguntasservice:preguntasservice) {
+  constructor(private rankingservice:rankingservice) {
     
     
   }
   ngOnInit()
     {
-      this.preguntasservice.getpreguntas().subscribe(res=>{
-        this.preguntas=res;
-        console.log('preguntas',res)
+      this.rankingservice.getranking().subscribe(res=>{
+        this.ranking=res;
       })
       
     }

@@ -7,11 +7,28 @@
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    <h1>Main Content hau informzio Profila  da admakdajdajdajdisjdisfjiasdjfiadfjadif</h1>
-  </div>
  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
 </ion-fab> 
+<ion-grid *ngFor="let ran of ranking">
+  <ion-row>
+    <ion-col>
+      <div>
+        {{ran.username}}
+      </div>
+    </ion-col>
+    <ion-col>
+      <div>
+        {{ran.puntuacionS}}
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-list *ngFor="let ran of ranking">
+  <ion-item>
+    <label>{{ran.username}}</label>
+    <label>{{ran.puntuacionS}}</label>
+  </ion-item>
+</ion-list>
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
   <ion-fab-button routerLink="/details" routerDirection="forward">
     <ion-icon name="add"></ion-icon>

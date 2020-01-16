@@ -1,27 +1,38 @@
 <ion-header >
   <ion-toolbar >
     <ion-title >
-      <ion-icon name="bulb"></ion-icon> Iluminate
+      <label><ion-icon name="bulb"></ion-icon> Iluminate </label>
+      <ion-chip>
+        <ion-label>Chip Avatar</ion-label>
+        <ion-avatar>
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-avatar>
+      </ion-chip>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content >
-  <div id="deskripzio" class="ion-padding">
-    <h1>Ongi Etorri Iluminate app-era, JOKATU aukeratu eta hasi.</h1>
-  </div>
+
+   <div id="deskripzio" class="ion-padding">
+    <!-- <h1>Ongi Etorri Iluminate app-era, JOKATU aukeratu eta hasi.</h1> -->
+    <ion-button id="jokatu" color="warning" shape="round" href="partida" expand="block" type="ion-button" class="ion-no-margin">Jokatu</ion-button>
+    <ion-button id="instrukzio" shape="round" href="partida" expand="block" type="ion-button" class="ion-no-margin">Instrukzioak</ion-button>
+  </div> 
   <div class="ion-padding">
     <label></label>
-    <ion-button shape="round" href="partida" expand="block" type="ion-button" class="ion-no-margin">Jokatu</ion-button>
+    <!-- <ion-button shape="round" href="partida" expand="block" type="ion-button" class="ion-no-margin">Jokatu</ion-button> -->
   </div>
-  <ion-list>
-    <ion-item-sliding *ngFor="let todo of todos"> 
-      <ion-item lines="insert" button [routerLink]="['/details',todo.id]">
-        <ion-label>
-          {{todo.nombre}}
-        </ion-label>
-      </ion-item>
-      
-    </ion-item-sliding>
-  </ion-list>
+  <ion-slides>
+    <ion-slide>
+      <h3>Asteko Gaia</h3>
+      <img src="assets/icon/animales.jpg">
+    </ion-slide>
+    <ion-slide>
+      <h3>Asteko saria</h3>
+    </ion-slide>
+    <ion-slide>
+      <h3>Jokalari onenak </h3>
+    </ion-slide>
+  </ion-slides>
 </ion-content >
