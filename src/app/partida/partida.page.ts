@@ -76,13 +76,13 @@ export class PartidaPage implements OnInit {
     for (var i = 0; i != respuestas.length; i++) {
       for (var a = 0; respuestas.length != this.final.length; a++) {
         this.astolfo = true;
-        this.myRand = this.random();
+        this.myRand = this.random(respuestas.length);
         if (respuestas[this.myRand] == this.final[a]) {
           this.astolfo = false;
           i--;
           break;
         }
-        if (this.astolfo && this.respuestas[this.myRand] != null) {
+        if (this.astolfo) {
           this.final.push(respuestas[this.myRand]);
           this.respuestas.splice(this.myRand, 1);
         }
@@ -90,8 +90,8 @@ export class PartidaPage implements OnInit {
     } this.respuestas = []
   }
 
-  random(): number {
-    let rand = Math.floor(Math.random() * 3);
+  random(tam: number): number {
+    let rand = Math.floor(Math.random() * tam);
     return rand;
   }
 
