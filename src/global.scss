@@ -29,15 +29,19 @@
 
 
 ion-header{
-    --ion-background-color:#5a025a;
+    --ion-background-color:linear-gradient(325deg, rgb(255, 211, 218) 15%, rgb(247, 170, 170) 35%, rgb(253, 110, 189) 45%, #550255 100%) !important;
+    
     
 }
+
+
 ion-title{
     color:rgb(240, 240, 240);
     
 }
 ion-content{
-    --ion-background-color:rgb(241, 183, 232);
+    --ion-background-color:rgb(255, 228, 242);
+    
 }
 
 ion-chip{

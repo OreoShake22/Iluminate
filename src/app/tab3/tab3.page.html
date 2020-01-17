@@ -1,9 +1,9 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      <ion-icon name="bulb"></ion-icon> Iluminate
+<ion-header >
+  <ion-toolbar >
+    <ion-title >
+      <label><ion-icon name="bulb"></ion-icon> Iluminate </label>
       <ion-chip>
-        <ion-label>Avatar</ion-label>
+        <ion-label><label><ion-icon id="rankingInit" name="trophy"></ion-icon> 2000</label></ion-label>
         <ion-avatar>
           <img src="../../assets/icon/guts.jpg">
         </ion-avatar>
@@ -13,11 +13,11 @@
 </ion-header>
 
 <ion-content>
-<ion-grid *ngFor="let ran of ranking">
+<ion-grid *ngFor="let ran of ranking; let i = index">
   <ion-row>
     <ion-col>
       <div>
-        {{ran.username}}
+        {{ i + 1 }} {{ran.username}}
       </div>
     </ion-col>
     <ion-col>
