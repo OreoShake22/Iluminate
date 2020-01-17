@@ -7,6 +7,7 @@ import { NavController } from '@ionic/angular';
 import { rankingTask } from "../models/model.interface";
 import * as firebase from 'firebase'
 import {rankingservice} from '../services/ranking.service';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',

@@ -1,0 +1,20 @@
+
+  
+img{
+  margin-top: 2%;;
+    width: 50%!important;
+  }
+
+
+  #titulo{
+    font-family: 'Allura Regular'!important;
+    font-size: 10vmin;
+  }
+
+ion-item, ion-input, ion-label,ng-containe, .item-native{
+  --background: transparent !important;
+}
+
+ion-content{
+  --background: linear-gradient(197deg, rgb(255, 211, 218) 15%, rgb(247, 170, 170) 45%, rgb(253, 110, 189) 70%, rgb(253, 44, 201) 100%) !important;
+}
