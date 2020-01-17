@@ -21,7 +21,7 @@ export class PartidaPage implements OnInit {
   
 
   public preguntas = [
-    { pregunta: "", respuesta: "", respuesta2: "", respuesta3: "" },
+    { pregunta: "Cargando preguntas", respuesta: "", respuesta2: "", respuesta3: "" },
   ];
 
   mix() {
