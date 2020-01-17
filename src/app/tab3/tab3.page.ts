@@ -12,12 +12,12 @@ export class Tab3Page implements OnInit{
 
   constructor(private rankingservice:rankingservice) {
     
-    
   }
   ngOnInit()
     {
       this.rankingservice.getranking().subscribe(res=>{
         this.ranking=res;
+         
       })
       
     }

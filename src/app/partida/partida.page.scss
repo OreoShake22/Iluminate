@@ -1,5 +1,25 @@
 #timer
 {
-    font-size: 40px;
-    
+    font-size: 15vmin;
+    text-align: center;
+}
+
+#respuesta
+{
+    min-width: 50%;
+}
+
+#pregunta
+{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+#deskripzio
+{
+  border:1px solid #5a025a;
+  background-color: rgb(192, 192, 192);
+  width: 90%;
+  margin:5%;
+  box-shadow: 5px 10px #747474;
+  border-radius:25px;
 }

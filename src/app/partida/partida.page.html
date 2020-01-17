@@ -6,17 +6,19 @@
 <ion-content>
 
   <ion-slides #slides>
-
-      <label id="timer">{{t}}</label>
-
-      <ion-slide>
-        <ion-list>
+    <ion-slide>
+      <ion-list>
         <ion-item-sliding>
-          <h3>{{preguntas[getIndex()].pregunta}}</h3>
+      <label id="timer">{{t}}</label>
+    </ion-item-sliding>
+    <div id="deskripzio" class="ion-padding">
+        <ion-item-sliding>
+          <h3 id="pregunta">{{preguntas[getIndex()].pregunta}}</h3>
         </ion-item-sliding>
+        </div>
         
-          <ion-item-sliding *ngFor="let res of final"> 
-              <ion-button (click)="updateIndex()" >
+          <ion-item-sliding  *ngFor="let res of final"> 
+              <ion-button id="respuesta" expand="block" (click)="updateIndex()" >
                 {{res}}
               </ion-button>
           </ion-item-sliding>
