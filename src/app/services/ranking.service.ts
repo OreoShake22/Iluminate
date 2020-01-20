@@ -11,13 +11,15 @@ export class rankingservice {
 
   private rankingCOllection : AngularFirestoreCollection<rankingTask>;
   private ranking:Observable<rankingTask[]>;
+  private db:AngularFirestore;
   constructor(db:AngularFirestore) {
     this.rankingCOllection= db.collection<rankingTask>('ranking');
+    this.db=db;
     this.ranking=this.rankingCOllection.snapshotChanges().pipe(map(
       actions=>{
         return actions.map(a=>{
           const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
+          const id = data.id;
           return{id, ...data};
         });
 
@@ -34,6 +36,12 @@ export class rankingservice {
    {
      return this.rankingCOllection.doc<rankingTask>(id).valueChanges();
      
+   }
+
+   getUsuario(id:string){
+    this.ranking.forEach(item=>{
+      
+    })
    }
 
    addTodo(todo:rankingTask)

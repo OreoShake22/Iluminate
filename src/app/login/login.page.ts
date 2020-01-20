@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { AuthenticateService } from '../services/autentication.service';
- 
+import { rankingTask } from "../models/model.interface";
+import * as firebase from 'firebase'
+import {rankingservice} from '../services/ranking.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -12,13 +15,32 @@ export class LoginPage implements OnInit {
  
   validations_form: FormGroup;
   errorMessage: string = '';
+  successMessage: string = '';
+
+  ranking:rankingTask={
+    uid:'',
+    username:'',
+    puntuacionS:0,
+    puntuacionG:0,
+  };
+
+  validation_messages = {
+    'email': [
+      { type: 'required', message: 'Email is required.' },
+      { type: 'pattern', message: 'Enter a valid email.' }
+    ],
+    'password': [
+      { type: 'required', message: 'Password is required.' },
+      { type: 'minlength', message: 'Password must be at least 5 characters long.' }
+    ]
+  };
  
   constructor(
  
     private navCtrl: NavController,
     private authService: AuthenticateService,
-    private formBuilder: FormBuilder
- 
+    private formBuilder: FormBuilder,
+    private rankingservice:rankingservice
   ) { }
  
   ngOnInit() {
@@ -36,18 +58,6 @@ export class LoginPage implements OnInit {
   }
  
  
-  validation_messages = {
-    'email': [
-      { type: 'required', message: 'Email is required.' },
-      { type: 'pattern', message: 'Please enter a valid email.' }
-    ],
-    'password': [
-      { type: 'required', message: 'Password is required.' },
-      { type: 'minlength', message: 'Password must be at least 5 characters long.' }
-    ]
-  };
- 
- 
   loginUser(value){
     this.authService.loginUser(value)
     .then(res => {
@@ -59,8 +69,20 @@ export class LoginPage implements OnInit {
     })
   }
  
-  goToRegisterPage(){
-    this.navCtrl.navigateForward('/register');
+  tryRegister(value){
+    this.authService.registerUser(value)
+     .then(res => {
+       console.log(res);
+       this.navCtrl.navigateForward('');
+       this.ranking.id=firebase.auth().currentUser.uid;
+        this.ranking.username=((document.getElementById("username") as HTMLInputElement).value);
+        this.rankingservice.addTodo(this.ranking)
+        
+     }, err => {
+       console.log(err);
+       this.errorMessage = err.message;
+       this.successMessage = "";
+     })     
   }
  
 }

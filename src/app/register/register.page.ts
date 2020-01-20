@@ -16,6 +16,7 @@ import {rankingservice} from '../services/ranking.service';
 export class RegisterPage implements OnInit {
   ranking:rankingTask={
     id:'',
+    uid:'',
     username:'',
     puntuacionS:0,
     puntuacionG:0,
