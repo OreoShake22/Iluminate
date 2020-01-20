@@ -44,9 +44,15 @@ export class rankingservice {
     })
    }
 
-   addTodo(todo:rankingTask)
+   addTodo(todo:rankingTask,id:string)
    {
-     return this.rankingCOllection.add(todo)
+     var salu2=this.rankingCOllection.doc<any>(id);
+     salu2.set({
+      name: todo.username,
+      puntuacionG: todo.puntuacionG,
+      puntuacionS: todo.puntuacionS,
+      // Other info you want to add here
+    })
    }
 
 }

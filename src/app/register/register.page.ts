@@ -64,7 +64,6 @@ export class RegisterPage implements OnInit {
        this.navCtrl.navigateForward('');
        this.ranking.id=firebase.auth().currentUser.uid;
         this.ranking.username=((document.getElementById("username") as HTMLInputElement).value);
-        this.rankingservice.addTodo(this.ranking)
         
      }, err => {
        console.log(err);

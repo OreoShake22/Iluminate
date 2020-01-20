@@ -74,9 +74,9 @@ export class LoginPage implements OnInit {
      .then(res => {
        console.log(res);
        this.navCtrl.navigateForward('');
-       this.ranking.id=firebase.auth().currentUser.uid;
         this.ranking.username=((document.getElementById("username") as HTMLInputElement).value);
-        this.rankingservice.addTodo(this.ranking)
+        console.log(firebase.auth().currentUser.uid)
+        this.rankingservice.addTodo(this.ranking,firebase.auth().currentUser.uid)
         
      }, err => {
        console.log(err);
