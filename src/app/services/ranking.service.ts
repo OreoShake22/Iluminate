@@ -48,7 +48,7 @@ export class rankingservice {
    {
      var salu2=this.rankingCOllection.doc<any>(id);
      salu2.set({
-      name: todo.username,
+      username: todo.username,
       puntuacionG: todo.puntuacionG,
       puntuacionS: todo.puntuacionS,
       // Other info you want to add here
