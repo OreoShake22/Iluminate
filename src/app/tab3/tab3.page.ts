@@ -9,18 +9,12 @@ import { rankingTask } from "../models/model.interface";
 })
 export class Tab3Page implements OnInit{
   ranking:rankingTask[];
-
   constructor(private rankingservice:rankingservice) {
-    
   }
   ngOnInit()
     {
       this.rankingservice.getranking().subscribe(res=>{
-        this.ranking=res;
-         
-      })
-      
+        this.ranking=res; 
+      }) 
     }
-
-  
 }

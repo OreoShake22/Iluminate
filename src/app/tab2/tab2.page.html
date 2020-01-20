@@ -13,18 +13,29 @@
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    <h1>Main Content hau informzio random da admakdajdajdajdisjdisfjiasdjfiadfjadif</h1>
-  </div>
-  <ion-list>
-    <ion-item-sliding *ngFor="let todo of todos"> 
-      <ion-item lines="insert" button [routerLink]="['/details',todo.id]">
-        <ion-label>
-          {{todo.nombre}}
-        </ion-label>
-      </ion-item>
-      
-    </ion-item-sliding>
-  </ion-list>
+<ion-grid *ngFor="let ran of ranking; let i = index">
+  <ion-row>
+    <ion-col>
+      <div>
+        {{ i + 1 }} {{ran.username}}
+      </div>
+    </ion-col>
+    <ion-col>
+      <div>
+        {{ran.puntuacionS}}
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-list *ngFor="let ran of ranking">
+  <ion-item>
+    <label>{{ran.username}}</label>
+    <label>{{ran.puntuacionS}}</label>
+  </ion-item>
+</ion-list>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button routerLink="/details" routerDirection="forward">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab> 
 </ion-content>
-
