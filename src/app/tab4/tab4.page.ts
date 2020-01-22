@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticateService } from '../services/autentication.service';
+import * as firebase from 'firebase'
 
 @Component({
   selector: 'app-tab4',
@@ -15,6 +16,18 @@ export class Tab4Page {
 
   logOut(value){
     this.authService.logoutUser()
-    
   }
+  
+  change()
+  {
+    var auth = firebase.auth();
+    var emailAddress = firebase.auth().currentUser.email;
+
+    auth.sendPasswordResetEmail(emailAddress).then(function() {
+     alert('Mezua bidali da '+ emailAddress + ' mailera' )
+    }).catch(function(error) {
+      // An error happened.
+    });
+  }
+  
 }
