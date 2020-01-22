@@ -12,7 +12,8 @@ export class rankingservice {
   usuario:rankingTask[];
   private db:AngularFirestore;
   constructor(db:AngularFirestore) {
-    this.rankingCOllection= db.collection<rankingTask>('ranking');
+    this.rankingCOllection= db.collection<rankingTask>('ranking', ref => ref.orderBy('puntuacionS', 'desc'));
+    
     this.db=db;
     this.ranking=this.rankingCOllection.snapshotChanges().pipe(map(
       actions=>{
