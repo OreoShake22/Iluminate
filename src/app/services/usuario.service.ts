@@ -5,11 +5,15 @@ import {map} from 'rxjs/operators'
 import {rankingTask } from "../models/model.interface";
 
 @Injectable()
-export class rankingservice {
-
+export class UsuarioService {
   private rankingCOllection : AngularFirestoreCollection<rankingTask>;
   private ranking:Observable<rankingTask[]>;
-  usuario:rankingTask[];
+  user:rankingTask={
+    uid:'',
+    username:'',
+    puntuacionS:0,
+    puntuacionG:0,
+  };
   private db:AngularFirestore;
   constructor(db:AngularFirestore) {
     this.rankingCOllection= db.collection<rankingTask>('ranking');
@@ -24,28 +28,10 @@ export class rankingservice {
 
       }
     ));
-
-   }
-   
-   getranking()
-   {
-     return this.ranking;
-   }
-   getTodo(id:string)
-   {
-     return this.rankingCOllection.doc<rankingTask>(id).valueChanges();
-     
    }
 
-   addTodo(todo:rankingTask,id:string)
-   {
-     var salu2=this.rankingCOllection.doc<any>(id);
-     salu2.set({
-      username: todo.username,
-      puntuacionG: todo.puntuacionG,
-      puntuacionS: todo.puntuacionS,
-      // Other info you want to add here
-    })
-   }
+   getUsuario(id:string){
 
+    return this.rankingCOllection.doc<rankingTask>(id).valueChanges();
+   }
 }
