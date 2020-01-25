@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content>
-<ion-grid *ngFor="let ran of ranking; let i = index">
+<!-- <ion-grid *ngFor="let ran of ranking; let i = index">
   <ion-row>
     <ion-col>
       <div>
@@ -26,7 +26,68 @@
       </div>
     </ion-col>
   </ion-row>
-</ion-grid>
+</ion-grid> -->
+
+<div class="center" >
+  <div >
+  <div class="top3">
+    <div *ngFor="let ran of ranking; let i = index" >
+    <div class="two item"  *ngIf="i==1">
+      <div class="pos">
+        {{ i + 1 }}
+      </div>
+      <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/men/44.jpg&#39;)"></div>
+      <div class="name">
+        {{ran.username}}
+      </div>
+      <div class="score">
+        {{ran.puntuacionS}}
+      </div>
+    </div>
+    <div class="one item"   *ngIf="i==0">
+      <div class="pos">
+        {{ i + 1 }}
+      </div>
+      <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/men/31.jpg&#39;)"></div>
+      <div class="name">
+        {{ran.username}}
+      </div>
+      <div class="score">
+        {{ran.puntuacionS}}
+      </div>
+    </div>
+    <div class="three item" *ngIf="i==2">
+      <div class="pos">
+        {{ i + 1 }}
+      </div>
+      <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/women/91.jpg&#39;)"></div>
+      <div class="name">
+        {{ran.username}}
+      </div>
+      <div class="score">
+        {{ran.puntuacionS}}
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="list" *ngFor="let ran of ranking; let i = index">
+    <div *ngIf="i>=3">
+    <div class="item">
+      <div class="pos">
+        {{ i + 1 }}
+      </div>
+      <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/men/88.jpg&#39;)"></div>
+      <div class="name">
+        {{ran.username}}
+      </div>
+      <div class="score">
+        {{ran.puntuacionS}}
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
   <ion-fab-button routerLink="/details" routerDirection="forward">
     <ion-icon name="add"></ion-icon>
