@@ -22,6 +22,7 @@ import { rankingservice } from './services/ranking.service';
 import { UsuarioService } from './services/usuario.service';
 
 import { HttpClientModule } from '@angular/common/http';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 firebase.initializeApp(environment.firebase);
 @NgModule({
@@ -35,16 +36,17 @@ firebase.initializeApp(environment.firebase);
     AngularFirestoreModule,
     AngularFireAuthModule,  
     ReactiveFormsModule,
-    HttpClientModule,
+    HttpClientModule, 
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthenticateService,
     AngularFireAuthGuard,
     rankingservice,
-    UsuarioService
+    UsuarioService,
   ],
   bootstrap: [AppComponent]
 })

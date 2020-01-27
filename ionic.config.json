@@ -1,5 +1,7 @@
 {
   "name": "Iluminate",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
