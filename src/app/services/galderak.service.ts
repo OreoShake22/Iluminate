@@ -8,7 +8,9 @@ import {galderakTask } from "../models/model.interface";
   providedIn: 'root'
 })
 export class preguntasservice {
-
+  public returnable = [
+    { pregunta: "", respuesta: "", respuesta2: "", respuesta3: "" },
+  ];
   private preguntasCOllection : AngularFirestoreCollection<galderakTask>;
   private preguntas:Observable<galderakTask[]>;
   constructor(db:AngularFirestore) {
@@ -30,10 +32,30 @@ export class preguntasservice {
    {
      return this.preguntas;
    }
+
+   mezclador(){
+    return this.preguntas
+   }
    
    addpreguntas(pregunta:galderakTask)
    {
      return this.preguntasCOllection.add(pregunta)
+   }
+
+   random(tam: number): number {
+    let rand = Math.floor(Math.random() * tam);
+    return rand;
+  }
+
+  shake(r:string){
+    this.loadPregunta(r).subscribe(k=>{
+      this.returnable.push(k)
+    })
+  }
+
+  loadPregunta(id:string){
+    console.log(id)
+    return this.preguntasCOllection.doc<galderakTask>(id).valueChanges();
    }
 
 }
