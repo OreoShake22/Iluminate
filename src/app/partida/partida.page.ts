@@ -75,20 +75,10 @@ export class PartidaPage implements OnInit {
   }
 
   mezclas(respuestas) {
-    for (var i = 0; i != respuestas.length; i++) {
-      for (var a = 0; respuestas.length != this.final.length; a++) {
-        this.astolfo = true;
+    while (this.final.length<3) {
         this.myRand = this.random(respuestas.length);
-        if (respuestas[this.myRand] == this.final[a]) {
-          this.astolfo = false;
-          i--;
-          break;
-        }
-        if (this.astolfo) {
           this.final.push(respuestas[this.myRand]);
           this.respuestas.splice(this.myRand, 1);
-        }
-      }
     } this.respuestas = []
   }
 
@@ -108,15 +98,13 @@ export class PartidaPage implements OnInit {
       this.startTimer();
 }
   filtrarPreguntas(){
-    console.log(this.preguntas)
-    console.log('aaaaaaaaaaa')
     var id:galderakTask[]=[];
-    var patata=true
     for (var i = 0; i != this.preguntas.length && id.length<10; i++) {
         this.myRand = this.random(this.preguntas.length);
           id.push(this.preguntas[this.myRand]);
           this.preguntas.splice(this.myRand,1)
     }
+    console.log(id.length)
     this.preguntas=id;
   }
 }
