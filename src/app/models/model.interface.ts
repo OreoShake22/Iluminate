@@ -1,9 +1,9 @@
 export interface rankingTask {
     id?: string;
-    uid:string;
     username: string;
     puntuacionS:number;
     puntuacionG:number;
+    ultimaPartida:string;
 }
 
 export interface galderakTask {

@@ -2,7 +2,8 @@ import { Component, OnInit, wtfStartTimeRange } from '@angular/core';
 import { NavController,LoadingController } from '@ionic/angular';
 import {preguntasservice} from '../services/galderak.service';
 import { galderakTask } from "../models/model.interface";
-
+import {rankingservice} from '../services/ranking.service';
+import * as firebase from 'firebase'
 @Component({
   selector: 'app-partida',
   templateUrl: './partida.page.html',
@@ -11,11 +12,12 @@ import { galderakTask } from "../models/model.interface";
 export class PartidaPage implements OnInit {
 
   index: number = 0;
+  correcta:string;
+  puntuacion:number =0;
   respuestas: string[] = [];
   final: string[] = [];
   t: number = 10;
   myRand: number;
-  astolfo: boolean;
   loading;
 
   
@@ -26,8 +28,16 @@ export class PartidaPage implements OnInit {
 
   mix() {
     this.final = [];
+    this.correcta=this.preguntas[this.index].respuesta;
     this.respuestas.push(this.preguntas[this.index].respuesta, this.preguntas[this.index].respuesta2, this.preguntas[this.index].respuesta3);
     this.mezclas(this.respuestas);
+  }
+
+  respuesta(res:string){
+    if(this.correcta==res){
+      this.puntuacion+=100*((this.t)/10)
+    }
+    this.updateIndex();
   }
 
   updateIndex() {
@@ -41,17 +51,19 @@ export class PartidaPage implements OnInit {
 
   }
 
+  
+
   getIndex() {
     return this.index;
   }
-  constructor(private loadingController: LoadingController, private navCtrl: NavController,private preguntasservice:preguntasservice) {  }
+  constructor(private rankingservice:rankingservice,private loadingController: LoadingController, private navCtrl: NavController,private preguntasservice:preguntasservice) {  }
 
   ngOnInit() {
     this.preguntasservice.getpreguntas().subscribe(res=>{
       this.preguntas=res;
+      this.filtrarPreguntas();
       this.loadAll();
     });
-    
   }
 
   startTimer() {
@@ -67,26 +79,17 @@ export class PartidaPage implements OnInit {
         this.startTimer();
       } else {
         this.navCtrl.navigateForward('/');
+        this.rankingservice.updatePuntos(this.puntuacion,firebase.auth().currentUser.uid)
       }
 
     }
   }
 
   mezclas(respuestas) {
-    for (var i = 0; i != respuestas.length; i++) {
-      for (var a = 0; respuestas.length != this.final.length; a++) {
-        this.astolfo = true;
+    while (this.final.length<3) {
         this.myRand = this.random(respuestas.length);
-        if (respuestas[this.myRand] == this.final[a]) {
-          this.astolfo = false;
-          i--;
-          break;
-        }
-        if (this.astolfo) {
           this.final.push(respuestas[this.myRand]);
           this.respuestas.splice(this.myRand, 1);
-        }
-      }
     } this.respuestas = []
   }
 
@@ -100,8 +103,19 @@ export class PartidaPage implements OnInit {
       message: 'Loading'
     });
     await loading.present();
+    
       this.mix()
       loading.dismiss();
       this.startTimer();
 }
+  filtrarPreguntas(){
+    var id:galderakTask[]=[];
+    for (var i = 0; i != this.preguntas.length && id.length<10; i++) {
+        this.myRand = this.random(this.preguntas.length);
+          id.push(this.preguntas[this.myRand]);
+          this.preguntas.splice(this.myRand,1)
+    }
+    console.log(id.length)
+    this.preguntas=id;
+  }
 }

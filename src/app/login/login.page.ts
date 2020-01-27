@@ -18,10 +18,10 @@ export class LoginPage implements OnInit {
   successMessage: string = '';
 
   ranking:rankingTask={
-    uid:'',
     username:'',
     puntuacionS:0,
     puntuacionG:0,
+    ultimaPartida:'0',
   };
 
   validation_messages = {

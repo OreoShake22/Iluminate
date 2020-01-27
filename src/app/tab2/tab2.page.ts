@@ -17,7 +17,6 @@ export class Tab2Page implements OnInit{
     {
       this.rankingservice.getranking().subscribe(res=>{
         this.ranking=res;
-         
       })
       
     }

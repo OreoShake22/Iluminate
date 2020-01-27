@@ -12,7 +12,6 @@ export class TabsPage implements OnInit{
   constructor(public navCtrl: NavController) {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        console.log("haha xd")
       } else {
         this.navCtrl.navigateForward('/login');
 
