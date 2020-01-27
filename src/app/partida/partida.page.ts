@@ -49,8 +49,10 @@ export class PartidaPage implements OnInit {
   ngOnInit() {
     this.preguntasservice.getpreguntas().subscribe(res=>{
       this.preguntas=res;
+      this.filtrarPreguntas();
       this.loadAll();
     });
+    console.log("hola")
     
   }
 
@@ -100,8 +102,21 @@ export class PartidaPage implements OnInit {
       message: 'Loading'
     });
     await loading.present();
+    
       this.mix()
       loading.dismiss();
       this.startTimer();
 }
+  filtrarPreguntas(){
+    console.log(this.preguntas)
+    console.log('aaaaaaaaaaa')
+    var id:galderakTask[]=[];
+    var patata=true
+    for (var i = 0; i != this.preguntas.length && id.length<10; i++) {
+        this.myRand = this.random(this.preguntas.length);
+          id.push(this.preguntas[this.myRand]);
+          this.preguntas.splice(this.myRand,1)
+    }
+    this.preguntas=id;
+  }
 }
