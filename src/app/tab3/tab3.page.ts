@@ -21,6 +21,7 @@ export class Tab3Page implements OnInit{
       this.timeServices.getHour()
       .then(data => {
         this.dia = data;
+        data=this.dia.substring(0,this.dia.indexOf("T"));
         console.log(data)
       });
     }
