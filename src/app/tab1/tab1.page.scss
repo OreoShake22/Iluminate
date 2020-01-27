@@ -18,15 +18,19 @@
   border-radius:25px;
 }
 
+.centri{
+  margin-left: 55px;
+
+}
+
 #jokatu{
-  width:80%;
+  width:70%;
   height: 50px;
-  margin-top: -8%;
+  margin-top: 8%;
   position: absolute;
   color: black;
-	position: absolute;
 	border-radius: 3.75rem;
-	line-height: 2.5rem;
+  line-height: 2.5rem;
 	font-size: 2rem;
 	font-weight: 600;
 	
@@ -36,8 +40,25 @@
 							0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
 							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
 							0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;
-  
-  
+}
+
+#hard{
+  width:70%;
+  height: 50px;
+  margin-top: 29%;
+  position: absolute;
+  color: black;
+	border-radius: 3.75rem;
+  line-height: 2.5rem;
+	font-size: 2rem;
+	font-weight: 600;
+	
+	border: 1px solid #012880;
+	background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
+	box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.50),
+							0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
+							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;
 }
 
 #instrukzio{
@@ -47,19 +68,21 @@
   margin-top: 5%;
 }
 
-
+#texti{
+margin-top: 150px;
+padding-right: 5px;
+padding-left: 5px;
+padding-top: 9px;
+}
 .ion-pading-top{
   padding-top: 20px;
 }
 
 .irudi{
   width: 100%;
-  height: 500px;
-  margin-top: -5%;
-
+  height: 200px;
+  margin-top: 10%;
   }
-
-
   .centro{
     text-align: center;
     position: absolute;
@@ -69,9 +92,9 @@
     height: 50px;
     border-radius: 25px;
   }
-
   #info{
     margin-top: 51%;
-    margin-left: 46%; 
-  position: absolute;}
+    margin-left: 60%; 
+  position: absolute;
+}
 
