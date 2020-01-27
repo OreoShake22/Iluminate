@@ -21,6 +21,8 @@ import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { rankingservice } from './services/ranking.service';
 import { UsuarioService } from './services/usuario.service';
 
+import { HttpClientModule } from '@angular/common/http';
+
 firebase.initializeApp(environment.firebase);
 @NgModule({
   declarations: [AppComponent],
@@ -33,6 +35,7 @@ firebase.initializeApp(environment.firebase);
     AngularFirestoreModule,
     AngularFireAuthModule,  
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [
     StatusBar,

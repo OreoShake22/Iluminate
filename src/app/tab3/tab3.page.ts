@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {rankingservice} from '../services/ranking.service';
 import { rankingTask } from "../models/model.interface";
+import { TimeService } from '../services/time.service';
 
 @Component({
   selector: 'app-tab3',
@@ -8,10 +9,19 @@ import { rankingTask } from "../models/model.interface";
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit{
-  constructor() {
+  dia:any;
+  constructor( public timeServices:TimeService) {
   }
   ngOnInit()
     {
       
+    }
+  
+    getPosts() { //llamamos a la funcion getPost de nuestro servicio.
+      this.timeServices.getHour()
+      .then(data => {
+        this.dia = data;
+        console.log(data)
+      });
     }
 }
