@@ -5,10 +5,10 @@ import { rankingTask } from "../models/model.interface";
 @Injectable()
 export class AuthenticateService {
   ranking:rankingTask={
-    uid:'',
     username:'',
     puntuacionS:0,
     puntuacionG:0,
+    ultimaPartida:'0'
   };
   constructor(){}
  

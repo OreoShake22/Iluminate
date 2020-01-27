@@ -9,10 +9,10 @@ export class UsuarioService {
   private rankingCOllection : AngularFirestoreCollection<rankingTask>;
   private ranking:Observable<rankingTask[]>;
   user:rankingTask={
-    uid:'',
     username:'',
     puntuacionS:0,
     puntuacionG:0,
+    ultimaPartida:'0'
   };
   private db:AngularFirestore;
   constructor(db:AngularFirestore) {

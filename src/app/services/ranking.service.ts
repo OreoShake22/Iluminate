@@ -35,7 +35,6 @@ export class rankingservice {
    getTodo(id:string)
    {
      return this.rankingCOllection.doc<rankingTask>(id).valueChanges();
-     
    }
 
    addTodo(todo:rankingTask,id:string)
@@ -45,8 +44,15 @@ export class rankingservice {
       username: todo.username,
       puntuacionG: todo.puntuacionG,
       puntuacionS: todo.puntuacionS,
+      ultimaPartida:todo.ultimaPartida,
       // Other info you want to add here
     })
+   }
+
+   updateTime(ranking:rankingTask,id:string){
+    return this.rankingCOllection.doc(id).update({
+      ultimaPartida:ranking.ultimaPartida,
+    });
    }
 
 }

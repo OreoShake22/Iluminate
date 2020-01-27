@@ -4,6 +4,7 @@ import {UsuarioService} from '../services/usuario.service';
 import { rankingTask } from "../models/model.interface";
 import * as firebase from 'firebase'
 
+
 @Component({
   selector: 'app-tab4',
   templateUrl: 'tab4.page.html',
@@ -11,10 +12,10 @@ import * as firebase from 'firebase'
 })
 export class Tab4Page {
   usuario:rankingTask={
-    uid:'',
     username:'',
     puntuacionS:0,
     puntuacionG:0,
+    ultimaPartida:''
   };
   name:string="";
   mail:string="";
