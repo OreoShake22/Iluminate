@@ -51,8 +51,22 @@ export class rankingservice {
 
    updateTime(ranking:rankingTask,id:string){
     return this.rankingCOllection.doc(id).update({
-      ultimaPartida:ranking.ultimaPartida,
+      ultimaPartida:ranking.ultimaPartida
     });
+   }
+
+   updatePuntos(puntos:number,id:string){
+     var temp1:number;
+     var temp2:number;
+     this.getTodo(id).subscribe(res=>{
+       temp1=res.puntuacionS
+       temp2=res.puntuacionG
+       return this.rankingCOllection.doc(id).update({
+        puntuacionS:puntos+temp1,
+        puntuacionG:puntos+temp2
+      });
+     })
+    
    }
 
 }

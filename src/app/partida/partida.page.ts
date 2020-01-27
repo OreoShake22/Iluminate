@@ -2,7 +2,8 @@ import { Component, OnInit, wtfStartTimeRange } from '@angular/core';
 import { NavController,LoadingController } from '@ionic/angular';
 import {preguntasservice} from '../services/galderak.service';
 import { galderakTask } from "../models/model.interface";
-
+import {rankingservice} from '../services/ranking.service';
+import * as firebase from 'firebase'
 @Component({
   selector: 'app-partida',
   templateUrl: './partida.page.html',
@@ -11,11 +12,12 @@ import { galderakTask } from "../models/model.interface";
 export class PartidaPage implements OnInit {
 
   index: number = 0;
+  correcta:string;
+  puntuacion:number =0;
   respuestas: string[] = [];
   final: string[] = [];
   t: number = 10;
   myRand: number;
-  astolfo: boolean;
   loading;
 
   
@@ -26,8 +28,16 @@ export class PartidaPage implements OnInit {
 
   mix() {
     this.final = [];
+    this.correcta=this.preguntas[this.index].respuesta;
     this.respuestas.push(this.preguntas[this.index].respuesta, this.preguntas[this.index].respuesta2, this.preguntas[this.index].respuesta3);
     this.mezclas(this.respuestas);
+  }
+
+  respuesta(res:string){
+    if(this.correcta==res){
+      this.puntuacion+=100*((this.t)/10)
+    }
+    this.updateIndex();
   }
 
   updateIndex() {
@@ -41,10 +51,12 @@ export class PartidaPage implements OnInit {
 
   }
 
+  
+
   getIndex() {
     return this.index;
   }
-  constructor(private loadingController: LoadingController, private navCtrl: NavController,private preguntasservice:preguntasservice) {  }
+  constructor(private rankingservice:rankingservice,private loadingController: LoadingController, private navCtrl: NavController,private preguntasservice:preguntasservice) {  }
 
   ngOnInit() {
     this.preguntasservice.getpreguntas().subscribe(res=>{
@@ -52,8 +64,6 @@ export class PartidaPage implements OnInit {
       this.filtrarPreguntas();
       this.loadAll();
     });
-    console.log("hola")
-    
   }
 
   startTimer() {
@@ -69,6 +79,7 @@ export class PartidaPage implements OnInit {
         this.startTimer();
       } else {
         this.navCtrl.navigateForward('/');
+        this.rankingservice.updatePuntos(this.puntuacion,firebase.auth().currentUser.uid)
       }
 
     }
