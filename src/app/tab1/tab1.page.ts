@@ -24,28 +24,42 @@ export class Tab1Page implements OnInit{
     ultimaPartida:'0',
   };
   dia:any;
+  fecha:any;
   constructor(private navCtrl: NavController,private preguntasservice:preguntasservice, private rankingService:rankingservice, public timeServices:TimeService) {
-    
-    
+
+
   }
+
   ngOnInit()
     {
-      
       
     }
     ionViewWillEnter ()
     {
-      this.getPosts();
-      this.rankingService.getTodo(firebase.auth().currentUser.uid).subscribe(res => {
-      this.ranking1 = res;
-      });
-      
+     
     }
    
     
     jokatu(){
-      this.ranking1.id=firebase.auth().currentUser.uid
-      this.rankingService.updateTime(this.ranking1, this.ranking1.id)
+      this.getPosts();
+      var yo;
+      var userId=firebase.auth().currentUser.uid
+      this.rankingService.getTodo(userId).subscribe(res => {
+        this.fecha=res.ultimaPartida;
+        yo=res.username
+        });
+      if(this.fecha==this.dia && yo!='OreoShake'){
+        alert('ya has jugadoooo')
+      }
+      else{
+        this.rankingService.getTodo(userId).subscribe(res=>{
+          res.ultimaPartida
+        })
+        this.ranking1.id=userId
+        this.rankingService.updateTime(this.ranking1, this.ranking1.id)
+        this.navCtrl.navigateForward('partida')
+      }
+     
     }
     
     getPosts() { //llamamos a la funcion getPost de nuestro servicio.
