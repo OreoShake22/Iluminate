@@ -48,7 +48,8 @@ export class Tab1Page implements OnInit{
         this.fecha=res.ultimaPartida;
         yo=res.username
         });
-      if(this.fecha==this.dia && yo!='OreoShake'){
+      //if(this.fecha==this.dia && yo!='OreoShake'){
+        if(1){
         alert('ya has jugadoooo')
       }
       else{

@@ -3,6 +3,7 @@ import { NavController,LoadingController } from '@ionic/angular';
 import {preguntasservice} from '../services/galderak.service';
 import { galderakTask } from "../models/model.interface";
 import {rankingservice} from '../services/ranking.service';
+import {rankingTask } from "../models/model.interface";
 import * as firebase from 'firebase'
 @Component({
   selector: 'app-partida',
@@ -19,6 +20,7 @@ export class PartidaPage implements OnInit {
   t: number = 10;
   myRand: number;
   loading;
+  ranking: rankingTask;
 
   
 
@@ -64,6 +66,8 @@ export class PartidaPage implements OnInit {
       this.filtrarPreguntas();
       this.loadAll();
     });
+
+    
   }
 
   startTimer() {
@@ -79,7 +83,9 @@ export class PartidaPage implements OnInit {
         this.startTimer();
       } else {
         this.navCtrl.navigateForward('/');
-        this.rankingservice.updatePuntos(this.puntuacion,firebase.auth().currentUser.uid)
+        this.ranking.puntuacionG+=this.puntuacion
+        this.ranking.puntuacionS+=this.puntuacion
+        this.rankingservice.updatePuntos(this.ranking,firebase.auth().currentUser.uid)
       }
 
     }
@@ -103,10 +109,13 @@ export class PartidaPage implements OnInit {
       message: 'Loading'
     });
     await loading.present();
-    
+
       this.mix()
       loading.dismiss();
       this.startTimer();
+      this.rankingservice.getTodo(firebase.auth().currentUser.uid).subscribe(res=>{
+        this.ranking=res;
+      })
 }
   filtrarPreguntas(){
     var id:galderakTask[]=[];
