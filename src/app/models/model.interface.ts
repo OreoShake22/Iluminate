@@ -4,6 +4,7 @@ export interface rankingTask {
     puntuacionS:number;
     puntuacionG:number;
     ultimaPartida:string;
+    grupos:string[];
 }
 
 export interface galderakTask {
@@ -12,4 +13,16 @@ export interface galderakTask {
     respuesta:string,
     respuesta2:string,
     respuesta3:string,   
+}
+
+export interface groupTask {
+    id?: string;
+    nombre: string;
+    contra: string;
+}
+
+export interface groupRelTask {
+    id?: string;
+    idGrupo: string;
+    idUsuario: string;
 }

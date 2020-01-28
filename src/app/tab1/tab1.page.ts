@@ -22,6 +22,7 @@ export class Tab1Page implements OnInit{
     puntuacionS:0,
     puntuacionG:0,
     ultimaPartida:'0',
+    grupos:[]
   };
   dia:any;
   fecha:any;
@@ -49,7 +50,7 @@ export class Tab1Page implements OnInit{
         yo=res.username
         });
       //if(this.fecha==this.dia && yo!='OreoShake'){
-        if(1){
+        if(0){
         alert('ya has jugadoooo')
       }
       else{

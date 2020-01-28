@@ -19,7 +19,8 @@ export class RegisterPage implements OnInit {
     username:'',
     puntuacionS:0,
     puntuacionG:0,
-    ultimaPartida:'0'
+    ultimaPartida:'0',
+    grupos:[]
   };
  
   validations_form: FormGroup;

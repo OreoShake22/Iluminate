@@ -3,6 +3,7 @@ import { AuthenticateService } from '../services/autentication.service';
 import {UsuarioService} from '../services/usuario.service';
 import { rankingTask } from "../models/model.interface";
 import * as firebase from 'firebase'
+import { ImagePicker,ImagePickerOptions  } from '@ionic-native/image-picker/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 
@@ -16,7 +17,8 @@ export class Tab4Page {
     username:'',
     puntuacionS:0,
     puntuacionG:0,
-    ultimaPartida:''
+    ultimaPartida:'',
+    grupos:[]
   };
   name:string="";
   mail:string="";
@@ -24,7 +26,8 @@ export class Tab4Page {
   constructor(
     private authService: AuthenticateService,
     private usuarioservice:UsuarioService,
-    private camera: Camera
+    private camera: Camera,
+    private imagePicker:ImagePicker
   ) {}
 
 
@@ -51,21 +54,20 @@ export class Tab4Page {
     this.mail=firebase.auth().currentUser.email
   }
 
-  getImg()
-  {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
+  // getImg()
+  // {
+  //   let options = {
+  //     width: 500,
+  //     height: 500,
+  //     quality: 75,
+  //     maximumImagesCount: 10
+  //   }
     
-    this.camera.getPicture(options).then((imageData) => {
-     // imageData is either a base64 encoded string or a file URI
-     // If it's base64 (DATA_URL):
-     let base64Image = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-     // Handle error
-    });
-  }
+  //   this.imagePicker.getPictures(options).then((results) => {
+  //     for (var i = 0; i < results.length; i++) {
+  //         console.log('Image URI: ' + results[i]);
+  //     }
+  //   }, (err) => { });
+  // }
+ 
 }

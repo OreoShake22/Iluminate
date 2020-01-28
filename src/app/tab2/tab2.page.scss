@@ -19,17 +19,17 @@ body, html {
 	overflow: hidden;
 	background: $purple;
 	color: #333;
+	
 }
 
 .center {
 	position: absolute;
-	top: 50%;
+	top: 10%;
 	left: 50%;
   transform: translate(-50%);
   width:100%;
 	z-index: 10;
   font-family: 'Red Hat Display', sans-serif;
-  margin-top: -270px;
 }
 
 .top3 {

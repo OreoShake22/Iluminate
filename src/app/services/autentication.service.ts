@@ -8,7 +8,8 @@ export class AuthenticateService {
     username:'',
     puntuacionS:0,
     puntuacionG:0,
-    ultimaPartida:'0'
+    ultimaPartida:'0',
+    grupos:[]
   };
   constructor(){}
  
