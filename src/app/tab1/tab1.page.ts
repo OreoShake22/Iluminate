@@ -21,6 +21,7 @@ export class Tab1Page implements OnInit{
     puntuacionS:0,
     puntuacionG:0,
     ultimaPartida:'0',
+    grupos:[]
   };
   dia:any;
   fecha:string='';

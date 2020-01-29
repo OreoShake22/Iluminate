@@ -12,7 +12,8 @@ export class UsuarioService {
     username:'',
     puntuacionS:0,
     puntuacionG:0,
-    ultimaPartida:'0'
+    ultimaPartida:'0',
+    grupos:[]
   };
   private db:AngularFirestore;
   constructor(db:AngularFirestore) {

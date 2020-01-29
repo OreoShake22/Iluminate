@@ -22,6 +22,7 @@ export class LoginPage implements OnInit {
     puntuacionS:0,
     puntuacionG:0,
     ultimaPartida:'0',
+    grupos:[]
   };
 
   validation_messages = {
