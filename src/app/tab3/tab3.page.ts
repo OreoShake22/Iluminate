@@ -49,6 +49,8 @@ export class Tab3Page implements OnInit {
     this.gruposId = []
     this.grupoService.getgrupos().subscribe(res => {
       this.antonio = res
+      
+      console.log(this.antonio)
       for (var i = 0; i < this.antonio.length; i++) {
         this.gruposId.push(this.antonio[i].nombre)
       }
@@ -147,6 +149,8 @@ export class Tab3Page implements OnInit {
               console.log(grupo.id)
               grupo.usuarios.push(firebase.auth().currentUser.uid)
 
+              this.grupoService.updateGrupo(grupo)
+              this.rankingService.updateGrupos(firebase.auth().currentUser.uid,grupo.id)
             }
             else{
               this.PassAlert(grupo)
