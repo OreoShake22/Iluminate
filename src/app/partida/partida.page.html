@@ -6,8 +6,9 @@
 <ion-content>
 
   <ion-slides #slides>
-    {{puntuacion}}
+    
     <ion-slide>
+      {{puntuacion}}
       <ion-list>
         <ion-item-sliding>
       <label id="timer">{{t}}</label>
@@ -19,7 +20,7 @@
         </div>
         
           <ion-item-sliding  *ngFor="let res of final; let i= index"> 
-              <ion-button color="Dpurple" class="boton" id="respuesta" (click)="respuesta(res)" round>
+              <ion-button color="{{colores[i]}}" class="boton" id="res" (click)="respuesta(res,i)" round>
                 {{res}}
               </ion-button>
           </ion-item-sliding>
