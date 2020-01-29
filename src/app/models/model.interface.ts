@@ -19,6 +19,7 @@ export interface groupTask {
     id?: string;
     nombre: string;
     contra: string;
+    usuarios:string[];
 }
 
 export interface groupRelTask {

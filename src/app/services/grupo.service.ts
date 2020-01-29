@@ -4,7 +4,6 @@ import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { groupTask } from "../models/model.interface";
 import { groupRelTask } from "../models/model.interface";
-import * as firebase from 'firebase'
 
 @Injectable({
   providedIn: 'root'
@@ -50,14 +49,27 @@ export class GrupoService {
     return this.group;
   }
 
-  filtro(){
-    var query = this.db.collection<groupRelTask>('relacionGrupos', ref => ref.where('idUser','==',firebase.auth().currentUser.uid));
-    return query
-  }
+  // filtro(){
+  //   var query = this.db.collection<groupRelTask>('relacionGrupos', ref => ref.where('idUser','==',firebase.auth().currentUser.uid));
+  //   return query
+  // }
 
   getGrupo(id:string)
   {
     return this.groupCollection.doc<groupTask>(id).valueChanges();
   }
+
+  addUsuario(grupo:groupTask,id:string)
+   {
+     var a=this.groupCollection.doc<any>(id);
+     a.set({
+       
+
+    })
+   }
+
+   updateGrupo(grupo:groupTask,id:string){
+    return this.groupCollection.doc(grupo.id).update(grupo);
+   }
 
 }
