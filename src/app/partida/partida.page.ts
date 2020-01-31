@@ -10,8 +10,8 @@ import * as firebase from 'firebase'
   templateUrl: './partida.page.html',
   styleUrls: ['./partida.page.scss'],
 })
-export class PartidaPage implements OnInit {
-
+export class PartidaPage{
+  temporalizador:any;
   index: number = 0;
   disponible: boolean = true;
   correcta: string;
@@ -53,7 +53,6 @@ export class PartidaPage implements OnInit {
       this.updateIndex();
       
       if (this.index < this.preguntas.length) {
-        console.log("index= ",this.index," preguntas= ",this.preguntas.length)
       this.disponible=true
       }
     this.startTimer();
@@ -68,7 +67,6 @@ export class PartidaPage implements OnInit {
       this.t = 10;
     } else {
       this.disponible=false;
-      console.log("update index")
       this.finalizar();
     }
 
@@ -81,12 +79,16 @@ export class PartidaPage implements OnInit {
   }
   constructor(private rankingservice: rankingservice, private loadingController: LoadingController, private navCtrl: NavController, private preguntasservice: preguntasservice) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.preguntasservice.getpreguntas().subscribe(res => {
       this.preguntas = res;
       this.filtrarPreguntas();
       this.loadAll();
     });
+  }
+
+  ionViewWillLeave(){
+     clearInterval(this.temporalizador)
   }
 
   pasarPregunta() {
@@ -97,7 +99,7 @@ export class PartidaPage implements OnInit {
   startTimer() {
     if (this.t > 0) {
 
-      setTimeout(function () {
+      this.temporalizador=setTimeout(function () {
         if (this.disponible) {
           this.t--;
           this.startTimer()
@@ -109,7 +111,6 @@ export class PartidaPage implements OnInit {
         this.updateIndex();
         this.startTimer();
       } else {
-        console.log("timer")
         this.finalizar();
       }
 
