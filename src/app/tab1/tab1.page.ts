@@ -16,7 +16,6 @@ import { TimeService } from '../services/time.service';
 })
 export class Tab1Page implements OnInit{
   preguntas:galderakTask[];
-  ranking:rankingTask[];
   ranking1:rankingTask={
     username:'',
     puntuacionS:0,
@@ -25,7 +24,7 @@ export class Tab1Page implements OnInit{
     grupos:[]
   };
   dia:any;
-  fecha:any;
+  fecha:string='';
   constructor(private navCtrl: NavController,private preguntasservice:preguntasservice, private rankingService:rankingservice, public timeServices:TimeService) {
 
 
@@ -45,23 +44,33 @@ export class Tab1Page implements OnInit{
       this.getPosts();
       var yo;
       var userId=firebase.auth().currentUser.uid
-      this.rankingService.getTodo(userId).subscribe(res => {
+      let fecha=this.rankingService.getTodo(userId).subscribe(res => {
         this.fecha=res.ultimaPartida;
         yo=res.username
+
+        console.log(this.fecha)
+        if(this.fecha!=''){
+        if(this.fecha==this.dia){
+          alert('ya has jugadoooo')
+        }
+        else{
+          this.rankingService.getTodo(userId).subscribe(res=>{
+            res.ultimaPartida
+          })
+          this.ranking1.id=userId
+          this.rankingService.updateTime(this.ranking1, this.ranking1.id)
+          this.navCtrl.navigateForward('partida')
+        }
+        fecha.unsubscribe()
+      }
         });
       //if(this.fecha==this.dia && yo!='OreoShake'){
-        if(0){
-        alert('ya has jugadoooo')
-      }
-      else{
-        this.rankingService.getTodo(userId).subscribe(res=>{
-          res.ultimaPartida
-        })
-        this.ranking1.id=userId
-        this.rankingService.updateTime(this.ranking1, this.ranking1.id)
-        this.navCtrl.navigateForward('partida')
-      }
+        
      
+    }
+
+    async comprobarDia(){
+
     }
     
     getPosts() { //llamamos a la funcion getPost de nuestro servicio.

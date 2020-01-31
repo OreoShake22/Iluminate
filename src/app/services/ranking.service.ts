@@ -19,7 +19,7 @@ export class rankingservice {
       actions=>{
         return actions.map(a=>{
           const data = a.payload.doc.data();
-          const id = data.id;
+          const id = a.payload.doc.id;
           return{id, ...data};
         });
 
@@ -57,6 +57,24 @@ export class rankingservice {
 
    updatePuntos(user:rankingTask,id:string){
     return this.rankingCOllection.doc(id).update(user);
+   }
+
+   updateGrupos(id:string, idGrupo:string)
+   {
+      this.ranking.subscribe(usuarios=>{
+        usuarios.forEach(usuario=>{
+          if(usuario.id==id)
+          {
+            usuario.grupos.push(idGrupo)
+            this.añadirGrupo(usuario)
+          }
+        })
+      })
+   }
+
+   añadirGrupo(usuario)
+   {
+    return this.rankingCOllection.doc(usuario.id).update(usuario);
    }
 
 }
