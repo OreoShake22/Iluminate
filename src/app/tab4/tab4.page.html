@@ -23,9 +23,11 @@
     <h3> Korreoa: {{mail}}</h3>
   </div>
 <div class="text">
-  
+  <div class="ion-padding">
+    <ion-button color="tertiary" (click)="pickImage()"  type="ion-button" class="ion-no-margin">Foto</ion-button>
+  </div>
 <div class="ion-padding">
-  <ion-button color="tertiary"  type="ion-button" class="ion-no-margin">Aldatu pasahitza</ion-button>
+  <ion-button color="tertiary" (click)="change()"  type="ion-button" class="ion-no-margin">Aldatu pasahitza</ion-button>
 </div>
 <div class="ion-padding">
   <ion-button color="danger" (click)="logOut()"  type="ion-button" class="ion-no-margin">Itxi saioa</ion-button>
