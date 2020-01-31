@@ -13,7 +13,7 @@ import { async } from '@angular/core/testing';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit {
-  grupo: rankingTask[];
+  grupo: rankingTask;
   sGroup: string[];
   gruposId: string[];
   groupIzen: string[];
@@ -27,6 +27,7 @@ export class Tab3Page implements OnInit {
   }
   ionViewWillEnter() {
     this.rankingService.getTodo(firebase.auth().currentUser.uid).subscribe(res => {
+      this.grupo=res;
       this.sGroup = res.grupos
       this.funcion()
       this.idGrupos()
@@ -106,7 +107,7 @@ export class Tab3Page implements OnInit {
 
   async alertNoGroup() {
     const alert = await this.atrCtrl.create({
-      header: 'Taldera ez da aurkitu',
+      header: 'Taldea ez da aurkitu',
 
       buttons: [
         {
@@ -147,10 +148,8 @@ export class Tab3Page implements OnInit {
             var pass = data.pass
             if(pass==grupo['contraseña']){
               console.log(grupo.id)
-              grupo.usuarios.push(firebase.auth().currentUser.uid)
-
-              this.grupoService.updateGrupo(grupo)
-              this.rankingService.updateGrupos(firebase.auth().currentUser.uid,grupo.id)
+              this.grupo.grupos.push(grupo.id)
+              this.rankingService.añadirGrupo(this.grupo,firebase.auth().currentUser.uid)
             }
             else{
               this.PassAlert(grupo)

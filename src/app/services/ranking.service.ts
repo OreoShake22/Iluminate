@@ -59,22 +59,12 @@ export class rankingservice {
     return this.rankingCOllection.doc(id).update(user);
    }
 
-   updateGrupos(id:string, idGrupo:string)
-   {
-      this.ranking.subscribe(usuarios=>{
-        usuarios.forEach(usuario=>{
-          if(usuario.id==id)
-          {
-            usuario.grupos.push(idGrupo)
-            this.añadirGrupo(usuario)
-          }
-        })
-      })
-   }
 
-   añadirGrupo(usuario)
+   añadirGrupo(usuario,id:string)
    {
-    return this.rankingCOllection.doc(usuario.id).update(usuario);
+     console.log(usuario)
+     console.log(id)
+    return this.rankingCOllection.doc(id).update(usuario);
    }
 
 }
