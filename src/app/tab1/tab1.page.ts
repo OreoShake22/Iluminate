@@ -21,6 +21,7 @@ export class Tab1Page implements OnInit{
     puntuacionS:0,
     puntuacionG:0,
     ultimaPartida:'0',
+    lastWeek:0,
     grupos:[]
   };
   dia:any;
@@ -58,7 +59,7 @@ export class Tab1Page implements OnInit{
             res.ultimaPartida
           })
           this.ranking1.id=userId
-          this.rankingService.updateTime(this.ranking1, this.ranking1.id)
+          this.rankingService.updateTodo(this.ranking1, this.ranking1.id)
           this.navCtrl.navigateForward('partida')
         }
         fecha.unsubscribe()
@@ -76,9 +77,11 @@ export class Tab1Page implements OnInit{
     getPosts() { //llamamos a la funcion getPost de nuestro servicio.
       this.timeServices.getHour()
       .then(data => {
-        this.dia = data;
+        this.dia = data['datetime'];
+
         this.dia=this.dia.substring(0,this.dia.indexOf("T"));
         this.ranking1.ultimaPartida=this.dia;
+        this.ranking1.lastWeek=data['week_number'];
       });
     }
 }

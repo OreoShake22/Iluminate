@@ -49,22 +49,8 @@ export class rankingservice {
     })
    }
 
-   updateTime(ranking:rankingTask,id:string){
-    return this.rankingCOllection.doc(id).update({
-      ultimaPartida:ranking.ultimaPartida
-    });
-   }
-
-   updatePuntos(user:rankingTask,id:string){
-    return this.rankingCOllection.doc(id).update(user);
-   }
-
-
-   añadirGrupo(usuario,id:string)
-   {
-     console.log(usuario)
-     console.log(id)
-    return this.rankingCOllection.doc(id).update(usuario);
+   updateTodo(ranking:rankingTask,id:string){
+    return this.rankingCOllection.doc(id).update(ranking);
    }
 
 }

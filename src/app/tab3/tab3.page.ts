@@ -149,7 +149,7 @@ export class Tab3Page implements OnInit {
             if(pass==grupo['contraseña']){
               console.log(grupo.id)
               this.grupo.grupos.push(grupo.id)
-              this.rankingService.añadirGrupo(this.grupo,firebase.auth().currentUser.uid)
+              this.rankingService.updateTodo(this.grupo,firebase.auth().currentUser.uid)
             }
             else{
               this.PassAlert(grupo)
