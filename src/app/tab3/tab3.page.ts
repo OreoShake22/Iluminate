@@ -222,11 +222,7 @@ export class Tab3Page implements OnInit {
               this.grupo.grupos.push(id)
               this.rankingService.añadirGrupo(this.grupo,firebase.auth().currentUser.uid)
            }
-            
-            // talde.grupos.push()
-
-            
-            
+                
           },
         }
       ]
