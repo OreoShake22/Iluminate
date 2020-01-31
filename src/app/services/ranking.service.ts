@@ -45,10 +45,26 @@ export class rankingservice {
       puntuacionG: todo.puntuacionG,
       puntuacionS: todo.puntuacionS,
       ultimaPartida:todo.ultimaPartida,
+      grupos:todo.grupos,
       // Other info you want to add here
     })
    }
 
+   updateTime(ranking:rankingTask,id:string){
+    return this.rankingCOllection.doc(id).update({
+      ultimaPartida:ranking.ultimaPartida
+    });
+   }
+
+   updatePuntos(user:rankingTask,id:string){
+    return this.rankingCOllection.doc(id).update(user);
+   }
+
+
+   añadirGrupo(usuario,id:string)
+   {
+    return this.rankingCOllection.doc(id).update(usuario);
+   }
    updateTodo(ranking:rankingTask,id:string){
      console.log(ranking)
     return this.rankingCOllection.doc(id).update(ranking);

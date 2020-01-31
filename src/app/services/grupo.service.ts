@@ -47,17 +47,23 @@ export class GrupoService {
     return this.groupCollection.doc<groupTask>(id).valueChanges();
   }
 
-  addUsuario(grupo:groupTask,id:string)
-   {
-     var a=this.groupCollection.doc<any>(id);
-     a.set({
-       
 
-    })
-   }
 
    updateGrupo(grupo:groupTask){
     return this.groupCollection.doc(grupo.id).update(grupo);
    }
+
+   addGroup(grupo:groupTask)
+   {
+    var id=this.db.createId()
+    var salu2=this.groupCollection.doc<any>(id);
+     salu2.set({
+      nombre: grupo.nombre,
+      contraseña: grupo.contra,
+      usuarios: grupo.usuarios,
+    })
+    return id;
+   }
+
 
 }
