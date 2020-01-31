@@ -45,6 +45,7 @@ export class rankingservice {
       puntuacionG: todo.puntuacionG,
       puntuacionS: todo.puntuacionS,
       ultimaPartida:todo.ultimaPartida,
+      grupos:todo.grupos,
       // Other info you want to add here
     })
    }
@@ -62,8 +63,6 @@ export class rankingservice {
 
    añadirGrupo(usuario,id:string)
    {
-     console.log(usuario)
-     console.log(id)
     return this.rankingCOllection.doc(id).update(usuario);
    }
 
