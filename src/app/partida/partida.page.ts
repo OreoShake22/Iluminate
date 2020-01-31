@@ -112,7 +112,7 @@ export class PartidaPage implements OnInit {
     this.navCtrl.navigateForward('/');
     this.ranking.puntuacionG += this.puntuacion
     this.ranking.puntuacionS += this.puntuacion
-    this.rankingservice.updatePuntos(this.ranking, firebase.auth().currentUser.uid)
+    this.rankingservice.updateTodo(this.ranking, firebase.auth().currentUser.uid)
   }
 
   mezclas(respuestas) {

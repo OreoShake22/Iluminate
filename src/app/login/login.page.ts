@@ -22,6 +22,7 @@ export class LoginPage implements OnInit {
     puntuacionS:0,
     puntuacionG:0,
     ultimaPartida:'0',
+    lastWeek:0,
     grupos:[]
   };
 
@@ -62,7 +63,6 @@ export class LoginPage implements OnInit {
   loginUser(value){
     this.authService.loginUser(value)
     .then(res => {
-      console.log(res);
       this.errorMessage = "";
       this.navCtrl.navigateForward('');
     }, err => {
@@ -73,14 +73,11 @@ export class LoginPage implements OnInit {
   tryRegister(value){
     this.authService.registerUser(value)
      .then(res => {
-       console.log(res);
        this.navCtrl.navigateForward('');
         this.ranking.username=((document.getElementById("username") as HTMLInputElement).value);
-        console.log(firebase.auth().currentUser.uid)
         this.rankingservice.addTodo(this.ranking,firebase.auth().currentUser.uid)
         
      }, err => {
-       console.log(err);
        this.errorMessage = err.message;
        this.successMessage = "";
      })     

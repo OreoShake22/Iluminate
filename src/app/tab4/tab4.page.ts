@@ -18,6 +18,7 @@ export class Tab4Page {
     puntuacionS:0,
     puntuacionG:0,
     ultimaPartida:'',
+    lastWeek:0,
     grupos:[]
   };
   name:string="";

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NavController } from '@ionic/angular';
 import { rankingservice } from '../services/ranking.service';
 import { GrupoService } from '../services/grupo.service';
 import { rankingTask, groupTask } from "../models/model.interface";
@@ -13,34 +13,46 @@ import { async } from '@angular/core/testing';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit {
-  grupo: rankingTask[];
+  grupo:rankingTask;
   sGroup: string[];
   gruposId: string[];
   groupIzen: string[];
   antonio: groupTask[];
   aa: boolean
+  talde:groupTask={
+    nombre: '',
+    contra: '',
+    usuarios:[],
 
-  constructor(private rankingService: rankingservice, private grupoService: GrupoService, public atrCtrl: AlertController) {
+  }
+ 
+
+  constructor(private navCtrl: NavController, private rankingService: rankingservice, private grupoService: GrupoService, public atrCtrl: AlertController) {
   }
   ngOnInit() {
 
   }
   ionViewWillEnter() {
+    try{
     this.rankingService.getTodo(firebase.auth().currentUser.uid).subscribe(res => {
+      this.grupo=res;
       this.sGroup = res.grupos
-      this.funcion()
+      this.groupName()
       this.idGrupos()
     })
   }
+  catch{
+    this.navCtrl.navigateForward('')
+  }
+  }
 
-  funcion() {
+  groupName() {
     this.groupIzen = []
     for (var i = 0; i < this.sGroup.length; i++) {
       var a = this.sGroup[i]
       this.grupoService.getGrupo(a).subscribe(res => {
         this.groupIzen.push(res.nombre)
       })
-
     }
 
   }
@@ -50,7 +62,6 @@ export class Tab3Page implements OnInit {
     this.grupoService.getgrupos().subscribe(res => {
       this.antonio = res
       
-      console.log(this.antonio)
       for (var i = 0; i < this.antonio.length; i++) {
         this.gruposId.push(this.antonio[i].nombre)
       }
@@ -93,7 +104,7 @@ export class Tab3Page implements OnInit {
               }
             }
             if (this.aa == false) {
-              this.alertNoGroup()
+              this.alertNoGroup(a+' taldea ez da aurkitu')
             }
           },
         }
@@ -104,9 +115,9 @@ export class Tab3Page implements OnInit {
 
   }
 
-  async alertNoGroup() {
+  async alertNoGroup(a) {
     const alert = await this.atrCtrl.create({
-      header: 'Taldera ez da aurkitu',
+      header: a,
 
       buttons: [
         {
@@ -146,15 +157,76 @@ export class Tab3Page implements OnInit {
           handler: async data => {
             var pass = data.pass
             if(pass==grupo['contraseña']){
-              console.log(grupo.id)
-              grupo.usuarios.push(firebase.auth().currentUser.uid)
-
-              this.grupoService.updateGrupo(grupo)
-              this.rankingService.updateGrupos(firebase.auth().currentUser.uid,grupo.id)
+              this.grupo.grupos.push(grupo.id)
+              this.rankingService.updateTodo(this.grupo,firebase.auth().currentUser.uid)
             }
             else{
               this.PassAlert(grupo)
             }
+          },
+        }
+      ]
+    });
+
+    await alert.present();
+
+  }
+
+  async createGroup() {
+    const alert = await this.atrCtrl.create({
+      header: 'Taldea sortu',
+      inputs: [
+        {
+          name: 'izena',
+          value: '',
+          type: 'text',
+          placeholder: 'taldearen izena',
+          id: 'izena'
+        },
+        {
+          name: 'pass',
+          value: '',
+          type: 'password',
+          placeholder: 'pasahitza',
+          id: 'pass'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Ezeztatu',
+
+          role: 'cancel',
+          cssClass: 'secondary'
+        },
+        {
+          text: 'Gorde',
+          handler: async data => {
+            var existe=false
+            
+            console.log(this.talde)
+            this.talde.nombre=data.izena
+            this.talde.contra=data.pass
+            this.talde.usuarios.push(firebase.auth().currentUser.uid)
+            console.log(this.talde)
+            for(var i=0;i<this.gruposId.length;i++)
+            {
+              if(data.izena==this.groupIzen[i]){
+                this.alertNoGroup(data.izena+' talde izena hartuta dago')
+                existe=true;
+                break;
+              }
+              
+            }
+            if(existe==false){
+              var id=(this.grupoService.addGroup(this.talde))
+              this.grupo.grupos.push(id)
+              this.rankingService.añadirGrupo(this.grupo,firebase.auth().currentUser.uid)
+           }
+            
+            // talde.grupos.push()
+
+            
+            
           },
         }
       ]

@@ -45,6 +45,7 @@ export class rankingservice {
       puntuacionG: todo.puntuacionG,
       puntuacionS: todo.puntuacionS,
       ultimaPartida:todo.ultimaPartida,
+      grupos:todo.grupos,
       // Other info you want to add here
     })
    }
@@ -59,22 +60,13 @@ export class rankingservice {
     return this.rankingCOllection.doc(id).update(user);
    }
 
-   updateGrupos(id:string, idGrupo:string)
-   {
-      this.ranking.subscribe(usuarios=>{
-        usuarios.forEach(usuario=>{
-          if(usuario.id==id)
-          {
-            usuario.grupos.push(idGrupo)
-            this.añadirGrupo(usuario)
-          }
-        })
-      })
-   }
 
-   añadirGrupo(usuario)
+   añadirGrupo(usuario,id:string)
    {
-    return this.rankingCOllection.doc(usuario.id).update(usuario);
+    return this.rankingCOllection.doc(id).update(usuario);
+   }
+   updateTodo(ranking:rankingTask,id:string){
+    return this.rankingCOllection.doc(id).update(ranking);
    }
 
 }
