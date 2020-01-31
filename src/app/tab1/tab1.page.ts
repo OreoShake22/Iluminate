@@ -55,11 +55,11 @@ export class Tab1Page implements OnInit{
           alert('ya has jugadoooo')
         }
         else{
-          this.rankingService.getTodo(userId).subscribe(res=>{
-            res.ultimaPartida
-          })
+          
           this.ranking1.id=userId
-          this.rankingService.updateTodo(this.ranking1, this.ranking1.id)
+          console.log("pato")
+          this.rankingService.updateTime(this.ranking1, this.ranking1.id)
+          console.log("pato")
           this.navCtrl.navigateForward('partida')
         }
         fecha.unsubscribe()

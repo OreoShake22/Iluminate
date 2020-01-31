@@ -38,6 +38,7 @@ export class PartidaPage implements OnInit {
   }
 
   respuesta(res: string,c:number) {
+    if(this.disponible){
     this.disponible = false
     if (this.correcta == res) {
       this.puntuacion += 100 * ((this.t) / 10)
@@ -50,10 +51,14 @@ export class PartidaPage implements OnInit {
     setTimeout(function () {
       this.colores[c]='Dpurple'
       this.updateIndex();
+      
+      if (this.index < this.preguntas.length) {
+        console.log("index= ",this.index," preguntas= ",this.preguntas.length)
       this.disponible=true
+      }
     this.startTimer();
     }.bind(this), 1000)
-    
+  }
   }
 
   updateIndex() {
@@ -62,6 +67,8 @@ export class PartidaPage implements OnInit {
       this.mix();
       this.t = 10;
     } else {
+      this.disponible=false;
+      console.log("update index")
       this.finalizar();
     }
 
@@ -91,8 +98,8 @@ export class PartidaPage implements OnInit {
     if (this.t > 0) {
 
       setTimeout(function () {
-        this.t--;
         if (this.disponible) {
+          this.t--;
           this.startTimer()
         }
       }.bind(this), 1000)
@@ -102,6 +109,7 @@ export class PartidaPage implements OnInit {
         this.updateIndex();
         this.startTimer();
       } else {
+        console.log("timer")
         this.finalizar();
       }
 
@@ -109,6 +117,7 @@ export class PartidaPage implements OnInit {
   }
 
   finalizar() {
+    this.disponible=false;
     this.navCtrl.navigateForward('/');
     this.ranking.puntuacionG += this.puntuacion
     this.ranking.puntuacionS += this.puntuacion

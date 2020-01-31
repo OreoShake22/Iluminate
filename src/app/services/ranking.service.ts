@@ -50,7 +50,14 @@ export class rankingservice {
    }
 
    updateTodo(ranking:rankingTask,id:string){
+     console.log(ranking)
     return this.rankingCOllection.doc(id).update(ranking);
    }
 
+   updateTime(ranking:rankingTask,id:string){
+       return this.rankingCOllection.doc(id).update({
+         ultimaPartida:ranking.ultimaPartida,
+         lastWeek:ranking.lastWeek
+       });
+      }
 }
