@@ -4,6 +4,7 @@ export interface rankingTask {
     puntuacionS:number;
     puntuacionG:number;
     ultimaPartida:string;
+    lastWeek:number;
     grupos:string[];
 }
 

@@ -15,7 +15,7 @@ export class TimeService {
   getHour(){
     return new Promise(resolve=>{
       this.http.get(this.url).subscribe(data=>{
-          resolve(data['datetime']);
+          resolve(data);
       },error=>{
         console.log(error);
       });

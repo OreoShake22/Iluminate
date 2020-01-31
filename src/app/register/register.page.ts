@@ -20,6 +20,7 @@ export class RegisterPage implements OnInit {
     puntuacionS:0,
     puntuacionG:0,
     ultimaPartida:'0',
+    lastWeek:0,
     grupos:[]
   };
  

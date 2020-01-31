@@ -65,5 +65,8 @@ export class rankingservice {
    {
     return this.rankingCOllection.doc(id).update(usuario);
    }
+   updateTodo(ranking:rankingTask,id:string){
+    return this.rankingCOllection.doc(id).update(ranking);
+   }
 
 }
