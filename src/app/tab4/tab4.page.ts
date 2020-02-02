@@ -6,7 +6,7 @@ import * as firebase from 'firebase'
 import { ImagePicker,ImagePickerOptions  } from '@ionic-native/image-picker/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { NavController, LoadingController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 //ionic cordova plugin add cordova-plugin-file
 //npm install @ionic-native/file
@@ -31,6 +31,9 @@ export class Tab4Page {
   name:string="";
   mail:string="";
   myphoto:string;
+  
+  captureDataUrl: string;
+  alertCtrl: AlertController;
 
   croppedImagepath = "";
   isLoading = false;
@@ -44,7 +47,7 @@ export class Tab4Page {
     private usuarioservice:UsuarioService,
     public actionSheetController: ActionSheetController,
     private imagePicker:ImagePicker,
-    public navCtrl: NavController, private camera: Camera,  private file: File, private loadingCtrl:LoadingController,
+    public navCtrl: NavController, private camera: Camera,  private file: File,   alertCtrl: AlertController
   ) {}
 
 
@@ -69,6 +72,7 @@ export class Tab4Page {
       this.usuario=algo;
     })
     this.mail=firebase.auth().currentUser.email
+    
   }
 
   // getImg()
@@ -96,32 +100,39 @@ export class Tab4Page {
       saveToPhotoAlbum:false
     }
 
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64:
-      this.myphoto = 'data:image/jpeg;base64,' + imageData;
-      alert()
-      this.uploadPicture('aaa') 
-      
-    }, (err) => {
-      // Handle error
-    });
+    this.camera.getPicture(options).then((captureDataUrl) => {
+      this.captureDataUrl = 'data:image/jpeg;base64,' + captureDataUrl;
+   }, (err) => {
+       console.log(err);
+   });
     
     
   }
 
-  async uploadPicture(imageString) {
-    const storageRef = firebase
-    .storage()
-    .ref("/profilePicture.jpg");
-   
-    const uploadedPicture = await storageRef.putString(imageString, 'base64', {
-    contentType: 'image/jpg'
+  upload() {
+    let storageRef = firebase.storage().ref();
+    // Create a timestamp as filename
+    const filename = firebase.auth().currentUser.uid;
+
+    // Create a reference to 'images/todays-date.jpg'
+    const imageRef = storageRef.child(`images/${filename}.jpg`);
+
+    imageRef.putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL)
+      .then((snapshot)=> {
+        // Do something here when the data is succesfully uploaded!
+        this.showSuccesfulUploadAlert();
     });
-   
-    const downloadURL = await storageRef.getDownloadURL();
-    alert(downloadURL)
-   }
+  }
+
+  async showSuccesfulUploadAlert() {
+    let alert = await this.alertCtrl.create({
+      header: 'Uploaded!',
+      buttons: ['OK']
+    });
+    alert.present();
+    // clear the previous photo data in the variable
+    this.captureDataUrl = "";
+  }
 
   
 
