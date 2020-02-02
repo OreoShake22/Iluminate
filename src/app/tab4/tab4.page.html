@@ -23,8 +23,9 @@
     <h3> Korreoa: {{mail}}</h3>
   </div>
 <div class="text">
+  <button ion-button (click)="getImage()" full color="secondary">Get Photo From Library</button>
   <div class="ion-padding">
-    <ion-button color="tertiary" (click)="pickImage()"  type="ion-button" class="ion-no-margin">Foto</ion-button>
+    <ion-button color="tertiary" (click)="getImage()" type="ion-button" class="ion-no-margin">Foto</ion-button>
   </div>
 <div class="ion-padding">
   <ion-button color="tertiary" (click)="change()"  type="ion-button" class="ion-no-margin">Aldatu pasahitza</ion-button>

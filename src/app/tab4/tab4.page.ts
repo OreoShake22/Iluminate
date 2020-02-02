@@ -6,6 +6,8 @@ import * as firebase from 'firebase'
 import { ImagePicker,ImagePickerOptions  } from '@ionic-native/image-picker/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { NavController, LoadingController } from '@ionic/angular';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 //ionic cordova plugin add cordova-plugin-file
 //npm install @ionic-native/file
 
@@ -40,10 +42,9 @@ export class Tab4Page {
   constructor(
     private authService: AuthenticateService,
     private usuarioservice:UsuarioService,
-    private camera: Camera,
     public actionSheetController: ActionSheetController,
     private imagePicker:ImagePicker,
-private file: File
+    public navCtrl: NavController, private camera: Camera,  private file: File, private loadingCtrl:LoadingController,
   ) {}
 
 
@@ -86,45 +87,64 @@ private file: File
   //   }, (err) => { });
   // }
 
-  pickImage(sourceType) {
+
+  getImage() {
     const options: CameraOptions = {
-      quality: 100,
-      sourceType: sourceType,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      quality: 70,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum:false
     }
+
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
-      // let base64Image = 'data:image/jpeg;base64,' + imageData;
+      // If it's base64:
+      this.myphoto = 'data:image/jpeg;base64,' + imageData;
+      alert()
+      this.uploadPicture('aaa') 
+      
     }, (err) => {
       // Handle error
     });
+    
+    
   }
 
-      async selectImage() {
-        const actionSheet = await this.actionSheetController.create({
-          header: "Select Image source",
-          buttons: [{
-            text: 'Load from Library',
-            handler: () => {
-              this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
-            }
-          },
-          {
-            text: 'Use Camera',
-            handler: () => {
-              this.pickImage(this.camera.PictureSourceType.CAMERA);
-            }
-          },
-          {
-            text: 'Cancel',
-            role: 'cancel'
-          }
-          ]
-        });
-        await actionSheet.present();
-      }
+  async uploadPicture(imageString) {
+    const storageRef = firebase
+    .storage()
+    .ref("/profilePicture.jpg");
+   
+    const uploadedPicture = await storageRef.putString(imageString, 'base64', {
+    contentType: 'image/jpg'
+    });
+   
+    const downloadURL = await storageRef.getDownloadURL();
+    alert(downloadURL)
+   }
+
+  
+
+  // cropImage() {
+  //   const options: CameraOptions = {
+  //     quality: 70,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+  //     saveToPhotoAlbum: false,
+  //     allowEdit:true,
+  //     targetWidth:300,
+  //     targetHeight:300
+  //   }
+
+  //   this.camera.getPicture(options).then((imageData) => {
+  //     // imageData is either a base64 encoded string or a file URI
+  //     // If it's base64:
+  //     this.myphoto = 'data:image/jpeg;base64,' + imageData;
+  //   }, (err) => {
+  //     // Handle error
+  //   });
+  // }
+
+
  
 }
