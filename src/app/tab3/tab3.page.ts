@@ -65,7 +65,7 @@ export class Tab3Page implements OnInit {
       for (var i = 0; i < this.antonio.length; i++) {
         this.gruposId.push(this.antonio[i].nombre)
       }
-    })
+    }).unsubscribe()
   }
 
   async insertGroup() {
