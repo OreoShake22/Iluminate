@@ -1,9 +1,13 @@
-<ion-header >
-  <ion-toolbar >
-    <ion-title >
-      <label><ion-icon name="bulb"></ion-icon> Iluminate </label>
-      <ion-chip >
-        <ion-label><label><ion-icon id="rankingInit" name="trophy"></ion-icon> 2000</label></ion-label>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <label>
+        <ion-icon name="bulb"></ion-icon> Iluminate
+      </label>
+      <ion-chip>
+        <ion-label><label>
+            <ion-icon id="rankingInit" name="trophy"></ion-icon> 2000
+          </label></ion-label>
         <ion-avatar>
           <img src="../../assets/icon/guts.jpg">
         </ion-avatar>
@@ -14,29 +18,29 @@
 
 <ion-content>
   <div class="ion-pading-top">
-  <ion-avatar class="avatar">
-    <img src={{myphoto}}>
-  </ion-avatar>
-  <div class="ion-padding-top"></div>
-  <div class="ion-padding">
-    <h3> NickName: {{usuario.username}}</h3>
-    <h3> Korreoa: {{mail}}</h3>
+    <ion-fab-button routerDirection="forward">
+      <ion-icon name="image" (click)="getImage()"></ion-icon>
+    </ion-fab-button>
+    <ion-avatar class="avatar">
+      <img src={{myphoto}}>
+    </ion-avatar>
+    <div class="ion-padding-top"></div>
+    <div class="ion-padding">
+      <h3> NickName: {{usuario.username}}</h3>
+      <h3> Korreoa: {{mail}}</h3>
+    </div>
+    <div class="text">
+      <ion-button ion-button (click)="upload()" *ngIf="captureDataUrl">Upload to Firebase!</ion-button>
+      <div class="ion-padding">
+        <ion-button color="tertiary" (click)="change()" type="ion-button" class="ion-no-margin">Aldatu pasahitza
+        </ion-button>
+      </div>
+      <div class="ion-padding">
+        <ion-button color="danger" (click)="logOut()" type="ion-button" class="ion-no-margin">Itxi saioa</ion-button>
+      </div>
+    </div>
   </div>
-<div class="text">
-  <button ion-button (click)="getImage()" full color="secondary">Get Photo From Library</button>
-  <div class="ion-padding">
-    <ion-button color="tertiary" (click)="getImage()" type="ion-button" class="ion-no-margin">Foto</ion-button>
-  </div>
-  <ion-button ion-button (click)="upload()" *ngIf="captureDataUrl">Upload to Firebase!</ion-button>
-<div class="ion-padding">
-  <ion-button color="tertiary" (click)="change()"  type="ion-button" class="ion-no-margin">Aldatu pasahitza</ion-button>
-</div>
-<div class="ion-padding">
-  <ion-button color="danger" (click)="logOut()"  type="ion-button" class="ion-no-margin">Itxi saioa</ion-button>
-</div>
-</div>
-</div>
-<!-- <div class="page">
+  <!-- <div class="page">
   <div class="page__container">
     <article class="profile">
       <header class="profile__header">
@@ -75,4 +79,3 @@
   </div>
 </div> -->
 </ion-content>
-

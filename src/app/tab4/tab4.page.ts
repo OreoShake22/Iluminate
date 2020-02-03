@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { AuthenticateService } from '../services/autentication.service';
-import {UsuarioService} from '../services/usuario.service';
+import { UsuarioService } from '../services/usuario.service';
 import { rankingTask } from "../models/model.interface";
 import * as firebase from 'firebase'
-import { ImagePicker,ImagePickerOptions  } from '@ionic-native/image-picker/ngx';
+import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { NavController, AlertController } from '@ionic/angular';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 //ionic cordova plugin add cordova-plugin-file
 //npm install @ionic-native/file
 
@@ -20,18 +19,20 @@ import { ActionSheetController } from '@ionic/angular';
   styleUrls: ['tab4.page.scss']
 })
 export class Tab4Page {
-  usuario:rankingTask={
-    username:'',
-    puntuacionS:0,
-    puntuacionG:0,
-    ultimaPartida:'',
-    lastWeek:0,
-    grupos:[]
+  usuario: rankingTask = {
+    username: '',
+    puntuacionS: 0,
+    puntuacionG: 0,
+    ultimaPartida: '',
+    lastWeek: 0,
+    grupos: []
   };
-  name:string="";
-  mail:string="";
-  myphoto:string;
-  
+  firestore = firebase.storage();
+  imgsource: any;
+  name: string = "";
+  mail: string = "";
+  myphoto: string;
+
   captureDataUrl: string;
   alertCtrl: AlertController;
 
@@ -44,35 +45,35 @@ export class Tab4Page {
   };
   constructor(
     private authService: AuthenticateService,
-    private usuarioservice:UsuarioService,
+    private usuarioservice: UsuarioService,
     public actionSheetController: ActionSheetController,
-    private imagePicker:ImagePicker,
-    public navCtrl: NavController, private camera: Camera,  private file: File,   alertCtrl: AlertController
-  ) {}
+    private imagePicker: ImagePicker,
+    public navCtrl: NavController, private camera: Camera, private file: File, alertCtrl: AlertController,
+    public zone: NgZone
+  ) { }
 
 
-  logOut(value){
+  logOut(value) {
     this.authService.logoutUser()
   }
-  change()
-  {
+  change() {
     var auth = firebase.auth();
     var emailAddress = firebase.auth().currentUser.email;
 
-    auth.sendPasswordResetEmail(emailAddress).then(function() {
-     alert('Mezua bidali da '+ emailAddress + ' mailera' )
-    }).catch(function(error) {
+    auth.sendPasswordResetEmail(emailAddress).then(function () {
+      alert('Mezua bidali da ' + emailAddress + ' mailera')
+    }).catch(function (error) {
       // An error happened.
     });
   }
 
-  ionViewWillEnter ()
-  {
-    this.usuarioservice.getUsuario(firebase.auth().currentUser.uid).subscribe(algo=>{
-      this.usuario=algo;
+  ionViewWillEnter() {
+    this.usuarioservice.getUsuario(firebase.auth().currentUser.uid).subscribe(algo => {
+      this.usuario = algo;
     })
-    this.mail=firebase.auth().currentUser.email
-    
+    this.mail = firebase.auth().currentUser.email
+    this.display()
+
   }
 
   // getImg()
@@ -83,7 +84,7 @@ export class Tab4Page {
   //     quality: 75,
   //     maximumImagesCount: 10
   //   }
-    
+
   //   this.camera.getPictures(options).then((results) => {
   //     for (var i = 0; i < results.length; i++) {
   //         console.log('Image URI: ' + results[i]);
@@ -97,16 +98,16 @@ export class Tab4Page {
       quality: 70,
       destinationType: this.camera.DestinationType.DATA_URL,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      saveToPhotoAlbum:false
+      saveToPhotoAlbum: false
     }
 
     this.camera.getPicture(options).then((captureDataUrl) => {
       this.captureDataUrl = 'data:image/jpeg;base64,' + captureDataUrl;
-   }, (err) => {
-       console.log(err);
-   });
-    
-    
+    }, (err) => {
+      console.log(err);
+    });
+
+
   }
 
   upload() {
@@ -118,10 +119,10 @@ export class Tab4Page {
     const imageRef = storageRef.child(`images/${filename}.jpg`);
 
     imageRef.putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL)
-      .then((snapshot)=> {
+      .then((snapshot) => {
         // Do something here when the data is succesfully uploaded!
         this.showSuccesfulUploadAlert();
-    });
+      });
   }
 
   async showSuccesfulUploadAlert() {
@@ -134,7 +135,9 @@ export class Tab4Page {
     this.captureDataUrl = "";
   }
 
-  
+
+
+
 
   // cropImage() {
   //   const options: CameraOptions = {
@@ -157,5 +160,12 @@ export class Tab4Page {
   // }
 
 
- 
+  display() {
+    this.firestore.ref().child('images/'+firebase.auth().currentUser.uid+'.jpg').getDownloadURL().then((url) => {
+      this.zone.run(() => {
+        this.imgsource = url;
+        this.myphoto=url
+      })
+    })
+  }
 }
