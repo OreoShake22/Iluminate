@@ -67,6 +67,7 @@ export class rankingservice {
    }
 
    updateTime(ranking:rankingTask,id:string){
+     console.log(ranking)
        return this.rankingCOllection.doc(id).update({
          ultimaPartida:ranking.ultimaPartida,
          lastWeek:ranking.lastWeek

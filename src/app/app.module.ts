@@ -27,6 +27,9 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { File } from '@ionic-native/file/ngx';
 
+import { SmartAudioService } from './smart-audio.service';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
+
 firebase.initializeApp(environment.firebase);
 @NgModule({
   declarations: [AppComponent],
@@ -39,11 +42,12 @@ firebase.initializeApp(environment.firebase);
     AngularFirestoreModule,
     AngularFireAuthModule,  
     ReactiveFormsModule,
-    HttpClientModule, 
+    HttpClientModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    NativeAudio,
     Camera,
     FileChooser,
     File,
@@ -53,6 +57,8 @@ firebase.initializeApp(environment.firebase);
     AngularFireAuthGuard,
     rankingservice,
     UsuarioService,
+    SmartAudioService,
+    ,
   ],
   bootstrap: [AppComponent]
 })

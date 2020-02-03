@@ -5,6 +5,7 @@ import { galderakTask } from "../models/model.interface";
 import { rankingservice } from '../services/ranking.service';
 import { rankingTask } from "../models/model.interface";
 import * as firebase from 'firebase'
+import { SmartAudioService } from '../smart-audio.service';
 @Component({
   selector: 'app-partida',
   templateUrl: './partida.page.html',
@@ -23,7 +24,7 @@ export class PartidaPage{
   loading;
   ranking: rankingTask;
   colores: string[] = ['Dpurple', 'Dpurple', 'Dpurple'];
-
+  smartAudioService:any;
 
 
   public preguntas = [
@@ -41,10 +42,12 @@ export class PartidaPage{
     if(this.disponible){
     this.disponible = false
     if (this.correcta == res) {
+      this.smartAudioService.play('acierto');
       this.puntuacion += 100 * ((this.t) / 10)
       this.colores[c]='success'
       
     }else{
+      this.smartAudioService.play('fallo');
       this.colores[c]='danger'
     }
 
@@ -77,7 +80,12 @@ export class PartidaPage{
   getIndex() {
     return this.index;
   }
-  constructor(private rankingservice: rankingservice, private loadingController: LoadingController, private navCtrl: NavController, private preguntasservice: preguntasservice) { }
+  constructor(private rankingservice: rankingservice, private loadingController: LoadingController, private navCtrl: NavController, private preguntasservice: preguntasservice,
+    smartAudioService: SmartAudioService) {
+      smartAudioService.preload('acierto', 'assets/audio/acierto.mp3');
+      smartAudioService.preload('fallo', 'assets/audio/muelle.mp3');
+      this.smartAudioService=smartAudioService
+     }
 
   ionViewWillEnter() {
     this.preguntasservice.getpreguntas().subscribe(res => {
@@ -85,15 +93,11 @@ export class PartidaPage{
       this.filtrarPreguntas();
       this.loadAll();
     });
+    
   }
 
   ionViewWillLeave(){
      clearInterval(this.temporalizador)
-  }
-
-  pasarPregunta() {
-
-
   }
 
   startTimer() {
@@ -161,4 +165,6 @@ export class PartidaPage{
     console.log(id.length)
     this.preguntas = id;
   }
+
+  
 }

@@ -16,6 +16,7 @@ import { TimeService } from '../services/time.service';
 })
 export class Tab1Page {
   preguntas: galderakTask[];
+  disponible=true;
   ranking1: rankingTask = {
     username: '',
     puntuacionS: 0,
@@ -33,17 +34,18 @@ export class Tab1Page {
 
 
   ionViewWillEnter() {
-
+    this.getPosts();
   }
 
 
   jokatu() {
-    let start = this.getPosts();
+    
     var yo;
     var userId = firebase.auth().currentUser.uid
     let fecha = this.rankingService.getTodo(userId).subscribe(res => {
       this.fecha = res.ultimaPartida;
       yo = res.username;
+      this.ranking1.username=yo
       if (this.fecha != '') {
         if (this.fecha == this.dia) {
           alert('ya has jugadoooo')
@@ -59,10 +61,10 @@ export class Tab1Page {
     });
     //if(this.fecha==this.dia && yo!='OreoShake'){
 
-
+  
   }
 
-  async getPosts() { //llamamos a la funcion getPost de nuestro servicio.
+  getPosts() { //llamamos a la funcion getPost de nuestro servicio.
     this.timeServices.getHour()
       .then(data => {
         this.dia = data['datetime'];
@@ -70,6 +72,5 @@ export class Tab1Page {
         this.ranking1.ultimaPartida = this.dia;
         this.ranking1.lastWeek = data['week_number'];
       });
-      return await 1;
   }
 }
