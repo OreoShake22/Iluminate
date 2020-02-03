@@ -70,7 +70,7 @@ export class Tab3Page implements OnInit {
 
   async insertGroup() {
     const alert = await this.atrCtrl.create({
-      header: 'Taldera sartu',
+      header: 'Taldea sartu',
       inputs: [
         {
           name: 'izena',
