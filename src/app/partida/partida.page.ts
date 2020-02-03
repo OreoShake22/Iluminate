@@ -10,8 +10,8 @@ import * as firebase from 'firebase'
   templateUrl: './partida.page.html',
   styleUrls: ['./partida.page.scss'],
 })
-export class PartidaPage implements OnInit {
-
+export class PartidaPage{
+  temporalizador:any;
   index: number = 0;
   disponible: boolean = true;
   correcta: string;
@@ -38,6 +38,7 @@ export class PartidaPage implements OnInit {
   }
 
   respuesta(res: string,c:number) {
+    if(this.disponible){
     this.disponible = false
     if (this.correcta == res) {
       this.puntuacion += 100 * ((this.t) / 10)
@@ -50,10 +51,13 @@ export class PartidaPage implements OnInit {
     setTimeout(function () {
       this.colores[c]='Dpurple'
       this.updateIndex();
+      
+      if (this.index < this.preguntas.length) {
       this.disponible=true
+      }
     this.startTimer();
     }.bind(this), 1000)
-    
+  }
   }
 
   updateIndex() {
@@ -62,6 +66,7 @@ export class PartidaPage implements OnInit {
       this.mix();
       this.t = 10;
     } else {
+      this.disponible=false;
       this.finalizar();
     }
 
@@ -74,12 +79,16 @@ export class PartidaPage implements OnInit {
   }
   constructor(private rankingservice: rankingservice, private loadingController: LoadingController, private navCtrl: NavController, private preguntasservice: preguntasservice) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.preguntasservice.getpreguntas().subscribe(res => {
       this.preguntas = res;
       this.filtrarPreguntas();
       this.loadAll();
     });
+  }
+
+  ionViewWillLeave(){
+     clearInterval(this.temporalizador)
   }
 
   pasarPregunta() {
@@ -90,9 +99,9 @@ export class PartidaPage implements OnInit {
   startTimer() {
     if (this.t > 0) {
 
-      setTimeout(function () {
-        this.t--;
+      this.temporalizador=setTimeout(function () {
         if (this.disponible) {
+          this.t--;
           this.startTimer()
         }
       }.bind(this), 1000)
@@ -109,6 +118,7 @@ export class PartidaPage implements OnInit {
   }
 
   finalizar() {
+    this.disponible=false;
     this.navCtrl.navigateForward('/');
     this.ranking.puntuacionG += this.puntuacion
     this.ranking.puntuacionS += this.puntuacion

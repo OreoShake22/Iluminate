@@ -25,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 firebase.initializeApp(environment.firebase);
 @NgModule({
@@ -45,6 +46,7 @@ firebase.initializeApp(environment.firebase);
     SplashScreen,
     Camera,
     FileChooser,
+    File,
     ImagePicker,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthenticateService,

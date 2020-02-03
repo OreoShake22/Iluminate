@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TimeService {
 
-  url = 'http://worldtimeapi.org/api/timezone/Europe/Madrid';
+  url = 'https://worldtimeapi.org/api/timezone/Europe/Madrid';
   data:string;
   constructor(public http: HttpClient) {
     

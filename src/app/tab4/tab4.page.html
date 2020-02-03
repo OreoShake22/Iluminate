@@ -15,7 +15,7 @@
 <ion-content>
   <div class="ion-pading-top">
   <ion-avatar class="avatar">
-    <img src="../../assets/icon/guts.jpg">
+    <img src={{myphoto}}>
   </ion-avatar>
   <div class="ion-padding-top"></div>
   <div class="ion-padding">
@@ -23,9 +23,13 @@
     <h3> Korreoa: {{mail}}</h3>
   </div>
 <div class="text">
-  
+  <button ion-button (click)="getImage()" full color="secondary">Get Photo From Library</button>
+  <div class="ion-padding">
+    <ion-button color="tertiary" (click)="getImage()" type="ion-button" class="ion-no-margin">Foto</ion-button>
+  </div>
+  <ion-button ion-button (click)="upload()" *ngIf="captureDataUrl">Upload to Firebase!</ion-button>
 <div class="ion-padding">
-  <ion-button color="tertiary"  type="ion-button" class="ion-no-margin">Aldatu pasahitza</ion-button>
+  <ion-button color="tertiary" (click)="change()"  type="ion-button" class="ion-no-margin">Aldatu pasahitza</ion-button>
 </div>
 <div class="ion-padding">
   <ion-button color="danger" (click)="logOut()"  type="ion-button" class="ion-no-margin">Itxi saioa</ion-button>
