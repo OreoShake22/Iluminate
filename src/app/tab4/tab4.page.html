@@ -18,9 +18,11 @@
 
 <ion-content>
   <div class="ion-pading-top">
-    <ion-fab-button routerDirection="forward">
-      <ion-icon name="image" (click)="getImage()"></ion-icon>
-    </ion-fab-button>
+    <ion-fab  vertical="top" horizontal="end" slot="fixed">
+      <ion-fab-button  color="light" routerDirection="forward">
+        <ion-icon name="image"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
     <ion-avatar class="avatar">
       <img src={{myphoto}}>
     </ion-avatar>

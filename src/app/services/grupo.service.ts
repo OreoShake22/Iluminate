@@ -47,6 +47,8 @@ export class GrupoService {
     return this.groupCollection.doc<groupTask>(id).valueChanges();
   }
 
+  
+
 
 
    updateGrupo(grupo:groupTask){

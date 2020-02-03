@@ -8,14 +8,14 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {AngularFireModule} from 'angularfire2';
-import {environment} from '../environments/environment';
-import {AngularFirestoreModule, AngularFirestore} from 'angularfire2/firestore'
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore'
 
 import { AuthenticateService } from './services/autentication.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ReactiveFormsModule } from '@angular/forms';
- 
+
 import * as firebase from 'firebase';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { rankingservice } from './services/ranking.service';
@@ -26,6 +26,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { Tab3Page } from 'src/app/tab3/tab3.page';
 
 import { SmartAudioService } from './smart-audio.service';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
@@ -35,12 +36,12 @@ firebase.initializeApp(environment.firebase);
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
+    BrowserModule,
+    IonicModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase), 
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule,  
+    AngularFireAuthModule,
     ReactiveFormsModule,
     HttpClientModule,
   ],
@@ -59,7 +60,8 @@ firebase.initializeApp(environment.firebase);
     UsuarioService,
     SmartAudioService,
     ,
+    Tab3Page
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

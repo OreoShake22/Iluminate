@@ -17,7 +17,7 @@
 </ion-header>
 <ion-content>
   <ion-list *ngFor="let grupo of groupIzen">
-    <ion-item>{{grupo}}</ion-item>
+    <ion-item [routerLink]="['/group-details', grupo]">{{grupo}}</ion-item>
   </ion-list>
   <!-- <ul class="list" *ngFor="let grupo of groupIzen">
     <li class="item">
