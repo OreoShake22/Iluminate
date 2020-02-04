@@ -55,6 +55,7 @@ export class Tab4Page {
 
   logOut(value) {
     this.authService.logoutUser()
+    navigator['app'].exitApp()
   }
   change() {
     var auth = firebase.auth();
@@ -120,6 +121,7 @@ export class Tab4Page {
 
     imageRef.putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL)
       .then((snapshot) => {
+        console.log('url: '+this.captureDataUrl)
         // Do something here when the data is succesfully uploaded!
         this.showSuccesfulUploadAlert();
       });
