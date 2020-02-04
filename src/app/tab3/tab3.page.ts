@@ -5,7 +5,7 @@ import { GrupoService } from '../services/grupo.service';
 import { rankingTask, groupTask } from "../models/model.interface";
 import * as firebase from 'firebase'
 import { AlertController } from '@ionic/angular';
-import { async } from '@angular/core/testing';
+import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-tab3',
@@ -13,44 +13,56 @@ import { async } from '@angular/core/testing';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit {
-  grupo:rankingTask;
+  grupo: rankingTask;
   sGroup: string[];
   gruposId: string[];
   groupIzen: string[];
   antonio: groupTask[];
+  checkUserGroup: boolean = false
   aa: boolean
-  talde:groupTask={
+  sub1: Subscription = new Subscription()
+  sub2: Subscription = new Subscription()
+  sub3: Subscription = new Subscription()
+  talde: groupTask = {
     nombre: '',
     contra: '',
-    usuarios:[],
+    usuarios: [],
 
   }
- 
+
+
 
   constructor(private navCtrl: NavController, private rankingService: rankingservice, private grupoService: GrupoService, public atrCtrl: AlertController) {
   }
   ngOnInit() {
 
   }
+
   ionViewWillEnter() {
-    try{
-    this.rankingService.getTodo(firebase.auth().currentUser.uid).subscribe(res => {
-      this.grupo=res;
-      this.sGroup = res.grupos
-      this.groupName()
-      this.idGrupos()
-    })
+    try {
+      this.sub3 = this.rankingService.getTodo(firebase.auth().currentUser.uid).subscribe(res => {
+        this.grupo = res;
+        this.sGroup = res.grupos
+        this.groupName()
+        this.idGrupos()
+      })
+    }
+    catch{
+      this.navCtrl.navigateForward('')
+    }
+
   }
-  catch{
-    this.navCtrl.navigateForward('')
-  }
+  a() {
+    this.sub1.unsubscribe()
+    this.sub2.unsubscribe()
+    this.sub3.unsubscribe()
   }
 
   groupName() {
     this.groupIzen = []
     for (var i = 0; i < this.sGroup.length; i++) {
       var a = this.sGroup[i]
-      this.grupoService.getGrupo(a).subscribe(res => {
+      this.sub2 = this.grupoService.getGrupo(a).subscribe(res => {
         this.groupIzen.push(res.nombre)
       })
     }
@@ -59,13 +71,13 @@ export class Tab3Page implements OnInit {
 
   idGrupos() {
     this.gruposId = []
-    this.grupoService.getgrupos().subscribe(res => {
+    this.sub1 = this.grupoService.getgrupos().subscribe(res => {
       this.antonio = res
-      
+
       for (var i = 0; i < this.antonio.length; i++) {
         this.gruposId.push(this.antonio[i].nombre)
       }
-    }).unsubscribe()
+    })
   }
 
   async insertGroup() {
@@ -91,20 +103,33 @@ export class Tab3Page implements OnInit {
           text: 'Gorde',
           handler: async data => {
             var a = data.izena
-            for (var i = 0; i < this.gruposId.length; i++) {
-              var b = this.gruposId[i]
-              
-              if (a == b) {
-                this.aa = true
-                this.PassAlert(this.antonio[i])
+            for (var i = 0; i < this.groupIzen.length; i++) {
+              if (a == this.groupIzen[i]) {
+                this.checkUserGroup = true
                 break;
+
               }
-              else {
-                this.aa = false
+
+            }
+            if (this.checkUserGroup == false) {
+              for (var i = 0; i < this.gruposId.length; i++) {
+                var b = this.gruposId[i]
+                if (a == b) {
+                  this.aa = true
+                  this.PassAlert(this.antonio[i])
+                  break;
+                }
+                else {
+                  this.aa = false
+                }
               }
             }
+            else if (this.checkUserGroup == true) {
+              this.alertNoGroup(a + ' taldean zaude')
+            }
+
             if (this.aa == false) {
-              this.alertNoGroup(a+' taldea ez da aurkitu')
+              this.alertNoGroup(a + ' taldea ez da aurkitu')
             }
           },
         }
@@ -156,11 +181,11 @@ export class Tab3Page implements OnInit {
           text: 'Gorde',
           handler: async data => {
             var pass = data.pass
-            if(pass==grupo['contraseña']){
+            if (pass == grupo['contraseña']) {
               this.grupo.grupos.push(grupo.id)
-              this.rankingService.updateTodo(this.grupo,firebase.auth().currentUser.uid)
+              this.rankingService.updateTodo(this.grupo, firebase.auth().currentUser.uid)
             }
-            else{
+            else {
               this.PassAlert(grupo)
             }
           },
@@ -201,28 +226,27 @@ export class Tab3Page implements OnInit {
         {
           text: 'Gorde',
           handler: async data => {
-            var existe=false
-            
-            console.log(this.talde)
-            this.talde.nombre=data.izena
-            this.talde.contra=data.pass
+            var existe = false
+            this.talde.nombre = data.izena
+            this.talde.contra = data.pass
             this.talde.usuarios.push(firebase.auth().currentUser.uid)
-            console.log(this.talde)
-            for(var i=0;i<this.gruposId.length;i++)
-            {
-              if(data.izena==this.groupIzen[i]){
-                this.alertNoGroup(data.izena+' talde izena hartuta dago')
-                existe=true;
+            for (var i = 0; i < this.gruposId.length; i++) {
+              if (data.izena == this.groupIzen[i]) {
+                this.alertNoGroup(data.izena + ' talde izena hartuta dago')
+                existe = true;
                 break;
               }
-              
+
             }
-            if(existe==false){
-              var id=(this.grupoService.addGroup(this.talde))
+            if (existe == false) {
+              var id = (this.grupoService.addGroup(this.talde))
               this.grupo.grupos.push(id)
-              this.rankingService.añadirGrupo(this.grupo,firebase.auth().currentUser.uid)
-           }
-                
+              this.rankingService.añadirGrupo(this.grupo, firebase.auth().currentUser.uid)
+              this.navCtrl.navigateForward('group-details/' + this.talde.nombre)
+              this.a()
+
+            }
+
           },
         }
       ]
@@ -231,5 +255,5 @@ export class Tab3Page implements OnInit {
     await alert.present();
 
   }
-  
+
 }
