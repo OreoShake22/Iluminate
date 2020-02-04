@@ -5,6 +5,7 @@ import { rankingservice } from '../services/ranking.service';
 import { galderakTask } from "../models/model.interface";
 import { NavController } from '@ionic/angular';
 import * as firebase from 'firebase'
+import { HttpClient } from '@angular/common/http';
 
 import { TimeService } from '../services/time.service';
 
@@ -16,7 +17,10 @@ import { TimeService } from '../services/time.service';
 })
 export class Tab1Page {
   preguntas: galderakTask[];
-  disponible=true;
+  imagen: string = 'assets/icon/anim.jpg';
+  categoria: string = 'animaliak'
+  disponible = true;
+  day_of_week;
   ranking1: rankingTask = {
     username: '',
     puntuacionS: 0,
@@ -27,7 +31,7 @@ export class Tab1Page {
   };
   dia: any;
   fecha: string = '';
-  constructor(private navCtrl: NavController, private preguntasservice: preguntasservice, private rankingService: rankingservice, public timeServices: TimeService) {
+  constructor(private http: HttpClient, private navCtrl: NavController, private preguntasservice: preguntasservice, private rankingService: rankingservice, public timeServices: TimeService) {
 
 
   }
@@ -35,21 +39,23 @@ export class Tab1Page {
 
   ionViewWillEnter() {
     this.getPosts();
+
+
   }
 
 
   jokatu() {
-    
+
     var yo;
     var semana;
     var userId = firebase.auth().currentUser.uid
     let fecha = this.rankingService.getTodo(userId).subscribe(res => {
       this.fecha = res.ultimaPartida;
       yo = res.username;
-      this.ranking1.username=yo
-      semana=res.lastWeek
+      this.ranking1.username = yo
+      semana = res.lastWeek
       this.ranking1.id = userId
-      if(semana!=this.ranking1.lastWeek){
+      if (semana != this.ranking1.lastWeek) {
         this.rankingService.updateSemana(this.ranking1, this.ranking1.id)
       }
       if (this.fecha != '') {
@@ -58,7 +64,7 @@ export class Tab1Page {
         }
         else {
 
-          
+
           this.rankingService.updateTime(this.ranking1, this.ranking1.id)
           this.navCtrl.navigateForward('partida')
         }
@@ -67,7 +73,7 @@ export class Tab1Page {
     });
     //if(this.fecha==this.dia && yo!='OreoShake'){
 
-  
+
   }
 
   getPosts() { //llamamos a la funcion getPost de nuestro servicio.
@@ -77,6 +83,20 @@ export class Tab1Page {
         this.dia = this.dia.substring(0, this.dia.indexOf("T"));
         this.ranking1.ultimaPartida = this.dia;
         this.ranking1.lastWeek = data['week_number'];
+        this.day_of_week = data['day_of_week']
+
+
+        this.http.get('../assets/json/categoria.json').subscribe(data => {
+          console.log(data['semana'])
+          data['semana'].forEach(cat => {
+            console.log(cat.day_of_week)
+            console.log(this.day_of_week)
+            if (cat.day_of_week == this.day_of_week) {
+              this.categoria = cat.categoria;
+              this.imagen = cat.imagen;
+            }
+          })
+        });
       });
   }
 }
