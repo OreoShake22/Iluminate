@@ -35,7 +35,7 @@
       <div class="pos">
         {{ i + 1 }}
       </div>
-      <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/men/44.jpg&#39;)"></div>
+      <img  class="pic" src="https://firebasestorage.googleapis.com/v0/b/iluminate-9c491.appspot.com/o/images%2F{{ran.id}}.jpg?alt=media">
       <div class="name">
         {{ran.username}}
       </div>
@@ -47,7 +47,7 @@
       <div class="pos">
         {{ i + 1 }}
       </div>
-      <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/men/31.jpg&#39;)"></div>
+      <img  class="pic" src="https://firebasestorage.googleapis.com/v0/b/iluminate-9c491.appspot.com/o/images%2F{{ran.id}}.jpg?alt=media">
       <div class="name">
         {{ran.username}}
       </div>
@@ -59,7 +59,7 @@
       <div class="pos">
         {{ i + 1 }}
       </div>
-      <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/women/91.jpg&#39;)"></div>
+      <img  class="pic" src="https://firebasestorage.googleapis.com/v0/b/iluminate-9c491.appspot.com/o/images%2F{{ran.id}}.jpg?alt=media">
       <div class="name">
         {{ran.username}}
       </div>
@@ -75,7 +75,7 @@
       <div class="pos">
         {{ i + 1 }}
       </div>
-      <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/men/88.jpg&#39;)"></div>
+      <img  class="pic" *ngIf="src==null" src="https://firebasestorage.googleapis.com/v0/b/iluminate-9c491.appspot.com/o/images%2F{{ran.id}}.jpg?alt=media">
       <div class="name">
         {{ran.username}}
       </div>

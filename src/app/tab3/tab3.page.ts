@@ -52,11 +52,7 @@ export class Tab3Page implements OnInit {
     }
 
   }
-  a() {
-    this.sub1.unsubscribe()
-    this.sub2.unsubscribe()
-    this.sub3.unsubscribe()
-  }
+  a() {}
 
   groupName() {
     this.groupIzen = []

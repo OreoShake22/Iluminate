@@ -25,6 +25,7 @@ export class LoginPage implements OnInit {
     lastWeek:0,
     grupos:[]
   };
+  url:string= 'data:image/jpeg;base64,'+'/aaa.jpg'
 
   validation_messages = {
     'email': [
@@ -75,7 +76,10 @@ export class LoginPage implements OnInit {
      .then(res => {
        this.navCtrl.navigateForward('');
         this.ranking.username=((document.getElementById("username") as HTMLInputElement).value);
+        this.upload()
         this.rankingservice.addTodo(this.ranking,firebase.auth().currentUser.uid)
+        
+        
         
      }, err => {
        this.errorMessage = err.message;
@@ -83,4 +87,18 @@ export class LoginPage implements OnInit {
      })     
   }
  
+
+  upload() {
+    let storageRef = firebase.storage().ref();
+    // Create a timestamp as filename
+    const filename = firebase.auth().currentUser.uid;
+
+    // Create a reference to 'images/todays-date.jpg'
+    const imageRef = storageRef.child(`images/aaaa.jpg`);
+
+    imageRef.putString(this.url, firebase.storage.StringFormat.DATA_URL)
+      .then((snapshot) => {
+        // Do something here when the data is
+      });
+  }
 }
