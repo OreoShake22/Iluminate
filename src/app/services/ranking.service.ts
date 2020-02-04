@@ -3,6 +3,7 @@ import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreModule} fr
 import {Observable} from 'rxjs'
 import {map} from 'rxjs/operators'
 import {rankingTask } from "../models/model.interface";
+import { TimeService } from './time.service';
 
 @Injectable()
 export class rankingservice {
@@ -11,8 +12,11 @@ export class rankingservice {
   private ranking:Observable<rankingTask[]>;
   usuario:rankingTask[];
   private db:AngularFirestore;
-  constructor(db:AngularFirestore) {
-    this.rankingCOllection= db.collection<rankingTask>('ranking', ref => ref.orderBy('puntuacionS', 'desc'));
+  constructor(db:AngularFirestore,public timeServices: TimeService) {
+    this.timeServices.getHour()
+          .then(data => {
+      console.log(data['week_number'])
+      this.rankingCOllection= db.collection<rankingTask>('ranking', ref => ref.orderBy('puntuacionS', 'desc').where('lastWeek','==',data['week_number']));
     
     this.db=db;
     this.ranking=this.rankingCOllection.snapshotChanges().pipe(map(
@@ -25,6 +29,8 @@ export class rankingservice {
 
       }
     ));
+    });
+    
 
    }
    
@@ -67,10 +73,23 @@ export class rankingservice {
    }
 
    updateTime(ranking:rankingTask,id:string){
-     console.log(ranking)
        return this.rankingCOllection.doc(id).update({
          ultimaPartida:ranking.ultimaPartida,
-         lastWeek:ranking.lastWeek
        });
+      }
+
+      async updateSemana(ranking:rankingTask,id:string){
+        return this.rankingCOllection.doc(id).update({
+          lastWeek:ranking.lastWeek,
+          puntuacionS:0,
+        });
+       }
+
+       async getSemana() { //llamamos a la funcion getPost de nuestro servicio.
+        this.timeServices.getHour()
+          .then(data => {
+            console.log(data['week_number'])
+            return data['week_number'];
+          });
       }
 }

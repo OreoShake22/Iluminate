@@ -15,11 +15,11 @@ const routes: Routes = [
     loadChildren: () => import('./partida/partida.module').then( m => m.PartidaPageModule)
   },
 
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'a', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'inicio', loadChildren: './tab1/tab1.module#Tab1PageModule'},
   {
-    path: 'a',
+    path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {

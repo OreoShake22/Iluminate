@@ -41,18 +41,24 @@ export class Tab1Page {
   jokatu() {
     
     var yo;
+    var semana;
     var userId = firebase.auth().currentUser.uid
     let fecha = this.rankingService.getTodo(userId).subscribe(res => {
       this.fecha = res.ultimaPartida;
       yo = res.username;
       this.ranking1.username=yo
+      semana=res.lastWeek
+      this.ranking1.id = userId
+      if(semana!=this.ranking1.lastWeek){
+        this.rankingService.updateSemana(this.ranking1, this.ranking1.id)
+      }
       if (this.fecha != '') {
         if (this.fecha == this.dia) {
           alert('ya has jugadoooo')
         }
         else {
 
-          this.ranking1.id = userId
+          
           this.rankingService.updateTime(this.ranking1, this.ranking1.id)
           this.navCtrl.navigateForward('partida')
         }

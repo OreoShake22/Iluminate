@@ -55,7 +55,6 @@ export class Tab4Page {
 
   logOut(value) {
     this.authService.logoutUser()
-    navigator["app"].exitApp();
   }
   change() {
     var auth = firebase.auth();

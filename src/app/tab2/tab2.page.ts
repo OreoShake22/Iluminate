@@ -8,7 +8,12 @@ import { rankingTask } from "../models/model.interface";
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page implements OnInit{
-  ranking:rankingTask[];
+  ranking:rankingTask[]=[{username: '',
+    puntuacionS:0,
+    puntuacionG:0,
+    ultimaPartida:'',
+    lastWeek:0,
+    grupos:[''],}];
 
   constructor(private rankingservice:rankingservice) {
     
