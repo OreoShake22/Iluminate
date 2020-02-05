@@ -87,10 +87,7 @@ export class Tab1Page {
 
 
         this.http.get('../assets/json/categoria.json').subscribe(data => {
-          console.log(data['semana'])
           data['semana'].forEach(cat => {
-            console.log(cat.day_of_week)
-            console.log(this.day_of_week)
             if (cat.day_of_week == this.day_of_week) {
               this.categoria = cat.categoria;
               this.imagen = cat.imagen;

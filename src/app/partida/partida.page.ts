@@ -6,6 +6,8 @@ import { rankingservice } from '../services/ranking.service';
 import { rankingTask } from "../models/model.interface";
 import * as firebase from 'firebase'
 import { SmartAudioService } from '../smart-audio.service';
+import { TimeService } from '../services/time.service';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-partida',
   templateUrl: './partida.page.html',
@@ -13,6 +15,7 @@ import { SmartAudioService } from '../smart-audio.service';
 })
 export class PartidaPage{
   temporalizador:any;
+  categoria:string;
   index: number = 0;
   disponible: boolean = true;
   correcta: string;
@@ -28,7 +31,7 @@ export class PartidaPage{
 
 
   public preguntas = [
-    { pregunta: "Cargando preguntas", respuesta: "", respuesta2: "", respuesta3: "" },
+    { categoria:'',imagen:'',pregunta: "Cargando preguntas", respuesta: "", respuesta2: "", respuesta3: "" },
   ];
 
   mix() {
@@ -80,7 +83,7 @@ export class PartidaPage{
   getIndex() {
     return this.index;
   }
-  constructor(private rankingservice: rankingservice, private loadingController: LoadingController, private navCtrl: NavController, private preguntasservice: preguntasservice,
+  constructor(private http: HttpClient,private rankingservice: rankingservice, public timeServices: TimeService, private loadingController: LoadingController, private navCtrl: NavController, private preguntasservice: preguntasservice,
     smartAudioService: SmartAudioService) {
       smartAudioService.preload('acierto', 'assets/audio/acierto.mp3');
       smartAudioService.preload('fallo', 'assets/audio/muelle.mp3');
@@ -88,12 +91,26 @@ export class PartidaPage{
      }
 
   ionViewWillEnter() {
+    this.timeServices.getHour()
+      .then(data => {
+        var semana;
+        semana=data['day_of_week'];
+        this.http.get('../assets/json/categoria.json').subscribe(data => {
+          
+          data['semana'].forEach(cat => {
+            if (cat.day_of_week == semana) {
+              this.categoria=cat.categoria;
+              
+              
+            }
+          })
+        });
     this.preguntasservice.getpreguntas().subscribe(res => {
       this.preguntas = res;
       this.filtrarPreguntas();
       this.loadAll();
     });
-    
+  })
   }
 
   ionViewWillLeave(){
@@ -157,10 +174,28 @@ export class PartidaPage{
   }
   filtrarPreguntas() {
     var id: galderakTask[] = [];
-    for (var i = 0; i != this.preguntas.length && id.length < 10; i++) {
+    var semanales:galderakTask[] = [];
+    for (var i = 0; i < this.preguntas.length; i++) {
+      if(this.preguntas[i].categoria==this.categoria){
+        semanales.push(this.preguntas[i]);
+        console.log(this.preguntas[i].pregunta+" "+i)
+        this.preguntas.splice(i, 1)
+        i--;
+      }
+    }
+
+    for (var i = 0; i < semanales.length && id.length < 5; i++) {
+      this.myRand = this.random(semanales.length);
+      id.push(semanales[this.myRand]);
+      semanales.splice(this.myRand, 1)
+      i--;
+    }
+
+    for (var i = 0;id.length < 10; i++) {
       this.myRand = this.random(this.preguntas.length);
       id.push(this.preguntas[this.myRand]);
       this.preguntas.splice(this.myRand, 1)
+      i--;
     }
     console.log(id.length)
     this.preguntas = id;

@@ -10,6 +10,8 @@ export interface rankingTask {
 
 export interface galderakTask {
     id?: string;
+    categoria:string,
+    imagen:string,
     pregunta:string,
     respuesta:string,
     respuesta2:string,

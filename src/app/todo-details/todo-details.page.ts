@@ -11,6 +11,8 @@ import * as firebase from 'firebase';
 })
 export class todoDetailsPage implements OnInit {
   galderak:galderakTask={
+    categoria:'',
+    imagen:'',
     pregunta:'',
     respuesta:'',
     respuesta2:'',

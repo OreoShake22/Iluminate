@@ -2,23 +2,23 @@
     "semana":
     [{
         "day_of_week":1,
-        "categoria":"barcos",
+        "categoria":"biologia",
         "imagen":"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fa%2Faf%2FUSS_Enterprise_%2528CVN-65%2529.jpg&f=1&nofb=1"
     },{
         "day_of_week":2,
-        "categoria":"barcos",
+        "categoria":"historia",
         "imagen":"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fa%2Faf%2FUSS_Enterprise_%2528CVN-65%2529.jpg&f=1&nofb=1"
     },{
         "day_of_week":3,
-        "categoria":"barcos",
+        "categoria":"*",
         "imagen":"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fa%2Faf%2FUSS_Enterprise_%2528CVN-65%2529.jpg&f=1&nofb=1"
     },{
         "day_of_week":4,
-        "categoria":"barcos",
+        "categoria":"biologia",
         "imagen":"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fa%2Faf%2FUSS_Enterprise_%2528CVN-65%2529.jpg&f=1&nofb=1"
     },{
         "day_of_week":5,
-        "categoria":"barcos",
+        "categoria":"historia",
         "imagen":"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fa%2Faf%2FUSS_Enterprise_%2528CVN-65%2529.jpg&f=1&nofb=1"
     },{
         "day_of_week":6,
@@ -26,7 +26,7 @@
         "imagen":"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fa%2Faf%2FUSS_Enterprise_%2528CVN-65%2529.jpg&f=1&nofb=1"
     },{
         "day_of_week":7,
-        "categoria":"barcos",
+        "categoria":"mix",
         "imagen":"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fa%2Faf%2FUSS_Enterprise_%2528CVN-65%2529.jpg&f=1&nofb=1"
     }]
 }
