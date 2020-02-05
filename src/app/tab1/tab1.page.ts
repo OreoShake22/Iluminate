@@ -17,7 +17,7 @@ import { TimeService } from '../services/time.service';
 })
 export class Tab1Page {
   preguntas: galderakTask[];
-  imagen: string = 'assets/icon/anim.jpg';
+  imagen: string = '';
   categoria: string = 'animaliak'
   disponible = true;
   day_of_week;
