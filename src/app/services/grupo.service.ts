@@ -59,6 +59,7 @@ export class GrupoService {
       nombre: grupo.nombre,
       contraseña: grupo.contra,
       usuarios: grupo.usuarios,
+      creador:grupo.creador,
     })
     return id;
    }
