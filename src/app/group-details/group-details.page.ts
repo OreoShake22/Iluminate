@@ -24,6 +24,8 @@ export class GroupDetailsPage implements OnInit {
   usuariosGrupo: rankingTask[] = [{
     username:'Datuak prozesatzen',puntuacionS:null,puntuacionG:null,grupos:[],lastWeek:null,ultimaPartida:'',
   }]
+
+
   gruposUsuarios: string[] = []
   
   constructor(private navCtrl: NavController,private router: ActivatedRoute, private rankingService: rankingservice, private grupoService: GrupoService, private loadingControler: LoadingController) { }
@@ -36,6 +38,8 @@ export class GroupDetailsPage implements OnInit {
 
   }
   async ionViewWillEnter() {
+    
+    document.getElementById('basura').innerHTML="<ion-fab vertical='bottom' horizontal='end' slot='fixed'><ion-fab-button routerDirection='forward'><ion-icon name='trash'></ion-icon></ion-fab-button></ion-fab>"
     const loading = await this.loadingControler.create({
       message: 'Loading'
     });
@@ -65,9 +69,9 @@ export class GroupDetailsPage implements OnInit {
           break
         }
 
-        if(this.grupos[i].creador == firebase.auth().currentUser.uid){
-          document.getElementById('basura').innerHTML="<ion-fab vertical='bottom' horizontal='end' slot='fixed'><ion-fab-button routerDirection='forward'><ion-icon name='trash'></ion-icon></ion-fab-button></ion-fab>"
-        }
+        // if(this.grupos[i].creador == firebase.auth().currentUser.uid){
+          // document.getElementById('basura').innerHTML="<ion-fab vertical='bottom' horizontal='end' slot='fixed'><ion-fab-button routerDirection='forward'><ion-icon name='trash'></ion-icon></ion-fab-button></ion-fab>"
+        // }
 
       } for (var i = 0; i < this.usuarios.length; i++) {
         this.sub3 = this.rankingService.getTodo(this.usuarios[i]).subscribe(res => {
@@ -77,6 +81,8 @@ export class GroupDetailsPage implements OnInit {
           
           this.usuariosGrupo.push(res)
         })
+
+        
       }
 
       // for(var i=0;i<this.usuarios.length;i++){
@@ -99,8 +105,42 @@ export class GroupDetailsPage implements OnInit {
     this.navCtrl.navigateForward('')
   }
   delete(){
-    console.log('aaa')
-    console.log(this.grupos)
-  }
+    
+    this.rankingService.getranking().subscribe(res=>{
+      res.forEach(grupo=>{
+        var gr=grupo.grupos
+        console.log(gr, grupo.id)
+      })
+    })
+  //   console.log(this.usuariosGrupo)
+  //   // this.grupoService.deleteGrupo(this.id)
+  //   console.log(this.usuariosGrupo)
+  //   for(var i=0;i<this.usuariosGrupo.length+1;i++){
+  //     var id= this.usuariosGrupo[i].grupos
+  //     for(var a=0;a<id.length;a++)
+  //     {
+  //       if(id[a]==this.id){
+  //         console.log(this.usuariosGrupo[a]['grupos'])
+  //         this.usuariosGrupo[a].grupos.splice(a,1)
+  //         this.rankingService.updateTodo(this.usuariosGrupo[a],this.usuariosGrupo[a].id)
+  //       }
+  //     }
+      
+        
+  //     }
+  //     // console.log('id',this.usuariosGrupo)
+  //     // if(this.usuariosGrupo[i].grupos[i]==this.id){
+  //     //   this.usuariosGrupo.splice(i,1)
+  //     //   this.rankingService.updateTodo(this.usuariosGrupo[i],this.usuariosGrupo[i].id)
+  //     //   console.log('aaaa',this.usuariosGrupo[i].grupos)
+        
 
+  //     // }
+      
+   
+    
+  //   console.log(this.usuariosGrupo)
+  //   console.log(id)
+  // }
+  }
 }

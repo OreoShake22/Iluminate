@@ -3,15 +3,15 @@
     [{
         "day_of_week":1,
         "categoria":"biologia",
-        "imagen":"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fbiologiaa%2Fimages%2Fc%2Fc1%2FBiologia.jpeg%2Frevision%2Flatest%3Fcb%3D20161002213116%26path-prefix%3Des&f=1&nofb=1"
+        "imagen":"./assets/icon/biologia.jpg"
     },{
         "day_of_week":2,
         "categoria":"historia",
-        "imagen":"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.usc.br%2Fcustom%2F2008%2Fuploads%2Fcursos_esp_mba%2Fimagens_humanas_esp_mba%2Fhistoria-cultura-poder-topo.jpg&f=1&nofb=1"
+        "imagen":"./assets/icon/historia.jpg"
     },{
         "day_of_week":3,
         "categoria":"barcos",
-        "imagen":"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fa%2Faf%2FUSS_Enterprise_%2528CVN-65%2529.jpg&f=1&nofb=1"
+        "imagen":"./assets/icon/barcos.jpg"
     },{
         "day_of_week":4,
         "categoria":"biologia",
