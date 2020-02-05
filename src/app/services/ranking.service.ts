@@ -39,6 +39,7 @@ export class rankingservice {
    }
    getTodo(id:string)
    {
+     console.log('patoMorido')
      return this.rankingCOllection.doc<rankingTask>(id).valueChanges();
    }
 

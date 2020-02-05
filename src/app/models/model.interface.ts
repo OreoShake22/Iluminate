@@ -23,6 +23,7 @@ export interface groupTask {
     nombre: string;
     contra: string;
     usuarios:string[];
+    creador:string;
 }
 
 export interface groupRelTask {

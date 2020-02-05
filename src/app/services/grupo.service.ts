@@ -3,7 +3,6 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreModule } 
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { groupTask } from "../models/model.interface";
-import { groupRelTask } from "../models/model.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -47,12 +46,9 @@ export class GrupoService {
     return this.groupCollection.doc<groupTask>(id).valueChanges();
   }
 
-  
-
-
-
-   updateGrupo(grupo:groupTask){
-    return this.groupCollection.doc(grupo.id).update(grupo);
+ 
+   updateGrupo(grupo:groupTask,id:string){
+    return this.groupCollection.doc(id).update(grupo);
    }
 
    addGroup(grupo:groupTask)
@@ -63,6 +59,7 @@ export class GrupoService {
       nombre: grupo.nombre,
       contraseña: grupo.contra,
       usuarios: grupo.usuarios,
+      creador:grupo.creador,
     })
     return id;
    }

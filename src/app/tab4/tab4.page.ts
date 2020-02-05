@@ -43,6 +43,7 @@ export class Tab4Page {
     maximumImagesCount: 1,
     quality: 50
   };
+  imagen:string
   constructor(
     private authService: AuthenticateService,
     private usuarioservice: UsuarioService,
@@ -73,7 +74,14 @@ export class Tab4Page {
       this.usuario = algo;
     })
     this.mail = firebase.auth().currentUser.email
+    try{
+
+    
     this.display()
+  }
+  catch{
+    this.myphoto='../assets/icon/anim.jpg'
+  }
 
   }
 

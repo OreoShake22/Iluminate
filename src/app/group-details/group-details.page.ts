@@ -5,6 +5,7 @@ import { GrupoService } from '../services/grupo.service';
 import { groupTask, rankingTask } from '../models/model.interface';
 import { LoadingController } from '@ionic/angular'
 import { Subscription } from 'rxjs'
+import * as firebase from 'firebase'
 
 @Component({
   selector: 'app-group-details',
@@ -20,9 +21,11 @@ export class GroupDetailsPage implements OnInit {
   sub1: Subscription = new Subscription()
   sub2: Subscription = new Subscription()
   sub3: Subscription = new Subscription()
-  usuariosGrupo: rankingTask[] = []
+  usuariosGrupo: rankingTask[] = [{
+    username:'Datuak prozesatzen',puntuacionS:null,puntuacionG:null,grupos:[],lastWeek:null,ultimaPartida:'',
+  }]
   gruposUsuarios: string[] = []
-  loading
+  
   constructor(private router: ActivatedRoute, private rankingService: rankingservice, private grupoService: GrupoService, private loadingControler: LoadingController) { }
 
 
@@ -50,7 +53,6 @@ export class GroupDetailsPage implements OnInit {
   idGrupos() {
     this.usuarios = []
     this.sub1 = this.grupoService.getgrupos().subscribe(res => {
-      console.log('a')
       this.grupos = res
       for (var i = 0; i < this.grupos.length; i++) {
         if (this.grupos[i].nombre == this.nombre) {
@@ -63,8 +65,17 @@ export class GroupDetailsPage implements OnInit {
           break
         }
 
+        if(this.grupos[i].creador == firebase.auth().currentUser.uid){
+          console.log('aaa')
+          document.getElementById('basura').innerHTML="<ion-icon name='trash'></ion-icon>"
+        }
+
       } for (var i = 0; i < this.usuarios.length; i++) {
         this.sub3 = this.rankingService.getTodo(this.usuarios[i]).subscribe(res => {
+          if(this.usuariosGrupo[0].username=='Datuak prozesatzen'){
+            this.usuariosGrupo.splice(0,1)
+          }
+          
           this.usuariosGrupo.push(res)
         })
       }

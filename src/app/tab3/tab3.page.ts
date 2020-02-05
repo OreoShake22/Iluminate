@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs'
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit {
+  admin:boolean=false
   grupo: rankingTask;
   sGroup: string[];
   gruposId: string[];
@@ -27,6 +28,7 @@ export class Tab3Page implements OnInit {
     nombre: '',
     contra: '',
     usuarios: [],
+    creador:''
 
   }
 
@@ -73,11 +75,13 @@ export class Tab3Page implements OnInit {
     this.gruposId = []
     this.sub1 = this.grupoService.getgrupos().subscribe(res => {
       this.antonio = res
-
       for (var i = 0; i < this.antonio.length; i++) {
         this.gruposId.push(this.antonio[i].nombre)
+        console.log(this.antonio[i].creador)
+       
       }
     })
+    
   }
 
   async insertGroup() {
@@ -182,8 +186,11 @@ export class Tab3Page implements OnInit {
           handler: async data => {
             var pass = data.pass
             if (pass == grupo['contraseña']) {
+              console.log(grupo['id'])
               this.grupo.grupos.push(grupo.id)
               this.rankingService.updateTodo(this.grupo, firebase.auth().currentUser.uid)
+              grupo.usuarios.push(firebase.auth().currentUser.uid)
+              this.grupoService.updateGrupo(grupo,grupo.id)
             }
             else {
               this.PassAlert(grupo)
@@ -226,10 +233,12 @@ export class Tab3Page implements OnInit {
         {
           text: 'Gorde',
           handler: async data => {
+            var idUsu=firebase.auth().currentUser.uid
             var existe = false
             this.talde.nombre = data.izena
             this.talde.contra = data.pass
-            this.talde.usuarios.push(firebase.auth().currentUser.uid)
+            this.talde.creador=idUsu
+            this.talde.usuarios.push(idUsu)
             for (var i = 0; i < this.gruposId.length; i++) {
               if (data.izena == this.groupIzen[i]) {
                 this.alertNoGroup(data.izena + ' talde izena hartuta dago')
@@ -241,7 +250,7 @@ export class Tab3Page implements OnInit {
             if (existe == false) {
               var id = (this.grupoService.addGroup(this.talde))
               this.grupo.grupos.push(id)
-              this.rankingService.añadirGrupo(this.grupo, firebase.auth().currentUser.uid)
+              this.rankingService.añadirGrupo(this.grupo, idUsu)
               this.navCtrl.navigateForward('group-details/' + this.talde.nombre)
               this.a()
 
