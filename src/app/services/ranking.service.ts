@@ -15,7 +15,6 @@ export class rankingservice {
   constructor(db:AngularFirestore,public timeServices: TimeService) {
     this.timeServices.getHour()
           .then(data => {
-      console.log(data['week_number'])
       this.rankingCOllection= db.collection<rankingTask>('ranking', ref => ref.orderBy('puntuacionS', 'desc').where('lastWeek','==',data['week_number']));
     
     this.db=db;

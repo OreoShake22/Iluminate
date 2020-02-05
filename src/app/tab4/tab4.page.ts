@@ -129,6 +129,7 @@ export class Tab4Page {
 
     imageRef.putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL)
       .then((snapshot) => {
+        console.log('url: '+this.captureDataUrl)
         // Do something here when the data is succesfully uploaded!
         this.showSuccesfulUploadAlert();
       });

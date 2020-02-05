@@ -30,6 +30,7 @@ import { Tab3Page } from 'src/app/tab3/tab3.page';
 
 import { SmartAudioService } from './smart-audio.service';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
+import { Base64 } from '@ionic-native/base64/ngx';
 
 firebase.initializeApp(environment.firebase);
 @NgModule({
@@ -59,8 +60,8 @@ firebase.initializeApp(environment.firebase);
     rankingservice,
     UsuarioService,
     SmartAudioService,
-    ,
-    Tab3Page
+    Base64
+    
   ],
   bootstrap: [AppComponent]
 })
