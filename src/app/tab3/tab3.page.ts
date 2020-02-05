@@ -52,7 +52,9 @@ export class Tab3Page implements OnInit {
     }
 
   }
-  a() {}
+  a() {
+    this.sub1.unsubscribe()
+  }
 
   groupName() {
     this.groupIzen = []
@@ -178,8 +180,11 @@ export class Tab3Page implements OnInit {
           handler: async data => {
             var pass = data.pass
             if (pass == grupo['contraseña']) {
+              console.log(grupo['id'])
               this.grupo.grupos.push(grupo.id)
               this.rankingService.updateTodo(this.grupo, firebase.auth().currentUser.uid)
+              grupo.usuarios.push(firebase.auth().currentUser.uid)
+              this.grupoService.updateGrupo(grupo,grupo.id)
             }
             else {
               this.PassAlert(grupo)
