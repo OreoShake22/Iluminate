@@ -51,6 +51,9 @@ export class GrupoService {
     return this.groupCollection.doc(id).update(grupo);
    }
 
+   deleteGrupo(id:string){
+    return this.groupCollection.doc(id).delete();
+   }
    addGroup(grupo:groupTask)
    {
     var id=this.db.createId()
