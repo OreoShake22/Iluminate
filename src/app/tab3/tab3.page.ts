@@ -247,7 +247,7 @@ export class Tab3Page implements OnInit {
               var id = (this.grupoService.addGroup(this.talde))
               this.grupo.grupos.push(id)
               this.rankingService.añadirGrupo(this.grupo, idUsu)
-              this.navCtrl.navigateForward('group-details/' + this.talde.id + this.talde.nombre)
+              this.navCtrl.navigateRoot('group-details/' + id +'/'+this.talde.nombre)
               this.a()
 
             }
