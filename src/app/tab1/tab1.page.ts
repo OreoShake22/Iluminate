@@ -60,7 +60,7 @@ export class Tab1Page {
       }
       if (this.fecha != '') {
         if (this.fecha == this.dia) {
-          alert('ya has jugadoooo')
+          alert('Gaur jokatu duzu, zaiatu berriro bihar')
         }
         else {
 

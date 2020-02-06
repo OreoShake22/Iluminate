@@ -30,7 +30,7 @@ img.tema{
 #jokatu{
   width:70%;
   height: 50px;
-  margin-top: 8%;
+  margin-top: 12%;
   position: absolute;
 	border-radius: 3.75rem;
   line-height: 2.5rem;
@@ -44,7 +44,7 @@ img.tema{
 #hard{
   width:70%;
   height: 50px;
-  margin-top: 27%;
+  margin-top: 30%;
   position: absolute;
 	border-radius: 3.75rem;
   line-height: 2.5rem;
@@ -90,9 +90,10 @@ padding-top: 9px;
     border-radius: 25px;
   }
   #info{
-    margin-top: 51%;
+    margin-top: 47%;
     margin-left: 60%; 
   position: absolute;
+  font-size: 160%;
 }
 
 svg {
@@ -109,4 +110,8 @@ text {
   fill:#550255;
   font-weight: 1000;
   
+}
+
+svg.text{
+  position: absolute;
 }
