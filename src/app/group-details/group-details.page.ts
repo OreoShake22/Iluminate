@@ -22,7 +22,7 @@ export class GroupDetailsPage implements OnInit {
   sub2: Subscription = new Subscription()
   sub3: Subscription = new Subscription()
   usuariosGrupo: rankingTask[] = [{
-    username:'Datuak prozesatzen',puntuacionS:null,puntuacionG:null,grupos:[],lastWeek:null,ultimaPartida:'',
+    username:'',puntuacionS:null,puntuacionG:null,grupos:[],lastWeek:null,ultimaPartida:'',
   }]
 
 
@@ -49,69 +49,56 @@ export class GroupDetailsPage implements OnInit {
     this.sub2.unsubscribe()
     this.sub3.unsubscribe()
     loading.dismiss();
-    this.nombre = this.router.snapshot.params['id']
+    this.nombre = this.router.snapshot.params['nombre']
+    this.id = this.router.snapshot.params['id']
     this.idGrupos()
+    
+    
 
   }
 
-  idGrupos() {
+  async idGrupos() {
     this.usuarios = []
-    this.sub1 = this.grupoService.getgrupos().subscribe(res => {
-      this.grupos = res
-      for (var i = 0; i < this.grupos.length; i++) {
-        if (this.grupos[i].nombre == this.nombre) {
-          this.id = this.grupos[i].id
-          this.sub2 = this.grupoService.getGrupo(this.id).subscribe(res => {
-            this.usuarios = res.usuarios
-
-
-          })
-          break
-        }
-
-        // if(this.grupos[i].creador == firebase.auth().currentUser.uid){
-          // document.getElementById('basura').innerHTML="<ion-fab vertical='bottom' horizontal='end' slot='fixed'><ion-fab-button routerDirection='forward'><ion-icon name='trash'></ion-icon></ion-fab-button></ion-fab>"
-        // }
-
-      } for (var i = 0; i < this.usuarios.length; i++) {
-        this.sub3 = this.rankingService.getTodo(this.usuarios[i]).subscribe(res => {
-          if(this.usuariosGrupo[0].username=='Datuak prozesatzen'){
-            this.usuariosGrupo.splice(0,1)
-          }
-          
-          this.usuariosGrupo.push(res)
-        })
-
-        
-      }
-
-      // for(var i=0;i<this.usuarios.length;i++){
-      //   this.rankingService.getTodo(this.usuarios[i]).subscribe(res=>{
-      //     console.log(res.username)
-      //   })
-      // }
+    this.sub1 = this.grupoService.getGrupo(this.id).subscribe(grupo=>{
+     this.gruposId=grupo.usuarios
+     this.gruposId.forEach(userId=>{
+      this.rankingService.getTodo(userId).subscribe(usuario=>{
+        this.usuariosGrupo.push(usuario)
+      })
+      
     })
-
+    })
   }
 
   ionViewWillLeave() {
     this.sub1.unsubscribe()
     this.sub2.unsubscribe()
     this.sub3.unsubscribe()
+    
   }
 
   volver()
   {
-    this.navCtrl.navigateForward('')
+    
+    this.navCtrl.navigateForward('/tabs/tab3')
   }
   delete(){
-    
     this.rankingService.getranking().subscribe(res=>{
-      res.forEach(grupo=>{
-        var gr=grupo.grupos
-        console.log(gr, grupo.id)
+      res.forEach(usuario=>{
+        var usu=usuario.grupos
+        console.log(usu, usuario.id)
+        for(var i=0;usuario.grupos.length>=i;i++){
+          if(usuario.grupos[i]==this.id){
+            usuario.grupos.splice(i,1)
+            this.rankingService.updateTodo(usuario,usuario.id);
+            i--;
+          }
+        }
       })
     })
+    this.navCtrl.navigateForward('')
+    alert(' el Grupo '+this.nombre+' eliminado')
+    this.grupoService.deleteGrupo(this.id);
   //   console.log(this.usuariosGrupo)
   //   // this.grupoService.deleteGrupo(this.id)
   //   console.log(this.usuariosGrupo)

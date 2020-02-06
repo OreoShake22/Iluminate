@@ -19,6 +19,7 @@ export class Tab3Page implements OnInit {
   gruposId: string[];
   groupIzen: string[];
   antonio: groupTask[];
+  
   checkUserGroup: boolean = false
   aa: boolean
   sub1: Subscription = new Subscription()
@@ -41,11 +42,11 @@ export class Tab3Page implements OnInit {
   }
 
   ionViewWillEnter() {
+    console.log(location)
     try {
       this.sub3 = this.rankingService.getTodo(firebase.auth().currentUser.uid).subscribe(res => {
         this.grupo = res;
         this.sGroup = res.grupos
-        this.groupName()
         this.idGrupos()
       })
     }
@@ -60,25 +61,12 @@ export class Tab3Page implements OnInit {
     this.sub3.unsubscribe()
   }
 
-  groupName() {
-    this.groupIzen = []
-    for (var i = 0; i < this.sGroup.length; i++) {
-      var a = this.sGroup[i]
-      this.sub2 = this.grupoService.getGrupo(a).subscribe(res => {
-        this.groupIzen.push(res.nombre)
-      })
-    }
 
-  }
 
   idGrupos() {
     this.gruposId = []
     this.sub1 = this.grupoService.getgrupos().subscribe(res => {
       this.antonio = res
-      for (var i = 0; i < this.antonio.length; i++) {
-        this.gruposId.push(this.antonio[i].nombre)
-       
-      }
     })
     
   }
@@ -249,7 +237,7 @@ export class Tab3Page implements OnInit {
               var id = (this.grupoService.addGroup(this.talde))
               this.grupo.grupos.push(id)
               this.rankingService.añadirGrupo(this.grupo, idUsu)
-              this.navCtrl.navigateForward('group-details/' + this.talde.nombre)
+              this.navCtrl.navigateForward('group-details/' + this.talde.id+ this.talde.nombre)
               this.a()
 
             }
