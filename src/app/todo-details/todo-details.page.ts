@@ -30,10 +30,14 @@ export class todoDetailsPage implements OnInit {
     this.galderak.respuesta=((document.getElementById("respuesta") as HTMLInputElement).value);
     this.galderak.respuesta2=((document.getElementById("respuesta2") as HTMLInputElement).value);
     this.galderak.respuesta3=((document.getElementById("respuesta3") as HTMLInputElement).value);
+    this.galderak.imagen=((document.getElementById("imagen") as HTMLInputElement).value);
+    this.galderak.categoria=((document.getElementById("categoria") as HTMLInputElement).value);
     this.preguntasservice.addpreguntas(this.galderak)
     this.galderak.respuesta3=((document.getElementById("pregunta") as HTMLInputElement).value="");
     this.galderak.respuesta3=((document.getElementById("respuesta") as HTMLInputElement).value="");
     this.galderak.respuesta3=((document.getElementById("respuesta2") as HTMLInputElement).value="");
     this.galderak.respuesta3=((document.getElementById("respuesta3") as HTMLInputElement).value="");
+    this.galderak.imagen=((document.getElementById("imagen") as HTMLInputElement).value="");
+    this.galderak.categoria=((document.getElementById("categoria") as HTMLInputElement).value="");
 }
 }
