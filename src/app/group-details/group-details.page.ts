@@ -39,7 +39,7 @@ export class GroupDetailsPage implements OnInit {
   }
   async ionViewWillEnter() {
     
-    document.getElementById('basura').innerHTML="<ion-fab vertical='bottom' horizontal='end' slot='fixed'><ion-fab-button routerDirection='forward'><ion-icon name='trash'></ion-icon></ion-fab-button></ion-fab>"
+    
     const loading = await this.loadingControler.create({
       message: 'Loading'
     });
@@ -60,6 +60,9 @@ export class GroupDetailsPage implements OnInit {
   async idGrupos() {
     this.usuarios = []
     this.sub1 = this.grupoService.getGrupo(this.id).subscribe(grupo=>{
+      if(grupo.creador==firebase.auth().currentUser.uid){
+        document.getElementById('basura').innerHTML="<ion-fab vertical='bottom' horizontal='end' slot='fixed'><ion-fab-button routerDirection='forward'><ion-icon name='trash'></ion-icon></ion-fab-button></ion-fab>"
+      }
      this.gruposId=grupo.usuarios
      this.gruposId.forEach(userId=>{
       this.rankingService.getTodo(userId).subscribe(usuario=>{
