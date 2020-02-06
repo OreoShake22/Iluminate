@@ -39,7 +39,6 @@ export class rankingservice {
    }
    getTodo(id:string)
    {
-     console.log('patoMorido')
      return this.rankingCOllection.doc<rankingTask>(id).valueChanges();
    }
 
@@ -87,7 +86,6 @@ export class rankingservice {
        async getSemana() { //llamamos a la funcion getPost de nuestro servicio.
         this.timeServices.getHour()
           .then(data => {
-            console.log(data['week_number'])
             return data['week_number'];
           });
       }

@@ -28,7 +28,6 @@ body, html {
 	left: 50%;
   transform: translate(-50%);
   width:100%;
-	z-index: 10;
   font-family: 'Red Hat Display', sans-serif;
 }
 
@@ -141,7 +140,7 @@ body, html {
 			text-align: center;
 			font-size: 1.25rem;
 			width: 1.5rem;
-			color: white;
+			color: black;
 			opacity: 0.6;
 			transition: opacity 200ms ease-in-out;
 		}
@@ -184,3 +183,11 @@ body, html {
 		}
 	}
 }
+
+#abajo{
+margin-top:128% ;
+z-index: 1;
+}
+#abajo>.item{
+	background-color: rgb(253, 110, 189) ;
+	}

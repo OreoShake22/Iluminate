@@ -7,8 +7,6 @@ import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx'
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { NavController, AlertController } from '@ionic/angular';
-//ionic cordova plugin add cordova-plugin-file
-//npm install @ionic-native/file
 
 import { ActionSheetController } from '@ionic/angular';
 
@@ -43,7 +41,7 @@ export class Tab4Page {
     maximumImagesCount: 1,
     quality: 50
   };
-  imagen:string
+  imagen: string
   constructor(
     private authService: AuthenticateService,
     private usuarioservice: UsuarioService,
@@ -74,33 +72,16 @@ export class Tab4Page {
       this.usuario = algo;
     })
     this.mail = firebase.auth().currentUser.email
-    try{
+    try {
 
-    
-    this.display()
+
+      this.display()
+    }
+    catch{
+      this.myphoto = '../assets/icon/anim.jpg'
+    }
+
   }
-  catch{
-    this.myphoto='../assets/icon/anim.jpg'
-  }
-
-  }
-
-  // getImg()
-  // {
-  //   let options = {
-  //     width: 500,
-  //     height: 500,
-  //     quality: 75,
-  //     maximumImagesCount: 10
-  //   }
-
-  //   this.camera.getPictures(options).then((results) => {
-  //     for (var i = 0; i < results.length; i++) {
-  //         console.log('Image URI: ' + results[i]);
-  //     }
-  //   }, (err) => { });
-  // }
-
 
   getImage() {
     const options: CameraOptions = {
@@ -116,7 +97,7 @@ export class Tab4Page {
       console.log(err);
     });
 
-
+    this.upload()
   }
 
   upload() {
@@ -129,7 +110,7 @@ export class Tab4Page {
 
     imageRef.putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL)
       .then((snapshot) => {
-        console.log('url: '+this.captureDataUrl)
+        console.log('url: ' + this.captureDataUrl)
         // Do something here when the data is succesfully uploaded!
         this.showSuccesfulUploadAlert();
       });
@@ -149,32 +130,11 @@ export class Tab4Page {
 
 
 
-  // cropImage() {
-  //   const options: CameraOptions = {
-  //     quality: 70,
-  //     destinationType: this.camera.DestinationType.DATA_URL,
-  //     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-  //     saveToPhotoAlbum: false,
-  //     allowEdit:true,
-  //     targetWidth:300,
-  //     targetHeight:300
-  //   }
-
-  //   this.camera.getPicture(options).then((imageData) => {
-  //     // imageData is either a base64 encoded string or a file URI
-  //     // If it's base64:
-  //     this.myphoto = 'data:image/jpeg;base64,' + imageData;
-  //   }, (err) => {
-  //     // Handle error
-  //   });
-  // }
-
-
   display() {
-    this.firestore.ref().child('images/'+firebase.auth().currentUser.uid+'.jpg').getDownloadURL().then((url) => {
+    this.firestore.ref().child('images/' + firebase.auth().currentUser.uid + '.jpg').getDownloadURL().then((url) => {
       this.zone.run(() => {
         this.imgsource = url;
-        this.myphoto=url
+        this.myphoto = url
       })
     })
   }

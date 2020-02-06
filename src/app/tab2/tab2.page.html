@@ -66,12 +66,12 @@
   </div>
   </div>
   <div class="list" *ngFor="let ran of ranking; let i = index">
-    <div *ngIf="i>=3">
+    <div *ngIf="i>=3 && 10>=i">
     <div class="item">
       <div class="pos">
         {{ i + 1 }}
       </div>
-      <img  class="pic" *ngIf="src==null" src="https://firebasestorage.googleapis.com/v0/b/iluminate-9c491.appspot.com/o/images%2F{{ran.id}}.jpg?alt=media">
+      <img  class="pic"  src="https://firebasestorage.googleapis.com/v0/b/iluminate-9c491.appspot.com/o/images%2F{{ran.id}}.jpg?alt=media">
       <div class="name">
         {{ran.username}}
       </div>
@@ -79,6 +79,19 @@
         {{ran.puntuacionS}}
       </div>
   </div>
+  </div>
+</div>
+<br><br><br>
+</div>
+
+<div slot="fixed" class="list" id="abajo">
+<div class="item">
+  <img  class="pic"  src="https://firebasestorage.googleapis.com/v0/b/iluminate-9c491.appspot.com/o/images%2F{{id}}.jpg?alt=media">
+  <div class="name">
+    {{User.username}}
+  </div>
+  <div class="score">
+    {{User.puntuacionS}}
   </div>
 </div>
 </div>

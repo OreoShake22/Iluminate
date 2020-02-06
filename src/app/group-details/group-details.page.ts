@@ -66,6 +66,7 @@ export class GroupDetailsPage implements OnInit {
      this.gruposId=grupo.usuarios
      this.gruposId.forEach(userId=>{
       this.rankingService.getTodo(userId).subscribe(usuario=>{
+        usuario.id=userId
         this.usuariosGrupo.push(usuario)
       })
       
@@ -102,35 +103,5 @@ export class GroupDetailsPage implements OnInit {
     this.navCtrl.navigateForward('')
     alert(' el Grupo '+this.nombre+' eliminado')
     this.grupoService.deleteGrupo(this.id);
-  //   console.log(this.usuariosGrupo)
-  //   // this.grupoService.deleteGrupo(this.id)
-  //   console.log(this.usuariosGrupo)
-  //   for(var i=0;i<this.usuariosGrupo.length+1;i++){
-  //     var id= this.usuariosGrupo[i].grupos
-  //     for(var a=0;a<id.length;a++)
-  //     {
-  //       if(id[a]==this.id){
-  //         console.log(this.usuariosGrupo[a]['grupos'])
-  //         this.usuariosGrupo[a].grupos.splice(a,1)
-  //         this.rankingService.updateTodo(this.usuariosGrupo[a],this.usuariosGrupo[a].id)
-  //       }
-  //     }
-      
-        
-  //     }
-  //     // console.log('id',this.usuariosGrupo)
-  //     // if(this.usuariosGrupo[i].grupos[i]==this.id){
-  //     //   this.usuariosGrupo.splice(i,1)
-  //     //   this.rankingService.updateTodo(this.usuariosGrupo[i],this.usuariosGrupo[i].id)
-  //     //   console.log('aaaa',this.usuariosGrupo[i].grupos)
-        
-
-  //     // }
-      
-   
-    
-  //   console.log(this.usuariosGrupo)
-  //   console.log(id)
-  // }
   }
 }

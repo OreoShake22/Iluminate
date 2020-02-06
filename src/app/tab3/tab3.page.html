@@ -11,11 +11,6 @@
   <ion-list *ngFor="let grup of antonio">
     <ion-item (click)="a()"  [routerLink]="['/group-details', grup.id,grup.nombre]">{{grup.nombre}}</ion-item>
   </ion-list>
-  <!-- <ul class="list" *ngFor="let grupo of groupIzen">
-    <li class="item">
-      {{grupo}}
-    </li>
-  </ul> -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button routerDirection="forward">
       <ion-icon name="add"></ion-icon>
