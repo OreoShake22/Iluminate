@@ -38,7 +38,7 @@ export class GroupDetailsPage implements OnInit {
 
   }
   async ionViewWillEnter() {
-
+    
 
     const loading = await this.loadingControler.create({
       message: 'Loading'
@@ -51,15 +51,17 @@ export class GroupDetailsPage implements OnInit {
     loading.dismiss();
     this.nombre = this.router.snapshot.params['nombre']
     this.id = this.router.snapshot.params['id']
+    console.log(this.id)
     this.idGrupos()
 
 
 
   }
 
-  async idGrupos() {
+  idGrupos() {
     this.usuarios = []
     this.sub1 = this.grupoService.getGrupo(this.id).subscribe(grupo => {
+      
       if (grupo.creador == firebase.auth().currentUser.uid) {
         document.getElementById('basura').innerHTML = "<ion-fab vertical='bottom' horizontal='end' slot='fixed'><ion-fab-button routerDirection='forward'><ion-icon name='trash'></ion-icon></ion-fab-button></ion-fab>"
       }

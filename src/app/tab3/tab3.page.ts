@@ -18,7 +18,7 @@ export class Tab3Page implements OnInit {
   sGroup: string[];
   gruposId: string[];
   groupIzen: string[];
-  antonio: groupTask[];
+  antonio: groupTask[]=[];
 
   checkUserGroup: boolean = false
   aa: boolean
@@ -42,12 +42,12 @@ export class Tab3Page implements OnInit {
   }
 
   ionViewWillEnter() {
-    console.log(location)
+    this.antonio=[]
     try {
       this.sub3 = this.rankingService.getTodo(firebase.auth().currentUser.uid).subscribe(res => {
         this.grupo = res;
         this.sGroup = res.grupos
-        this.idGrupos()
+        this.idGrupos();
       })
     }
     catch{
@@ -64,11 +64,13 @@ export class Tab3Page implements OnInit {
 
 
   idGrupos() {
-    this.gruposId = []
-    this.sub1 = this.grupoService.getgrupos().subscribe(res => {
-      this.antonio = res
+    this.sGroup.forEach(id=>{
+      this.sub1 = this.grupoService.getGrupo(id).subscribe(res=>{
+        res.id=id;
+        this.antonio.push(res);
+      })
     })
-
+    
   }
 
   async insertGroup() {
@@ -241,7 +243,6 @@ export class Tab3Page implements OnInit {
               this.a()
 
             }
-
           },
         }
       ]
