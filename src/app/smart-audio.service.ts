@@ -7,7 +7,8 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
 export class SmartAudioService {
   audioType: string = 'html5';
   sounds: any = [];
-
+  audio:any;
+  audioAsset: HTMLAudioElement;
   constructor(public nativeAudio: NativeAudio, platform: Platform) {
 
       if(platform.is('cordova')){
@@ -51,8 +52,9 @@ export class SmartAudioService {
 
       if(audio.type === 'html5'){
 
-          let audioAsset = new Audio(audio.asset);
-          audioAsset.play();
+          this.audioAsset = new Audio(audio.asset);
+          console.log(audio)
+          this.audioAsset.play();
 
       } else {
 
@@ -63,6 +65,51 @@ export class SmartAudioService {
           });
 
       }
+
+    }
+
+    songEfect(key){
+
+        let audio = this.sounds.find((sound) => {
+            return sound.key === key;
+        });
+  
+        if(audio.type === 'html5'){
+            
+            let audioAsset = new Audio(audio.asset);
+            audioAsset.play();
+  
+        } else {
+  
+            this.nativeAudio.play(audio.asset).then((res) => {
+                console.log(res);
+            }, (err) => {
+                console.log(err);
+            });
+  
+        }
+  
+      }
+
+    stop(key)
+    {
+        let audio = this.sounds.find((sound) => {
+            return sound.key === key;
+        });
+
+         if(audio.type === 'html5'){
+            this.audioAsset.pause();
+            this.audioAsset.currentTime = 0;
+            this.audioAsset.src = '';
+
+        } else {
+            this.nativeAudio.stop(audio.asset).then((res) => {
+                console.log(res);
+            }, (err) => {
+                console.log(err);
+            });
+
+        }
 
     }
   }
