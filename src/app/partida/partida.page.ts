@@ -6,7 +6,7 @@ import { galderakTask } from "../models/model.interface";
 import { rankingservice } from '../services/ranking.service';
 import { rankingTask } from "../models/model.interface";
 import * as firebase from 'firebase'
-import { SmartAudioService } from '../smart-audio.service';
+import { SmartAudioService } from '../services/smart-audio.service';
 import { TimeService } from '../services/time.service';
 import { HttpClient } from '@angular/common/http';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
@@ -15,10 +15,10 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
   templateUrl: './partida.page.html',
   styleUrls: ['./partida.page.scss'],
 })
-export class PartidaPage{
-  modo:string;
-  temporalizador:any;
-  categoria:string;
+export class PartidaPage {
+  modo: string;
+  temporalizador: any;
+  categoria: string;
   index: number = 0;
   disponible: boolean = true;
   correcta: string;
@@ -30,12 +30,12 @@ export class PartidaPage{
   loading;
   ranking: rankingTask;
   colores: string[] = ['Dpurple', 'Dpurple', 'Dpurple'];
-  smartAudioService:any;
-  imagen:string
+  smartAudioService: any;
+  imagen: string
 
 
   public preguntas = [
-    { categoria:'',imagen:'',pregunta: "Cargando preguntas", respuesta: "", respuesta2: "", respuesta3: "" },
+    { categoria: '', imagen: '', pregunta: "Cargando preguntas", respuesta: "", respuesta2: "", respuesta3: "" },
   ];
 
   mix() {
@@ -46,48 +46,48 @@ export class PartidaPage{
     this.mezclas(this.respuestas);
   }
 
-  respuesta(res: string,c:number) {
-    if(this.disponible){
-    this.disponible = false
-    if (this.correcta == res) {
-      this.smartAudioService.play('acierto');
-      if(this.modo=='dificil'){
-        this.puntuacion+=100;
-      }else{
-        this.puntuacion += 100 * ((this.t) / 10)
-      }
-      
-      this.colores[c]='success'
-      
-    }else{
-      this.smartAudioService.play('fallo');
-      this.colores[c]='danger'
-    }
+  respuesta(res: string, c: number) {
+    if (this.disponible) {
+      this.disponible = false
+      if (this.correcta == res) {
+        this.smartAudioService.play('acierto');
+        if (this.modo == 'dificil') {
+          this.puntuacion += 100;
+        } else {
+          this.puntuacion += 100 * ((this.t) / 10)
+        }
 
-    setTimeout(function () {
-      this.colores[c]='Dpurple'
-      this.updateIndex();
-      
-      if (this.index < this.preguntas.length) {
-      this.disponible=true
+        this.colores[c] = 'success'
+
+      } else {
+        this.smartAudioService.play('fallo');
+        this.colores[c] = 'danger'
       }
-    this.startTimer();
-    }.bind(this), 1000)
-  }
+
+      setTimeout(function () {
+        this.colores[c] = 'Dpurple'
+        this.updateIndex();
+
+        if (this.index < this.preguntas.length) {
+          this.disponible = true
+        }
+        this.startTimer();
+      }.bind(this), 1000)
+    }
   }
 
   updateIndex() {
     if (this.index < this.preguntas.length - 1) {
       this.index++;
       this.mix();
-      if(this.modo=='dificil'){
-        this.t=3;
-      }else{
+      if (this.modo == 'dificil') {
+        this.t = 3;
+      } else {
         this.t = 10;
       }
-      
+
     } else {
-      this.disponible=false;
+      this.disponible = false;
       this.finalizar();
     }
 
@@ -98,50 +98,50 @@ export class PartidaPage{
   getIndex() {
     return this.index;
   }
-  constructor(private router: ActivatedRoute,private http: HttpClient,private rankingservice: rankingservice, public timeServices: TimeService, private loadingController: LoadingController, private navCtrl: NavController, private preguntasservice: preguntasservice,
+  constructor(private router: ActivatedRoute, private http: HttpClient, private rankingservice: rankingservice, public timeServices: TimeService, private loadingController: LoadingController, private navCtrl: NavController, private preguntasservice: preguntasservice,
     smartAudioService: SmartAudioService) {
-      smartAudioService.preload('acierto', 'assets/audio/acierto.mp3');
-      smartAudioService.preload('fallo', 'assets/audio/muelle.mp3');
-      smartAudioService.preload('sans', 'assets/audio/sans.mp3');
-      this.smartAudioService=smartAudioService
-     }
+    smartAudioService.preload('acierto', 'assets/audio/acierto.mp3');
+    smartAudioService.preload('fallo', 'assets/audio/muelle.mp3');
+    smartAudioService.preload('sans', 'assets/audio/sans.mp3');
+    this.smartAudioService = smartAudioService
+  }
 
   ionViewWillEnter() {
-    this.modo=this.router.snapshot.params['modo']
+    this.modo = this.router.snapshot.params['modo']
     console.log(this.modo)
     this.timeServices.getHour()
       .then(data => {
         var semana;
-        semana=data['day_of_week'];
+        semana = data['day_of_week'];
         this.http.get('../assets/json/categoria.json').subscribe(data => {
-          
+
           data['semana'].forEach(cat => {
             if (cat.day_of_week == semana) {
-              this.categoria=cat.categoria;
-              
-              
+              this.categoria = cat.categoria;
+
+
             }
           })
         });
-    this.preguntasservice.getpreguntas().subscribe(res => {
-      this.preguntas = res;
+        this.preguntasservice.getpreguntas().subscribe(res => {
+          this.preguntas = res;
 
-      this.filtrarPreguntas();
-      this.loadAll();
-    });
-  })
+          this.filtrarPreguntas();
+          this.loadAll();
+        });
+      })
   }
 
-  ionViewWillLeave(){
-     clearInterval(this.temporalizador)
-     this.smartAudioService.stop('sans');
+  ionViewWillLeave() {
+    clearInterval(this.temporalizador)
+    this.smartAudioService.stop('sans');
     //  location.reload()
   }
 
   startTimer() {
     if (this.t > 0) {
 
-      this.temporalizador=setTimeout(function () {
+      this.temporalizador = setTimeout(function () {
         if (this.disponible) {
           this.t--;
           this.startTimer()
@@ -160,7 +160,7 @@ export class PartidaPage{
   }
 
   finalizar() {
-    this.disponible=false;
+    this.disponible = false;
     this.navCtrl.navigateForward('/');
     this.ranking.puntuacionG += this.puntuacion
     this.ranking.puntuacionS += this.puntuacion
@@ -187,9 +187,9 @@ export class PartidaPage{
     await loading.present();
 
     this.mix()
-    if(this.modo=='dificil'){
+    if (this.modo == 'dificil') {
       this.smartAudioService.play('sans');
-      this.t=3
+      this.t = 3
     }
     loading.dismiss();
     this.startTimer();
@@ -199,11 +199,11 @@ export class PartidaPage{
   }
   filtrarPreguntas() {
     var id: galderakTask[] = [];
-    var semanales:galderakTask[] = [];
+    var semanales: galderakTask[] = [];
     for (var i = 0; i < this.preguntas.length; i++) {
-      if(this.preguntas[i].categoria==this.categoria){
+      if (this.preguntas[i].categoria == this.categoria) {
         semanales.push(this.preguntas[i]);
-        console.log(this.preguntas[i].pregunta+" "+i)
+        console.log(this.preguntas[i].pregunta + " " + i)
         this.preguntas.splice(i, 1)
         i--;
       }
@@ -216,7 +216,7 @@ export class PartidaPage{
       i--;
     }
 
-    for (var i = 0;id.length < 10; i++) {
+    for (var i = 0; id.length < 10; i++) {
       this.myRand = this.random(this.preguntas.length);
       id.push(this.preguntas[this.myRand]);
       this.preguntas.splice(this.myRand, 1)
@@ -226,5 +226,5 @@ export class PartidaPage{
     this.preguntas = id;
   }
 
-  
+
 }

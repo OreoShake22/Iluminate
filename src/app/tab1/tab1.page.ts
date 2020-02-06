@@ -44,7 +44,7 @@ export class Tab1Page {
   }
 
 
-  jokatu(modo:string) {
+  jokatu(modo: string) {
     console.log(modo)
     var yo;
     var semana;
@@ -66,7 +66,7 @@ export class Tab1Page {
 
 
           this.rankingService.updateTime(this.ranking1, this.ranking1.id)
-          this.navCtrl.navigateForward('partida/'+modo)
+          this.navCtrl.navigateForward('partida/' + modo)
         }
         fecha.unsubscribe()
       }

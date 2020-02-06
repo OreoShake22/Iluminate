@@ -2,8 +2,8 @@
   <ion-toolbar>
     <ion-title>
       <label id="titulo">
-        <img id="logo"src="./assets/icon/bonbilla.png">  Illuminate
-      </label> 
+        <img id="logo" src="./assets/icon/bonbilla.png"> Illuminate
+      </label>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -35,27 +35,30 @@
     </div>
   </div> -->
   <div class="page">
-  <div class="page__container">
-    <article class="profile">
-      <header class="profile__header">
-        <ion-fab  vertical="top" horizontal="end" slot="fixed">
-          <ion-fab-button (click)="getImage()" color="light" routerDirection="forward">
-            <ion-icon name="image"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
-        <img src={{myphoto}} class="profile__avatar">
-        <h3 class="profile__name">{{usuario.username}}</h3>
-        <span class="profile__post">{{mail}}</span>
-      </header>
-          <div class="ion-padding">
-            <ion-button color="tertiary" (click)="change()" type="ion-button" class="ion-no-margin ion-text-center" >Aldatu pasahitza &nbsp;<ion-icon name="refresh"></ion-icon>
-            </ion-button>
-          </div>
-          <div class="ion-padding">
-            <ion-button color="warning" (click)="logOut()" class="ion-no-margin">Itxi saioa &nbsp;<ion-icon name="log-out"></ion-icon></ion-button>
-          </div>
-     
-    </article>
+    <div class="page__container">
+      <article class="profile">
+        <header class="profile__header">
+          <ion-fab vertical="top" horizontal="end" slot="fixed">
+            <ion-fab-button (click)="getImage()" color="light" routerDirection="forward">
+              <ion-icon name="image"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+          <img src={{myphoto}} class="profile__avatar">
+          <h3 class="profile__name">{{usuario.username}}</h3>
+          <span class="profile__post">{{mail}}</span>
+        </header>
+        <div class="ion-padding">
+          <ion-button color="tertiary" (click)="change()" type="ion-button" class="ion-no-margin ion-text-center">Aldatu
+            pasahitza &nbsp;<ion-icon name="refresh"></ion-icon>
+          </ion-button>
+        </div>
+        <div class="ion-padding">
+          <ion-button color="warning" (click)="logOut()" class="ion-no-margin">Itxi saioa &nbsp;<ion-icon
+              name="log-out"></ion-icon>
+          </ion-button>
+        </div>
+
+      </article>
+    </div>
   </div>
-</div>
 </ion-content>

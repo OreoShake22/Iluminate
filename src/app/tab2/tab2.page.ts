@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {rankingservice} from '../services/ranking.service';
+import { rankingservice } from '../services/ranking.service';
 import { rankingTask } from "../models/model.interface";
 import * as firebase from 'firebase'
 
@@ -8,9 +8,9 @@ import * as firebase from 'firebase'
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page implements OnInit{
-  ranking:rankingTask[];
-  User:rankingTask = {
+export class Tab2Page implements OnInit {
+  ranking: rankingTask[];
+  User: rankingTask = {
     username: '',
     puntuacionS: 0,
     puntuacionG: 0,
@@ -18,24 +18,23 @@ export class Tab2Page implements OnInit{
     lastWeek: 0,
     grupos: []
   };
-  id:string
+  id: string
 
-  constructor(private rankingservice:rankingservice) {
-    
+  constructor(private rankingservice: rankingservice) {
+
   }
-  ngOnInit()
-    {
-      this.rankingservice.getranking().subscribe(res=>{
-        this.ranking=res;
-      })
-    }
-
-  ionViewWillEnter(){
-    this.rankingservice.getTodo(firebase.auth().currentUser.uid).subscribe(res=>{
-      this.User=res
+  ngOnInit() {
+    this.rankingservice.getranking().subscribe(res => {
+      this.ranking = res;
     })
-    this.id=firebase.auth().currentUser.uid
   }
 
-  
+  ionViewWillEnter() {
+    this.rankingservice.getTodo(firebase.auth().currentUser.uid).subscribe(res => {
+      this.User = res
+    })
+    this.id = firebase.auth().currentUser.uid
+  }
+
+
 }

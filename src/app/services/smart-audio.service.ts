@@ -53,7 +53,6 @@ export class SmartAudioService {
       if(audio.type === 'html5'){
 
           this.audioAsset = new Audio(audio.asset);
-          console.log(audio)
           this.audioAsset.play();
 
       } else {

@@ -2,16 +2,18 @@
   <ion-toolbar>
     <ion-title>
       <label id="titulo">
-        <img id="logo"src="./assets/icon/bonbilla.png">  Illuminate
-      </label> 
+        <img id="logo" src="./assets/icon/bonbilla.png"> Illuminate
+      </label>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list  *ngFor="let grup of antonio">
-    <ion-item (click)="a()"  [routerLink]="['/group-details', grup.id,grup.nombre]"><span>{{grup.nombre}}</span> <ion-icon class="icon" name="information-circle-outline"></ion-icon></ion-item>
+  <ion-list *ngFor="let grup of antonio">
+    <ion-item (click)="a()" [routerLink]="['/group-details', grup.id,grup.nombre]"><span>{{grup.nombre}}</span>
+      <ion-icon class="icon" name="information-circle-outline"></ion-icon>
+    </ion-item>
   </ion-list>
-  <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="warning" routerDirection="forward">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>

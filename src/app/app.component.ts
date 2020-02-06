@@ -4,7 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { rankingTask } from "./models/model.interface";
-import { SmartAudioService } from './smart-audio.service';
+import { SmartAudioService } from './services/smart-audio.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',

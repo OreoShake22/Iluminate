@@ -6,22 +6,25 @@
 </ion-header>
 
 <ion-content>
-<div class="center">
-<div class="list" *ngFor="let usu of usuariosGrupo; let i = index">
-  <div *ngIf="i>0">
-  <div class="item">
-    <div class="pos">
-      {{ i }} 
+  <div class="center">
+    <div class="list" *ngFor="let usu of usuariosGrupo; let i = index">
+      <div *ngIf="i>0">
+        <div class="item">
+          <div class="pos">
+            {{ i }}
+          </div>
+          <img class="pic"
+            src="https://firebasestorage.googleapis.com/v0/b/iluminate-9c491.appspot.com/o/images%2F{{usu.id}}.jpg?alt=media">
+          <div class="name">
+            {{usu.username}}
+          </div>
+          <div class="score">
+            {{usu.puntuacionS}}
+          </div>
+        </div>
+      </div>
     </div>
-    <img  class="pic"  src="https://firebasestorage.googleapis.com/v0/b/iluminate-9c491.appspot.com/o/images%2F{{usu.id}}.jpg?alt=media">
-    <div class="name">
-      {{usu.username}}
-    </div>
-    <div class="score">
-      {{usu.puntuacionS}}
-    </div>
-</div></div>
-</div></div>
-<div id="basura" (click)='delete()'></div>
+  </div>
+  <div id="basura" (click)='delete()'></div>
 
 </ion-content>

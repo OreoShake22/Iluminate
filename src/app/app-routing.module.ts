@@ -8,27 +8,27 @@ const routes: Routes = [
   },
   {
     path: 'details',
-    loadChildren: () => import('./todo-details/todo-details.module').then( m => m.TodoDetailsPageModule)
+    loadChildren: () => import('./todo-details/todo-details.module').then(m => m.TodoDetailsPageModule)
   },
   {
     path: 'partida/:modo',
-    loadChildren: () => import('./partida/partida.module').then( m => m.PartidaPageModule)
+    loadChildren: () => import('./partida/partida.module').then(m => m.PartidaPageModule)
   },
 
   { path: 'a', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
-  { path: 'inicio', loadChildren: './tab1/tab1.module#Tab1PageModule'},
+  { path: 'inicio', loadChildren: './tab1/tab1.module#Tab1PageModule' },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
   },
   {
     path: 'group-details/:id/:nombre',
-    loadChildren: () => import('./group-details/group-details.module').then( m => m.GroupDetailsPageModule)
+    loadChildren: () => import('./group-details/group-details.module').then(m => m.GroupDetailsPageModule)
   },
 
 
@@ -41,4 +41,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -28,7 +28,7 @@ import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Tab3Page } from 'src/app/tab3/tab3.page';
 
-import { SmartAudioService } from './smart-audio.service';
+import { SmartAudioService } from './services/smart-audio.service';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 firebase.initializeApp(environment.firebase);

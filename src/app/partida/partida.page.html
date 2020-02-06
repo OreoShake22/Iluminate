@@ -1,39 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    
-    
+
+
     <ion-title>Partida</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
 
   <div id="centro">
-    
-      
-      <ion-list>
-        <label>
-          {{puntuacion}}
-        </label>
-        <div>
-          
-      <label id="timer">{{t}}</label>
-    </div>
-    <div id="deskripzio" class="ion-padding">
+
+
+    <ion-list>
+      <label>
+        {{puntuacion}}
+      </label>
+      <div>
+
+        <label id="timer">{{t}}</label>
+      </div>
+      <div id="deskripzio" class="ion-padding">
         <div>
           <h3 id="pregunta">{{preguntas[getIndex()].pregunta}}</h3>
         </div>
-        
+
         <img src="{{imagen}}">
-        </div>
-        
-          <div  *ngFor="let res of final; let i= index"> 
-              <ion-button color="{{colores[i]}}" class="boton" id="res" (click)="respuesta(res,i)" round>
-                {{res}}
-              </ion-button>
-          </div>
-        </ion-list>
-
-
       </div>
+
+      <div *ngFor="let res of final; let i= index">
+        <ion-button color="{{colores[i]}}" class="boton" id="res" (click)="respuesta(res,i)" round>
+          {{res}}
+        </ion-button>
+      </div>
+    </ion-list>
+
+
+  </div>
 
 </ion-content>

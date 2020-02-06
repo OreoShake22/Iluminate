@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { NavController } from '@ionic/angular';
-import { SmartAudioService } from '../smart-audio.service';
+import { SmartAudioService } from '../services/smart-audio.service';
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',

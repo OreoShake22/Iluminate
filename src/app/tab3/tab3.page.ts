@@ -13,13 +13,13 @@ import { Subscription } from 'rxjs'
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit {
-  admin:boolean=false
+  admin: boolean = false
   grupo: rankingTask;
   sGroup: string[];
   gruposId: string[];
   groupIzen: string[];
   antonio: groupTask[];
-  
+
   checkUserGroup: boolean = false
   aa: boolean
   sub1: Subscription = new Subscription()
@@ -29,7 +29,7 @@ export class Tab3Page implements OnInit {
     nombre: '',
     contra: '',
     usuarios: [],
-    creador:''
+    creador: ''
 
   }
 
@@ -68,7 +68,7 @@ export class Tab3Page implements OnInit {
     this.sub1 = this.grupoService.getgrupos().subscribe(res => {
       this.antonio = res
     })
-    
+
   }
 
   async insertGroup() {
@@ -176,7 +176,7 @@ export class Tab3Page implements OnInit {
               this.grupo.grupos.push(grupo.id)
               this.rankingService.updateTodo(this.grupo, firebase.auth().currentUser.uid)
               grupo.usuarios.push(firebase.auth().currentUser.uid)
-              this.grupoService.updateGrupo(grupo,grupo.id)
+              this.grupoService.updateGrupo(grupo, grupo.id)
             }
             else {
               this.PassAlert(grupo)
@@ -219,11 +219,11 @@ export class Tab3Page implements OnInit {
         {
           text: 'Gorde',
           handler: async data => {
-            var idUsu=firebase.auth().currentUser.uid
+            var idUsu = firebase.auth().currentUser.uid
             var existe = false
             this.talde.nombre = data.izena
             this.talde.contra = data.pass
-            this.talde.creador=idUsu
+            this.talde.creador = idUsu
             this.talde.usuarios.push(idUsu)
             for (var i = 0; i < this.gruposId.length; i++) {
               if (data.izena == this.groupIzen[i]) {
@@ -237,7 +237,7 @@ export class Tab3Page implements OnInit {
               var id = (this.grupoService.addGroup(this.talde))
               this.grupo.grupos.push(id)
               this.rankingService.añadirGrupo(this.grupo, idUsu)
-              this.navCtrl.navigateForward('group-details/' + this.talde.id+ this.talde.nombre)
+              this.navCtrl.navigateForward('group-details/' + this.talde.id + this.talde.nombre)
               this.a()
 
             }
