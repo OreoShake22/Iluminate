@@ -4,3 +4,27 @@
    font-weight: 200;
    font-style: bold;
  }
+
+ @font-face {
+  font-family: 'helvetica neue bold';
+  src: url('./assets/fonts/helvetica-neue-bold.ttf');
+  font-weight: 200;
+  size: 75;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'helvetica neue thin';
+  src: url('./assets/fonts/helvetica-neue-thin.ttf');
+  font-weight: 200;
+  size: 45;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'kids rock';
+  src: url('./assets/fonts/kids-rock-demo-regular.otf');
+  font-weight: 200;
+  size: 45;
+  font-style: bold;
+}

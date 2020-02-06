@@ -1,13 +1,9 @@
-<ion-header >
-  <ion-toolbar >
-    <ion-title >
-      <label><ion-icon name="bulb"></ion-icon> Iluminate </label>
-      <ion-chip>
-        <ion-label><label><ion-icon id="rankingInit" name="trophy"></ion-icon> {{ranking1.username}}</label></ion-label>
-        <ion-avatar>
-          <img src="../../assets/icon/guts.jpg">
-        </ion-avatar>
-      </ion-chip>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <label id="titulo">
+        <img id="logo"src="./assets/icon/bonbilla.png">  Illuminate
+      </label> 
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -23,24 +19,31 @@
     <label></label>
     <!-- <ion-button shape="round" href="partida" expand="block" type="ion-button" class="ion-no-margin">Jokatu</ion-button> -->
   </div>
-  <ion-slides>
-    <h3 id="textu" class="ion-text-center centro"> Asteko Gaia </h3>
-    <ion-slide>
+  <div>
+    <!-- <h3 id="textu" class="ion-text-center centro"> Asteko Gaia </h3> -->
+    <div>
+      <svg viewBox="0 0 500 500">
+        <path id="curve" d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97" />
+        <text id="a"width="500">
+          <textPath xlink:href="#curve">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ASTEKO GAIA
+          </textPath>
+        </text>
+      </svg>
+      <img class="tema" src={{imagen}}>
       
-      <img class="irudi" src={{imagen}}>
       
-    </ion-slide>
+    </div>
     <h3 id="texti" class="ion-text-center centro"> {{categoria}} </h3>
-    <ion-slide>
-      <h3>Asteko saria</h3>
-    </ion-slide>
-    <ion-slide>
-      <h3>Jokalari onenak </h3>
-    </ion-slide>
-  </ion-slides>
+   
+  </div>
+
   <div class="centri">
-  <ion-button id="jokatu" color="danger" shape="round" (click)="jokatu('normal')"  type="ion-button" ><span>Jokatu</span></ion-button>
-  <ion-button id="hard" color="danger" shape="round" (click)="jokatu('dificil')" type="ion-button" ><span>Hardcore</span></ion-button>
+  <button id="jokatu" class="boton" shape="round" (click)="jokatu('normal')"  type="ion-button" ><span>Jokatu</span></button>
+  <button id="hard" color="danger" shape="round" (click)="jokatu('dificil')" type="ion-button" ><span>Hardcore</span></button>
+    
+  <!-- <button id="jokatu" class="boton" shape="round" (click)="jokatu()"  ><span>Jokatu</span></button>
+  <button id="hard" color="danger" shape="round" href="partida" ><span>Hardcore</span></button> -->
   <ion-icon id="info" name="information-circle"></ion-icon>
 </div>
 </ion-content >

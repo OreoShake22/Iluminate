@@ -131,8 +131,8 @@ export class PartidaPage{
 
   ionViewWillLeave(){
      clearInterval(this.temporalizador)
-     //this.smartAudioService.stop('sans');
-     location.reload()
+     this.smartAudioService.stop('sans');
+    //  location.reload()
   }
 
   startTimer() {

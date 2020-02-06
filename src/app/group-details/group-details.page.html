@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>groupDetails</ion-title>
+    <ion-icon id="flecha" (click)="volver()" name="arrow-round-back"></ion-icon>
+    <ion-title>{{nombre}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,5 +10,6 @@
   {{usu.username}}
   {{usu.puntuacionS}}
 </div>
-<a id="basura"></a>
+<div id="basura" (click)='delete()'></div>
+
 </ion-content>
