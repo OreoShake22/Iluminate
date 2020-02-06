@@ -15,9 +15,9 @@ import { Subscription } from 'rxjs'
 export class Tab3Page implements OnInit {
   admin: boolean = false
   grupo: rankingTask;
-  sGroup: string[];
-  gruposId: string[];
-  groupIzen: string[];
+  sGroup: string[]=[];
+  gruposId: string[]=[];
+  groupIzen: groupTask[]=[];
   antonio: groupTask[]=[];
 
   checkUserGroup: boolean = false
@@ -53,7 +53,9 @@ export class Tab3Page implements OnInit {
     catch{
       this.navCtrl.navigateForward('')
     }
-
+    this.sub3 = this.grupoService.getgrupos().subscribe(res => {
+      this.groupIzen = res;
+    })
   }
   a() {
     this.sub1.unsubscribe()
@@ -74,6 +76,7 @@ export class Tab3Page implements OnInit {
   }
 
   async insertGroup() {
+    
     const alert = await this.atrCtrl.create({
       header: 'Taldea sartu',
       inputs: [
@@ -97,7 +100,7 @@ export class Tab3Page implements OnInit {
           handler: async data => {
             var a = data.izena
             for (var i = 0; i < this.groupIzen.length; i++) {
-              if (a == this.groupIzen[i]) {
+              if (a == this.groupIzen[i].nombre) {
                 this.checkUserGroup = true
                 break;
 
@@ -105,8 +108,8 @@ export class Tab3Page implements OnInit {
 
             }
             if (this.checkUserGroup == false) {
-              for (var i = 0; i < this.gruposId.length; i++) {
-                var b = this.gruposId[i]
+              for (var i = 0; i < this.groupIzen.length; i++) {
+                var b = this.groupIzen[i].id
                 if (a == b) {
                   this.aa = true
                   this.PassAlert(this.antonio[i])
@@ -236,6 +239,7 @@ export class Tab3Page implements OnInit {
 
             }
             if (existe == false) {
+              this.antonio=[]
               var id = (this.grupoService.addGroup(this.talde))
               this.grupo.grupos.push(id)
               this.rankingService.añadirGrupo(this.grupo, idUsu)
