@@ -1,4 +1,5 @@
 import { Component, OnInit, wtfStartTimeRange } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 import { preguntasservice } from '../services/galderak.service';
 import { galderakTask } from "../models/model.interface";
@@ -8,12 +9,14 @@ import * as firebase from 'firebase'
 import { SmartAudioService } from '../smart-audio.service';
 import { TimeService } from '../services/time.service';
 import { HttpClient } from '@angular/common/http';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 @Component({
   selector: 'app-partida',
   templateUrl: './partida.page.html',
   styleUrls: ['./partida.page.scss'],
 })
 export class PartidaPage{
+  modo:string;
   temporalizador:any;
   categoria:string;
   index: number = 0;
@@ -48,7 +51,12 @@ export class PartidaPage{
     this.disponible = false
     if (this.correcta == res) {
       this.smartAudioService.play('acierto');
-      this.puntuacion += 100 * ((this.t) / 10)
+      if(this.modo=='dificil'){
+        this.puntuacion+=100;
+      }else{
+        this.puntuacion += 100 * ((this.t) / 10)
+      }
+      
       this.colores[c]='success'
       
     }else{
@@ -72,7 +80,12 @@ export class PartidaPage{
     if (this.index < this.preguntas.length - 1) {
       this.index++;
       this.mix();
-      this.t = 10;
+      if(this.modo=='dificil'){
+        this.t=3;
+      }else{
+        this.t = 10;
+      }
+      
     } else {
       this.disponible=false;
       this.finalizar();
@@ -85,14 +98,17 @@ export class PartidaPage{
   getIndex() {
     return this.index;
   }
-  constructor(private http: HttpClient,private rankingservice: rankingservice, public timeServices: TimeService, private loadingController: LoadingController, private navCtrl: NavController, private preguntasservice: preguntasservice,
+  constructor(private router: ActivatedRoute,private http: HttpClient,private rankingservice: rankingservice, public timeServices: TimeService, private loadingController: LoadingController, private navCtrl: NavController, private preguntasservice: preguntasservice,
     smartAudioService: SmartAudioService) {
       smartAudioService.preload('acierto', 'assets/audio/acierto.mp3');
       smartAudioService.preload('fallo', 'assets/audio/muelle.mp3');
+      smartAudioService.preload('sans', 'assets/audio/sans.mp3');
       this.smartAudioService=smartAudioService
      }
 
   ionViewWillEnter() {
+    this.modo=this.router.snapshot.params['modo']
+    console.log(this.modo)
     this.timeServices.getHour()
       .then(data => {
         var semana;
@@ -118,6 +134,8 @@ export class PartidaPage{
 
   ionViewWillLeave(){
      clearInterval(this.temporalizador)
+     this.smartAudioService.stop('sans');
+    //  location.reload()
   }
 
   startTimer() {
@@ -169,6 +187,10 @@ export class PartidaPage{
     await loading.present();
 
     this.mix()
+    if(this.modo=='dificil'){
+      this.smartAudioService.play('sans');
+      this.t=3
+    }
     loading.dismiss();
     this.startTimer();
     this.rankingservice.getTodo(firebase.auth().currentUser.uid).subscribe(res => {
