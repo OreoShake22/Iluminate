@@ -186,7 +186,7 @@ export class Tab3Page implements OnInit {
               this.rankingService.updateTodo(this.grupo, firebase.auth().currentUser.uid)
               grupo.usuarios.push(firebase.auth().currentUser.uid)
               this.grupoService.updateGrupo(grupo, grupo.id)
-              this.navCtrl.navigateForward('')
+              this.navCtrl.navigateRoot('group-details/' + grupo.id +'/'+this.talde.nombre)
             }
             else {
               this.PassAlert(grupo)
@@ -247,7 +247,7 @@ export class Tab3Page implements OnInit {
               var id = (this.grupoService.addGroup(this.talde))
               this.grupo.grupos.push(id)
               this.rankingService.añadirGrupo(this.grupo, idUsu)
-              this.navCtrl.navigateRoot('group-details/' + id +'/'+this.talde.nombre)
+              this.navCtrl.navigateForward('group-details/' + id +'/'+this.talde.nombre)
               this.a()
 
             }
