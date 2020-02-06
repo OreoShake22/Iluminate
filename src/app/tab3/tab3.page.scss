@@ -6,5 +6,23 @@
   }
  
   ion-item{
-    background-color: burlywood;
+    color: cornsilk;
+    border-radius: 25px;
+    width: 90%;
+    margin-left: 5%;
+    text-align: center;
+    --ion-background-color: linear-gradient(-180deg, #FF89D6 10%, #550255 100%);
+    
+  }
+
+
+  .icon{
+    color:white;
+    text-align: right;
+    position: absolute;
+    right: 4%;
+  }
+
+  .fab{
+    background-color: orange;
   }
