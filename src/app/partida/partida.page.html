@@ -7,33 +7,33 @@
 </ion-header>
 <ion-content>
 
-  <ion-slides #slides>
+  <div id="centro">
     
-    <ion-slide>
       
       <ion-list>
         <label>
           {{puntuacion}}
         </label>
-        <ion-item-sliding>
+        <div>
           
       <label id="timer">{{t}}</label>
-    </ion-item-sliding>
+    </div>
     <div id="deskripzio" class="ion-padding">
-        <ion-item-sliding>
+        <div>
           <h3 id="pregunta">{{preguntas[getIndex()].pregunta}}</h3>
-        </ion-item-sliding>
         </div>
         
-          <ion-item-sliding  *ngFor="let res of final; let i= index"> 
+        <img src="{{imagen}}">
+        </div>
+        
+          <div  *ngFor="let res of final; let i= index"> 
               <ion-button color="{{colores[i]}}" class="boton" id="res" (click)="respuesta(res,i)" round>
                 {{res}}
               </ion-button>
-          </ion-item-sliding>
+          </div>
         </ion-list>
 
-      </ion-slide>
 
-  </ion-slides>
+      </div>
 
 </ion-content>

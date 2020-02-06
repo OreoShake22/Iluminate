@@ -28,6 +28,7 @@ export class PartidaPage{
   ranking: rankingTask;
   colores: string[] = ['Dpurple', 'Dpurple', 'Dpurple'];
   smartAudioService:any;
+  imagen:string
 
 
   public preguntas = [
@@ -37,6 +38,7 @@ export class PartidaPage{
   mix() {
     this.final = [];
     this.correcta = this.preguntas[this.index].respuesta;
+    this.imagen = this.preguntas[this.index].imagen;
     this.respuestas.push(this.preguntas[this.index].respuesta, this.preguntas[this.index].respuesta2, this.preguntas[this.index].respuesta3);
     this.mezclas(this.respuestas);
   }
@@ -107,6 +109,7 @@ export class PartidaPage{
         });
     this.preguntasservice.getpreguntas().subscribe(res => {
       this.preguntas = res;
+
       this.filtrarPreguntas();
       this.loadAll();
     });
