@@ -99,8 +99,8 @@ export class Tab3Page implements OnInit {
           text: 'Gorde',
           handler: async data => {
             var a = data.izena
-            for (var i = 0; i < this.groupIzen.length; i++) {
-              if (a == this.groupIzen[i].nombre) {
+            for (var i = 0; i < this.antonio.length; i++) {
+              if (a == this.antonio[i].nombre) {
                 this.checkUserGroup = true
                 break;
 
@@ -109,10 +109,12 @@ export class Tab3Page implements OnInit {
             }
             if (this.checkUserGroup == false) {
               for (var i = 0; i < this.groupIzen.length; i++) {
-                var b = this.groupIzen[i].id
+                var b = this.groupIzen[i].nombre;
+                console.log(a+' '+b)
                 if (a == b) {
+                  console.log('entro')
                   this.aa = true
-                  this.PassAlert(this.antonio[i])
+                  this.PassAlert(this.groupIzen[i])
                   break;
                 }
                 else {
@@ -155,6 +157,7 @@ export class Tab3Page implements OnInit {
 
   }
   async PassAlert(grupo: groupTask) {
+    console.log(grupo)
     const alert = await this.atrCtrl.create({
       header: 'Pasahitza sartu',
       inputs: [
@@ -177,11 +180,13 @@ export class Tab3Page implements OnInit {
           text: 'Gorde',
           handler: async data => {
             var pass = data.pass
+            this.antonio=[]
             if (pass == grupo['contraseña']) {
               this.grupo.grupos.push(grupo.id)
               this.rankingService.updateTodo(this.grupo, firebase.auth().currentUser.uid)
               grupo.usuarios.push(firebase.auth().currentUser.uid)
               this.grupoService.updateGrupo(grupo, grupo.id)
+              this.navCtrl.navigateForward('')
             }
             else {
               this.PassAlert(grupo)
@@ -190,7 +195,6 @@ export class Tab3Page implements OnInit {
         }
       ]
     });
-
     await alert.present();
 
   }
