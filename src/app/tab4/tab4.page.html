@@ -48,6 +48,7 @@
           <span class="profile__post">{{mail}}</span>
         </header>
         <div class="ion-padding">
+          <ion-button color="tertiary" ion-button (click)="upload()" *ngIf="captureDataUrl">Argazkia Aldatu</ion-button>
           <ion-button color="tertiary" (click)="change()" type="ion-button" class="ion-no-margin ion-text-center">Aldatu
             pasahitza &nbsp;<ion-icon name="refresh"></ion-icon>
           </ion-button>
